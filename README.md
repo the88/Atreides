@@ -1,0 +1,4 @@
+Atreides
+========
+
+Simple rails CMS
