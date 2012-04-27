@@ -1,14 +1,14 @@
-en: 
-  model: 
-    states: 
+en:
+  model:
+    states:
       drafted: save as a draft
       publish_now: publish now
       published_at: publish on date
 
-  atreides: 
+  atreides:
 
-    layouts: 
-      public: 
+    layouts:
+      public:
         go: Go!>>
         home: Home
         search: search
@@ -19,22 +19,23 @@ en:
         logout: logout
         search: search
         users: users
+        github: issues
 
     atreides:
-      home: 
-        index: 
+      home:
+        index:
           diary: Diary
       posts:
         show:
           arrow_previous: < previous
           arrow_next: next >
-      admin_home: 
-        index: 
-          x_drafts: 
+      admin_home:
+        index:
+          x_drafts:
             one: 1 draft
             other: "%{count} drafts"
             zero: no draft
-          x_posts: 
+          x_posts:
             one: 1 post
             other: "%{count} posts"
             zero: 0 post
@@ -62,12 +63,12 @@ en:
           site_changed: "Site changed to %{current_site}!"
 
     admin:
-      common: 
+      common:
         search_form:
           reset: reset
 
-      atreides: 
-        comments: 
+      atreides:
+        comments:
           index:
             comments: comments
             approve: approve
@@ -96,18 +97,18 @@ en:
             spam: spam
             deleted: deleted
             submit: submit
-            
-        features: 
-          index: 
+
+        features:
+          index:
             drafted: Drafted
             drag_and_drop_featured_items_to_change_their_display_order: Drag and drop featured items to change their display order.
             published: Published
             queued: queued
-            x_features: 
+            x_features:
               one: 1 feature
               other: "%{count} features"
               zero: no feature
-          form: 
+          form:
             caption: caption
             choose_a_post: choose a post
             existing_post: existing post
@@ -122,28 +123,28 @@ en:
             tags: tags
             custom_url: "custom URL"
             leave_blank_to_create_automatically: "leave blank to set automatically"
-          index: 
+          index:
             drafts: drafts
             published: published
-          form: 
+          form:
             add_inline_photo: + insert photo
             custom_url: Custom URL
             leave_blank_to_create_automatically: Leave blank to create automatically
             parent: Parent
             publish_on: Publish on
             tags: Tags
-        posts: 
-          index: 
+        posts:
+          index:
             drafts: drafts
             published: published
             queued: queued
-            x_posts: 
+            x_posts:
               one: 1 post
               other: "%{count} posts"
               zero: 0 post
-          post: 
+          post:
             add_inline_photo: + insert photo
-          form_sidebar: 
+          form_sidebar:
             cross_posting: cross posting
             crosspost_facebook: Post to Facebook
             crosspost_twitter: Post to Twitter
@@ -158,16 +159,16 @@ en:
         content_parts:
           text:
             add_inline_photo: + insert photo
-          photos: 
+          photos:
             gallery_display: Gallery Display
             show_photos_as_a_slideshow_gallery_or_stacked_above_each_other: "Show photos as a slideshow gallery or stacked above each other."
             upload_hint: Upload, then reorder and caption photos
-          videos: 
+          videos:
             paste_in_a_URL_to_a_vimeo_or_youtube_video: Paste in a URL to a vimeo or youtube video
             reorder_and_caption_videos: Reorder and caption videos
             video_url: Video Url
             save: save
-        users: 
+        users:
           form:
             admin: admin
             editor: editor
