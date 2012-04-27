@@ -1,0 +1,52 @@
+= render :partial => 'admin/edit_head_content'
+  
+= semantic_form_for @order, :url => admin_order_path(@order) do |f|
+  
+  #form_content{:class => "span-17 order-form form"}
+    %h2 #{ttt :'.order'} ##{@order.number} #{ttt :'.by'} #{@order.full_name} #{ttt :'.for'} #{@order.final_amount.format}
+    = f.semantic_errors
+    - f.inputs do
+      %li.name
+        %label #{ttt :'.name'}
+        = @order.full_name
+      %li.address
+        %label #{ttt :'.address'}
+        = simple_format @order.address
+      %li.items
+        %label #{ttt :'.items'}
+        %table.order-items
+          %thead
+            %th
+            %th #{ttt :'.item'}
+            %th #{ttt :'.size'}
+            %th #{ttt :'.qty'}
+            %th #{ttt :'.price'}
+            %th #{ttt :'.total'}
+          %tfoot
+            %tr
+              %td{:colspan => 3}
+              %td=@order.line_items.to_a.sum{|li| li.qty }
+              %td=@order.line_items.to_a.sum{|li| li.price }.format
+              %td=@order.line_items.to_a.sum{|li| li.total_price }.format
+          %tbody
+          - @order.line_items.each do |li|
+            %tr
+              %td= link_to(image_tag(li.product.photos.first.image.url(:thumb), :size => "50x50"), admin_product_path(li.product))
+              %td= li.product.title
+              %td= li.size
+              %td= li.qty
+              %td= li.price.format
+              %td= li.total_price.format
+            
+      %li.date
+        %label #{ttt :'.date'}
+        = @order.created_at.to_s(:datetime_ordinal)
+          
+
+    - f.buttons do
+      %li.commit
+        = link_to "Orders", admin_pages_path, :class => "create"
+
+  #form_sidebar{:class => "sidebar span-6 last"}
+
+  .clear

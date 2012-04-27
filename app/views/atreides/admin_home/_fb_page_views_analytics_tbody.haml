@@ -1,0 +1,10 @@
+- units = 'visits'
+%tbody{:units => units.singularize}
+  - if @fb_page_views
+    - range = (Date.today-1.month+1.day .. Date.today).to_a
+    - data  = @fb_page_views.data.first['values']
+    - range.each do |date|
+      - day = data.detect{|m|m.end_time.to_time.in_time_zone.to_date == date}
+      %tr
+        %td= date.to_s(:db)
+        %td= day ? day['value'].to_i : 0

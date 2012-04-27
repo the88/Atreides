@@ -1,0 +1,57 @@
+- today = Date.today
+- @date ||= today
+- content_for :pre_head do
+  // Must be loaded before jQuery
+  = javascript_include_tag 'raphael-min.js', 'raphael.path.methods.js', 'raphael.pie.js'
+- content_for :head do
+  = javascript_include_tag 'raphael.analytics.js'
+  
+- content_for :sidebar do
+  %h2
+    / - link_to edit_admin_user_path(current_user) do
+    /   = current_user.full_name
+    /   %span #{ttt :'.edit'}
+
+  %ul.summary
+    %li.divider
+    %li.home
+      = image_tag "admin/dashboard_controls_open.png"
+      =link_to Settings.domain, root_path
+    %li.posts-count
+      = image_tag "admin/dashboard_controls_posts.png"
+      = link_to ttt(:'.x_posts', :count => Atreides::Post.published.count), admin_posts_path
+    %li.drafts-count
+      = image_tag "admin/dashboard_controls_drafts.png"
+      = link_to ttt(:'.x_drafts', :count => Atreides::Post.drafted.count), admin_posts_path(:state => "drafted")
+    %li.divider
+
+  %ul#stats_period_selector
+    %form
+      - periods = [["This month", (Date.today - 1.month).to_s]]
+      - 1.upto 12 do |n|
+        - this_year = Date.today.year
+        - date = (Date.today - n.months).beginning_of_month
+        - periods << if date.year == this_year
+          - [date.strftime("%B"), date.to_s]
+        - else
+          - [date.strftime("Last %B"), date.to_s]
+      / = image_submit_tag "before.png", :title => "&larr;", :class => "stats_period_before"
+      %li
+        Statistics for
+        = select_tag "month", options_for_select(periods)
+
+      / = image_submit_tag "before.png", :title => "&rarr;", :class => "stats_period_after", :style => "display:none"
+      :javascript
+        $(function(){
+          $("#stats_period_selector select").change(function(){
+            window.stats_browsed_date = $(this).val();
+            console.log("navigating to ", this, stats_browsed_date);
+            $('.graph_canvas circle').hide(function(){ });
+            refreshAnalytics();
+          });
+        })
+
+= render :partial => "atreides/admin/content_nav"
+
+#dashboard
+  = render(:partial => 'analytics')

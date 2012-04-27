@@ -1,0 +1,13 @@
+%h2= ttt(:'.please_login')
+
+= semantic_form_for resource, :as => resource_name, :url => session_path(resource_name) do |form|
+  #form_content{:class => "span-10"}
+    = form.inputs do
+      = form.input :email, :input_html => { :class => "title" }
+      = form.input :password, :input_html => { :class => "title" }
+      = form.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+  
+    = form.buttons do
+      = form.commit_button "Login"
+
+/= render :partial => "devise/shared/links"

@@ -1,0 +1,31 @@
+- today = Date.today
+- @date ||= today
+- content_for :sidebar do
+  %ul.summary
+    %li.new-content
+      =sidebar_new_content_link
+    %li.divider
+    %li= pluralize Atreides::Post.published.count, 'Post'
+    %li= link_to ttt(:'.published'), url_for(params.merge(:state => 'published'))
+    %li= link_to ttt(:'.drafts'), url_for(params.merge(:state => 'drafted', :month => @date.month, :year => @date.year))
+    %li= link_to ttt(:'.queued'), url_for(params.merge(:state => 'queued', :month => @date.month, :year => @date.year))
+    %li= link_to_function "Stats", ""
+    %li.divider
+    %li= link_to ttt(:'.posts'), admin_posts_path
+    %li= link_to_function "#TERRYTALK", ""
+    %li= link_to_function "#TERRY SHOOTS", ""
+    %li.divider
+    %li #{ttt :'.filter'}:
+    %li
+      #{ttt :'.month'}: 
+      =select_tag "archive_month", options_for_select(Date::MONTHNAMES.map{|m| [m, Date::MONTHNAMES.index(m)]}, @date.month), :onchange => "window.location = '#{admin_posts_path}?state=#{params[:state]}&month='+this.value+'&year='+$('#archive_year').val()"
+    %li
+      #{ttt :'.year'}: 
+      =select_tag "archive_year", options_for_select((today.year-5..today.year).to_a.reverse, @date.year), :onchange => "window.location = '#{admin_posts_path}?year='+this.value+'&month='+$('#archive_month').val()"
+
+= render :partial => 'admin/common/search_form'
+
+%h2 #{ttt :'.products'}
+
+.clear
+= render :partial => 'admin/common/list_table', :locals => { :records => collection, :class_obj => Atreides::Product, :list_cols => %w(image product price inventory total sales), :action_cols => %w() }

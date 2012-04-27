@@ -1,0 +1,30 @@
+/ #top_pics
+/   %ul.slideshow_controls
+/     = @top_pics.each do |p|
+/       %li=link_to image_tag(p.photos.first.image.url(:small)), post_path(p)
+
+/ #splash_pic.slideshow
+/   - splash_pics = @top_pics.map{|p| p.photos.first }.compact
+/   - splash_pics.each do |f|
+/     - display = (f==splash_pics.first) ? "block" : "none"
+/     = link_to image_tag(f.image.url(:splash)), post_path(f.photoable, :anchor => f.dom_id), :style => "display:#{display}"
+
+.clear
+
+#posts.span-16
+
+  %h2 #{ttt :'.diary' }
+
+  .red-line
+
+  - if defined?(Settings.common_tags)
+    #posts_nav= Settings.common_tags.map{|t| link_to t.humanize, tagged_posts_path(t) }.join("&nbsp; / &nbsp;")
+
+  %ul.posts-stream
+    =render :partial => "atreides/posts/list"
+
+.span-8.last
+  #posts_sidebar
+    #social_links
+
+    #posts_sidebar_content

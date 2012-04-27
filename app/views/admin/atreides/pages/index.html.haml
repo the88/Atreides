@@ -1,0 +1,15 @@
+- today = Date.today
+- @date ||= today
+- content_for :sidebar do
+  %ul.summary
+    %li.new-content
+      =sidebar_new_content_link
+    %li.divider
+    %li= pluralize Atreides::Page.count, 'Page'
+    %li= link_to ttt(:".published"), url_for(params.merge(:state => 'published'))
+    %li= link_to ttt(:".drafts"), url_for(params.merge(:state => 'drafted', :month => @date.month, :year => @date.year))
+
+%h2 #{ttt :pages}
+
+.clear
+= render :partial => 'admin/common/list_table', :locals => { :records => collection, :class_obj => Atreides::Page, :list_cols => @list_cols, :action_cols => @action_cols }

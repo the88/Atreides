@@ -1,0 +1,19 @@
+- content_for :sidebar do
+  %ul.summary
+%h2 Issue ##{params[:id]} - #{@issue.title}
+
+%h3 Description
+%p= @issue.body.empty? ? "<i>No description available</i>".html_safe : gfm(@issue.body).html_safe
+%a.back{:href => admin_github_path} Back to issues
+%hr
+%h3 Comments
+.github
+  - @comments.each do |comment|
+    - comment = Hashie::Mash.new(comment)
+    .comment
+      .user
+        %span.time{:style => "font-size: 70%; color: #888;"} (#{Time.parse(comment.created_at).to_s(:short)})
+      = gfm(comment.body).html_safe
+  - if @comments.empty?
+    .comment
+      %p No comments at this time

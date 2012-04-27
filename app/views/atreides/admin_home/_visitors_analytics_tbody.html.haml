@@ -1,0 +1,12 @@
+- data       = @report[:results]
+- dimensions = @report[:dimensions]
+- metrics    = @report[:metrics]
+- range      = (@report[:start_date].to_date .. @report[:end_date].to_date).to_a
+/ Atreides::Order visitors by date
+%tbody{:units => 'visit'}
+  - range.each do |date|
+    - point = data.points.detect{|p|p.dimensions.first.values.first.to_i == date.mday}
+    - next unless point
+    %tr
+      %td= date.to_s(:db)
+      %td= point.metrics.map{|m| m.values }.flatten.join(' ')

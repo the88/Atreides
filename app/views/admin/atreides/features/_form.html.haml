@@ -1,0 +1,60 @@
+= render :partial => 'admin/edit_head_content'
+= semantic_form_for @feature, :url => (@feature.new_record? ? admin_features_path : admin_feature_path(@feature)), :as => "feature" do |f|
+  
+  #form_content{:class => "span-17"}
+    %h2= ttt("#{params[:action].to_s}_feature").html_safe
+    = error_messages_for :resource, :header_message => ttt(:validation_error_header, :model => @feature.class.to_s.demodulize),  :message => ttt(:validation_error_message)
+    = f.semantic_errors
+    = f.inputs do
+      = f.input :title, :input_html => { :class => "title" }
+      %li.photos-upload
+        %label #{ttt :'.photo'}
+        = multi_file_uploader(:url => admin_feature_photo_path((@feature.new_record? ? '-' : @feature), :format => :js), :css_parent_class => "photos-upload", :resource_type => "feature")
+        .clear
+      %li.photos-choose
+        %label #{ttt :'.existing_post'}
+        = hidden_field :feature, :post_id
+        = link_to_function ttt(:'.choose'), remote_function(:url => admin_posts_path(:format => :js), :type => :get, :success => "$('#feature_post_browser').toggle(); ")
+        .clear
+      %li.photo
+        #feature_photo.media-list
+          %ul#feature_photo_ul
+            - if @feature.photo
+              = photo_for_assoc(@feature.photo, @feature, "photos_list")
+            - elsif @feature.post && @feature.video
+              = image_tag @feature.video.thumb_url
+        
+        #feature_post_browser{:style => 'display:none;'}
+          .close= link_to_function 'close', "$('#feature_post_browser').hide();$(this).find('.archives').remove()"
+          %label #{ttt :'.choose_a_post'}
+          #pagination
+          
+      = f.input :caption, :label => ttt(:'.caption'), :as => 'text', :input_html => { :style => "height:10em;" }
+      = f.input :url, :label => ttt(:'.url'), :input_html => { :class => "title" }
+
+    = f.buttons do
+      = f.commit_button ttt(:save)
+      %li.cancel
+        = link_to ttt(:back), admin_features_path, :class => "cancel"
+      %li.delete
+        = link_to ttt(:delete), admin_feature_path(@feature), :class => "cancel", :confirm => ttt(:are_you_absolutely_sure), :method => "delete" unless @feature.new_record?
+
+  #form_sidebar{:class => "sidebar span-6 last"}
+    = f.inputs do
+      = f.input :state, :as => "hidden", :wrapper_html => { :class => "post-hidden" }
+      - selected = (@feature.pending? || @feature.published?) ? (@feature.published_at? ? :published_at : :published_now) : @feature.state.to_sym
+
+      - @feature.published_at = (@feature.published_at || Time.now).in_time_zone # Needed to show time in user's TZ
+      - label = @feature.published_at.past? ? "Published on: " : "Will be published on:"
+
+      = f.input :state, :as => "select", :collection => @feature.states_for_select, :selected => selected, :include_blank => false, :wrapper_html => { :class => "post-states" }
+      = f.input :published_at, :label => label, :as => "string", :wrapper_html => { :class => "date-picker", :style => "display:#{selected==:published_at ? 'block' : 'none'}"} 
+
+      - if defined?(Settings.tags.posts.features)
+        %li{:class => "features-tag-group tag-picker"}
+          %label #{ttt :'.location'}
+          %ul
+            - Settings.tags.posts.features.each do |tag|
+              %li.machine_tag.feature_tag{:class => @feature.tag_list.include?(tag) ? "selected" : "" }
+                = radio_button_tag 'feature[tag_list][]', tag, @feature.tag_list.include?(tag)
+                = tag.humanize.titleize

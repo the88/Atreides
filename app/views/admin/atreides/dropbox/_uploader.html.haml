@@ -1,0 +1,134 @@
+#dropbox_browser{:style => "min-height:420px; height:420px; display:none;", :rel => "Dropbox import"}
+  %table
+    %tr
+      %td{ :height => "420", :width => '780', :style => 'background: white;'}
+        %center
+          = image_tag 'admin/dashboard-indicator.gif'
+#dropbox_uploader.upload-btn
+  - if dropbox_session.authorized? then
+    %a{:rel => "facebox", :href => "#dropbox_browser", :title => "Click to import from Dropbox"}
+      Click to import from Dropbox
+    :javascript
+      $(function(){
+        var browser = $('#dropbox_browser');
+        var loading_html = browser.html();
+        var uploadImagesFromDropbox = function(image_paths) {
+          $('.inline-hints').hide();
+          $('.upload-progress').show();
+          $('.upload-progress').progressbar()
+          var nDone = 0, nTotal = image_paths.length;
+
+          var updateProgressMonitor = function(fileName) {
+            $('.upload-progress span').text((1 + nDone) + ' / ' + nTotal + ' - Importing ' + fileName);
+            $('.upload-progress').progressbar('value',((nDone/nTotal)*100))
+          };
+
+          var uploadFirstImage = function(image_paths) {
+            if(!image_paths || !image_paths.length) {
+              $('.upload-progress').hide();
+              $('.inline-hints').show();
+              return;
+            }
+            var image_path = image_paths.shift();
+            updateProgressMonitor(image_path.split('/').pop());
+            $.post("/admin/photos.js?part_id=#{part_id}&list_id=#{list_id}&resource_type=post&post_type=photos&dropbox_path=" + encodeURIComponent(image_path), {}, function(data, textStatus, xhr) {
+              nDone += 1;
+              if(textStatus == 'success') {
+                uploadFirstImage(image_paths);
+              } else {
+                alert('Error uploading ' + image_path + ' !\n'+ data);
+                // Keep on trying with the others
+                uploadFirstImage(image_paths);
+              }
+            }, 'script');
+          };
+          uploadFirstImage(image_paths);
+        };
+
+        var loadDropboxPath = function(path) {
+          var list = $('.dropbox_list', browser);
+          list.fadeOut();
+          browser.load('/admin/dropbox/list?path=' + encodeURIComponent(path), null, function(responseText, textStatus, xhr){
+            if(textStatus !== 'success') {
+              browser.html([
+                '<b>Failed listing ' + path + '</b>.<br/>',
+                '<a class="directory" rel="' + path + '">Try again</a> or ',
+                '<a class="directory" rel="/">get back to the root</a>.'
+              ].join(''));
+            } else {
+              var list = $('#dropbox_browser .dropbox_list');
+              list.animate({
+                opacity: 1
+              }, 200, 'easeOutQuad');
+              var sel = $("#dropbox_browser .selector");
+              sel.multipleSelectBox();
+              $(".breadCrumb").jBreadCrumb({easing: 'easeOutQuad'});
+            }
+          });
+        };
+
+        browser.dialog({
+          title: browser.attr('rel'),
+          autoOpen: false,
+          width: 800,
+          height: 500,
+          show: 'puff',
+          open: function(e, ui) {
+            var default_path = '/';
+            if(window['localStorage']) {
+              default_path = localStorage.getItem('dropbox_browser_path') || default_path;
+            }
+            loadDropboxPath(default_path);
+          },
+          buttons: {
+            "Use selected": function() {
+              var sel = $("#dropbox_browser .selector");
+              var img_links = sel.find('.selected a');
+              var img_paths = [];
+              img_links.each(function(i, e){
+                img_paths.push($(e).attr('rel'));
+              });
+              $(this).dialog("close");
+              uploadImagesFromDropbox(img_paths);
+            },
+            "Cancel": function() { $(this).dialog("close"); },
+          }
+        });
+
+        $('#dropbox_uploader a').tipsy({gravity: 'w'}).click(function(e){
+          e.preventDefault();
+          browser.dialog('open');
+        });
+
+        $("#dropbox_browser a").live('click', function(e, el) {
+          e.preventDefault();
+          var el = $(this);
+          if(el.hasClass('directory')) {
+            var new_path = el.attr('rel');
+            if(window['localStorage']) { localStorage.setItem('dropbox_browser_path', new_path); }
+            loadDropboxPath(new_path);
+          }
+        });
+
+        $("a[href*='www.dropbox.com']").bind("click", function(e){
+          if (hasPageChanged()){
+            var message = "You've made changes to this document, authenticating with dropbox will leave this page and changes will be lost. If you wish to save your changes, please save a draft and then authenticate with Dropbox to add photos.";
+            if(confirm(message)) {
+              pageChanged = false;
+              return true;
+            } else {
+              return false;
+            }
+          }
+        });
+
+        // debug:
+        // setTimeout(function(){
+        //   $('#dropbox_uploader img').click()
+        // }, 300);
+      });
+  - else
+    - puts "Must authorize dropbox !"
+    = link_to "Connect with Dropbox", dropbox_authorize_link(request.referer.gsub(/\?.+/,"")+"?add_content[]=photos", :target => '_self', :title => "Connect with Dropbox"
+    :javascript
+      $('#dropbox_uploader a').tipsy({gravity: 'w'})

@@ -1,0 +1,235 @@
+en: 
+  model: 
+    states: 
+      drafted: save as a draft
+      publish_now: publish now
+      published_at: publish on date
+
+  atreides: 
+
+    layouts: 
+      public: 
+        go: Go!>>
+        home: Home
+        search: search
+      admin:
+        admin_title: admin
+        archives: archives
+        dashboard: dashboard
+        logout: logout
+        search: search
+        users: users
+
+    atreides:
+      home: 
+        index: 
+          diary: Diary
+      posts:
+        show:
+          arrow_previous: < previous
+          arrow_next: next >
+      admin_home: 
+        index: 
+          x_drafts: 
+            one: 1 draft
+            other: "%{count} drafts"
+            zero: no draft
+          x_posts: 
+            one: 1 post
+            other: "%{count} posts"
+            zero: 0 post
+        setup:
+          email: email
+          firstname: first name
+          lastname: last name
+          password: password
+          password_confirmation: confirmation
+          create: create
+        analytics:
+          fb_page_likes: "Facebook likes"
+          fb_page_total_likes: "Total Facebook likes"
+          fb_page_total_views: "Total Facebook page views"
+          fb_page_views: "Facebook page views"
+          top_landing_pages: top landing pages
+          top_referrers: top referrers
+          tweet_exposure: tweet exposure
+          tweet_reach: tweet reach
+          tweets: tweets
+          visitors: visitors
+        search:
+          no_results_found: No results found
+        switch_site:
+          site_changed: "Site changed to %{current_site}!"
+
+    admin:
+      common: 
+        search_form:
+          reset: reset
+
+      atreides: 
+        comments: 
+          index:
+            comments: comments
+            approve: approve
+            'mark as spam': mark as spam
+            delete: delete
+          line:
+            'mark spam': mark as spam
+            'show comments only from this thread': show comments only from this thread
+            'this comment is': this comment is
+            'add commenter to': "add commenter to %{list}"
+            'all comments from': "all comments from"
+            'this thread': this thread
+            see_also: See other comments from
+            approved: approved
+            approve: approve
+            context: context
+            delete: delete
+            reply: reply
+            edit: edit
+            find: find
+          sidebar:
+            filter: filter
+            approved: approved
+            unapproved: unapproved
+            flagged: flagged
+            spam: spam
+            deleted: deleted
+            submit: submit
+            
+        features: 
+          index: 
+            drafted: Drafted
+            drag_and_drop_featured_items_to_change_their_display_order: Drag and drop featured items to change their display order.
+            published: Published
+            queued: queued
+            x_features: 
+              one: 1 feature
+              other: "%{count} features"
+              zero: no feature
+          form: 
+            caption: caption
+            choose_a_post: choose a post
+            existing_post: existing post
+            location: location
+            photo: Photo
+            url: URL
+        pages:
+          form:
+            add_inline_photo: "add a photo"
+            publish_on: "published on"
+            parent: parent
+            tags: tags
+            custom_url: "custom URL"
+            leave_blank_to_create_automatically: "leave blank to set automatically"
+          index: 
+            drafts: drafts
+            published: published
+          form: 
+            add_inline_photo: + insert photo
+            custom_url: Custom URL
+            leave_blank_to_create_automatically: Leave blank to create automatically
+            parent: Parent
+            publish_on: Publish on
+            tags: Tags
+        posts: 
+          index: 
+            drafts: drafts
+            published: published
+            queued: queued
+            x_posts: 
+              one: 1 post
+              other: "%{count} posts"
+              zero: 0 post
+          post: 
+            add_inline_photo: + insert photo
+          form_sidebar: 
+            cross_posting: cross posting
+            crosspost_facebook: Post to Facebook
+            crosspost_twitter: Post to Twitter
+            crosspost_queued_twitter: In Twitter post queue
+            crosspost_queued_facebook: In Facebook post queue
+            custom_url: custom URL
+            tags_help: "Split tags with a comma (',')"
+            leave_blank_to_create_automatically_from_the_title: Leave blank to create automatically from the title
+            message: message
+            published_on: published on
+            tags: Tags
+        content_parts:
+          text:
+            add_inline_photo: + insert photo
+          photos: 
+            gallery_display: Gallery Display
+            show_photos_as_a_slideshow_gallery_or_stacked_above_each_other: "Show photos as a slideshow gallery or stacked above each other."
+            upload_hint: Upload, then reorder and caption photos
+          videos: 
+            paste_in_a_URL_to_a_vimeo_or_youtube_video: Paste in a URL to a vimeo or youtube video
+            reorder_and_caption_videos: Reorder and caption videos
+            video_url: Video Url
+            save: save
+        users: 
+          form:
+            admin: admin
+            editor: editor
+            email: email
+            firstname: first name
+            lastname: last name
+            password: password
+            password_confirmation: password confirmation
+            writer: writer
+        sessions:
+          new:
+            please_login: Please login
+    archives: archives
+    are_you_sure: Are you absolutely sure?
+    back: back
+    body: body
+    cancel: cancel
+    comments: comments
+    delete: delete
+    edit: edit
+    edit_page: edit page
+    edit_photos: edit photos
+    edit_post: edit post
+    edit_feature: edit feature
+    edit_video: edit video
+    update_page: edit page
+    update_post: edit post
+    update_feature: edit feature
+    update_photos: edit photos
+    update_video: edit video
+    email: email
+    features: features
+    name: name
+    new: new
+    new_admin: new admin
+    new_feature: new feature
+    new_page: new page
+    new_post: new post
+    new_photos: new photos
+    new_post: new post
+    new_user: new user
+    new_video: new video
+    add_content_parts: Drag & Drop in content parts from the sidebar.
+    content_parts_drops: Content Parts
+    page: page
+    pages: pages
+    photos: photos
+    post: post
+    text: text
+    preview: preview
+    role: role
+    save: save
+    state: state
+    title: title
+    update_feature: update feature
+    users: users
+    value: value
+    video: video
+    videos: videos
+    view: view
+    validation_error_header: "Uh oh. We found some problems with your %{model}..."
+    validation_error_message: "Please review the following fields:"
+    loading_content_part: Loading content part...
+    drop_content_part: Drop part here
+    drag_drop_contant_parts_hint: Drag and drop onto the post to add new content parts

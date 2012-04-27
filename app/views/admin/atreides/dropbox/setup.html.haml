@@ -1,0 +1,8 @@
+%h2= ttt :'.dropbox_setup'
+
+- if @is_authorized
+  %p Authorized.
+  %p= link_to 'Unlink Dropbox', :admin_dropbox_unlink
+- else
+  %p Not autorize. Authorize !
+  %p= link_to 'Link with Dropbox', @authorize_link, :target => '_self'

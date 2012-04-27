@@ -1,0 +1,63 @@
+:config:
+  :method: "NetHTTP"
+
+:providers:
+  :oohembed: "http://oohembed.com/oohembed/"
+  :vimeo: "http://vimeo.com/api/oembed.{format}"
+  :hulu: "http://www.hulu.com/api/oembed.{format}"
+  :flickr: "http://www.flickr.com/services/oembed"
+  :viddler: "http://lab.viddler.com/services/oembed/"
+  :youtube: "http://www.youtube.com/oembed"
+
+:youtube:
+  :format: "json"
+  :schemes:
+    - "http://www.youtube.com/watch?v=*"
+    - "http://www.youtube.com/embed/*"
+    - "http://www.youtu.be/*"
+    - "http://youtube.com/watch?v=*"
+    - "http://youtube.com/embed/*"
+    - "http://youtu.be/*"
+    - "https://www.youtube.com/watch?v=*"
+    - "https://www.youtube.com/embed/*"
+    - "https://www.youtu.be/*"
+    - "https://youtube.com/watch?v=*"
+    - "https://youtube.com/embed/*"
+
+:oohembed:
+  :format: "json"
+  :schemes:
+    - "http://*.amazon.(com|co.uk|de|ca|jp)/*/(gp/product|o/ASIN|obidos/ASIN|dp)/*"
+    - "http://*.amazon.(com|co.uk|de|ca|jp)/(gp/product|o/ASIN|obidos/ASIN|dp)/*"
+    - "http://*.collegehumor.com/video:*"
+    - "http://*.funnyordie.com/videos/*"
+    - "http://video.google.com/videoplay?*"
+    - "http://*.imdb.com/title/tt*/"
+    - "http://*.metacafe.com/watch/*"
+    - "http://*.slideshare.net/*"
+    - "http://twitter.com/*/statuses/*"
+    - "http://*.wikipedia.org/wiki/*"
+    - "http://*.wordpress.com/[0-9]{4}/[0-9]{2}/[0-9]{2}/*"
+
+:vimeo:
+  :format: "json"
+  :schemes:
+    - "http://vimeo.com/*"
+    - "http://vimeo.com/groups/*/videos/*"
+    - "http://www.vimeo.com/*"
+    - "http://www.vimeo.com/groups/*/videos/*"
+
+:hulu:
+  :format: "xml"
+  :schemes:
+    - "http://www.hulu.com/watch/*"
+
+:flickr:
+  :format: "xml"
+  :schemes:
+    - "http://*.flickr.com/*"
+
+:viddler:
+  :format: "xml"
+  :schemes:
+    - "http://*.viddler.com/*"

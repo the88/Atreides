@@ -1,0 +1,123 @@
+common: &common
+  app_name: Atreides
+  admin_email: 
+  session_key: '_dummy_web_app_session'
+  analytics_backends:
+    - console
+    - google
+  ganalytics:
+    code: UA-XXXXXXX-XX
+    email: atreides@gmail.com
+    password: weloveterry69
+    profile_id: 25211350
+  domain: atreides.rails
+  disqus:
+    key: mg9C49wg7VGSBCzckZv799lweuyepzki7jWKcRo9bbP4ELiovmAvGZDnYnEKUuNz
+    secret: wMbpkchik8EWmYOTW7Jr2jVDd1BHiipTpenlolINRlc8EaRYpJDX1vGWHLoWLCJC
+    forum: yvanrodic
+  tumblr:
+    blog: 
+    email: 
+    pass: 
+  dropbox:
+    key: 'zfva58fcjnx50me'
+    secret: 'xjj4wq3a8g6r0wg'
+  vimeo:
+    consumer_key: b54e1791dc294c6ead7cf6f4c7fa9d23
+    consumer_secret: fcfb4b9bb66e992b
+    user_token: ba3498c474b6e926f838219a2ff1acf0
+    user_secret: d499ad238dcff4061ea90522dbbeedff8cecd2ff
+  facebook:
+    # GoTo:
+    # http://graph.facebook.com/oauth/authorize?client_id=632c768327fd8d5ec7a55b2364424abe&redirect_uri=http://kanonvodka.rails
+    # -> Get code param and save as the token
+    # GoTo:
+    #   https://graph.facebook.com/oauth/access_token?client_id=632c768327fd8d5ec7a55b2364424abe&redirect_uri=http://kanonvodka.rails/&client_secret=ad83f27037cc74cb3c242557276753a1&code=e56edc612fdf770e2a35a610-666591162%7CxYP-8UFDcOKMeeZsWAcd7ybXhrk.
+    # -> Put resulting access_token into user_token val below
+    # -> Create a OAuth access_token object with: access_token = OAuth2::AccessToken.new(client, Settings.facebook.user_token)
+    # -> Get your page's access_token with: access_token.get("/me/accounts")
+    # -> Put the page's access_token into page_token below
+    secret_key: ad83f27037cc74cb3c242557276753a1
+    api_key: 632c768327fd8d5ec7a55b2364424abe
+    code: e56edc612fdf770e2a35a610-666591162%7CxYP-8UFDcOKMeeZsWAcd7ybXhrk.
+    user_token: 137055902989083|e56edc612fdf770e2a35a610-666591162|61Vu_kbLAejg0v3Vq1I5a-GgAgU.
+    page_token: 137055902989083|e56edc612fdf770e2a35a610-666591162|100914013285388|yz-wMScNjGPZ51nzigrl-fFCHXM.
+    page_id: 100914013285388
+    app_id: 110195482348474
+  twitter:
+    login: 
+    consumer_key: uPDt8kCyGTcZsZTQHeKPiQ
+    consumer_secret: jRJiSOFOj1DDY8s5n9kphDFQTEnIoe4jyDW26X74Io
+    # oauth = Twitter::OAuth.new(Settings.twitter.consumer_key, Settings.twitter.consumer_secret, :sign_in => true)
+    # oauth.set_callback_url(app.root_url(:host => Settings.domain))
+    # rtoken  = oauth.request_token.token
+    # rsecret = oauth.request_token.secret
+    # oauth.request_token.authorize_url 
+    # -- Go to above URL and sign-in/approve the app and retrieve the verifier param from the return-to-app URL
+    # oauth_verifier = "0aRHi5UAGWoxfyaa0iMnUYNC3nUXF5gIIzjtxyauc58"
+    # oauth.authorize_from_request(rtoken, rsecret, oauth_verifier)
+    # oauth.access_token.token -> use below
+    # oauth.access_token.secret -> use below
+    app_user_token: 142716515-p3qcuaGq6xLdtSNySr0aI7WCAujpdGMsmpv6NcpO
+    app_user_secret: WNcvqsoh83XsoDRTlRHPgAMbuekCPpcvbrZ0o4A4jj8
+    search_for: PPS OR "Preplay Sport" OR PPS_Football OR @PPS_Football
+  vimeo:
+    consumer_key: b54e1791dc294c6ead7cf6f4c7fa9d23
+    consumer_secret: fcfb4b9bb66e992b
+    user_token: ba3498c474b6e926f838219a2ff1acf0
+    user_secret: d499ad238dcff4061ea90522dbbeedff8cecd2ff
+  bitly:
+    login: jacksonlaycock
+    key: R_c8a7f8051740494c879df5865cd04b4b
+  tags: 
+    posts:
+      groups: [tags, location]
+      tags: []
+      location: [blog, featured]
+      features: [home, blog]
+    features:
+      groups: [home, blog]
+    pages:
+      groups: []
+  photo_conv_options: "-density 70 -quality 70"
+  photo_dimensions:
+    thumb: "100x100#"
+    small: "156x156#"
+    splash: "940x380#"
+    list: "670x120#"
+    medium: "670x670>"
+    full: "2000x2000>"
+
+development:
+  <<: *common
+
+test:
+  <<: *common
+
+staging:
+  <<: *common
+  domain: atreides.lovethe88.com
+
+production:
+  <<: *common
+  ganalytics:
+    code: UA-12859057-1
+    profile_id: 25211478
+  domain: atreides.com
+  facebook:
+    # GoTo:
+    # http://graph.facebook.com/oauth/authorize?client_id=632c768327fd8d5ec7a55b2364424abe&redirect_uri=http://kanonvodka.rails
+    # -> Get code param and save as the token
+    # GoTo:
+    #   https://graph.facebook.com/oauth/access_token?client_id=632c768327fd8d5ec7a55b2364424abe&redirect_uri=http://kanonvodka.rails/&client_secret=ad83f27037cc74cb3c242557276753a1&code=e56edc612fdf770e2a35a610-666591162%7CxYP-8UFDcOKMeeZsWAcd7ybXhrk.
+    # -> Put resulting access_token into user_token val below
+    # -> Create a OAuth access_token object with: access_token = OAuth2::AccessToken.new(client, Settings.facebook.user_token)
+    # -> Get your page's access_token with: access_token.get("/me/accounts")
+    # -> Put the page's access_token into page_token below
+    secret_key: ad83f27037cc74cb3c242557276753a1
+    api_key: 632c768327fd8d5ec7a55b2364424abe
+    code: e56edc612fdf770e2a35a610-666591162%7CxYP-8UFDcOKMeeZsWAcd7ybXhrk.
+    user_token: 137055902989083|e56edc612fdf770e2a35a610-666591162|61Vu_kbLAejg0v3Vq1I5a-GgAgU.
+    page_token: 137055902989083|e56edc612fdf770e2a35a610-666591162|100914013285388|yz-wMScNjGPZ51nzigrl-fFCHXM.
+    page_id: 100914013285388
+    app_id: 110195482348474

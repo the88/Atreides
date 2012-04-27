@@ -1,0 +1,9 @@
+-collection.each do |post|
+  %li{:id => post.dom_id}
+    = post_item(post)
+    .red-line
+
+-if collection.respond_to?(:per_page) and collection.size == collection.per_page
+  - url_opts = {:page => collection.current_page+1}
+  %li#more_posts_btn
+    =link_to ttt(:'.more'), url_for(url_opts.update(:format => 'js')), {:href => url_for(url_opts), :id => "fetch_next_page", :remote => true}

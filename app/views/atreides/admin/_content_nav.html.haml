@@ -1,0 +1,8 @@
+#content_nav
+  %ul
+    - %w(text photos videos).each do |content_type|
+      %li{:class => content_type}= link_to ttt(content_type), admin_new_content_path(content_type)
+    %li.features= link_to ttt(:features), admin_features_path
+    %li.archives= link_to ttt(:archives), admin_posts_path
+    %li.pages= link_to ttt(:pages), admin_pages_path
+    %li.comments= link_to ttt(:comments), admin_comments_path

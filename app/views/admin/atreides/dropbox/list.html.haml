@@ -1,0 +1,27 @@
+.dropbox_list{:style => "opacity:.5"}
+  .breadCrumb.module
+    %ul
+      - path = ''
+      - *segs, last_seg = @dropbox_path.split('/')
+      - for seg in segs
+        - path = "#{path}/#{seg}".gsub /^\/\//, '/'
+        %li.directory
+          %a.directory{ :rel => path }= if seg.present? then seg else "/" end
+      - if path == ''
+        %li.directory
+          %a.directory{ :rel => path } Home
+      - else
+        %li.directory= last_seg
+
+  %ul.selector
+    - for dir in @dirs
+      %li.directory{ :class => dir.icon}
+        %a.directory{ :rel => dir.path }= basename dir.path
+    - for img in @imgs
+      %li.selected
+        %img{:src => admin_dropbox_thumbnail_path(:path => img.path)}
+        %a.image{ :rel => img.path }= basename img.path
+    - unless @imgs.size > 0 || @dirs.size > 0
+      %li.back
+        %a.directory{:rel => path} &larr; No image found.
+

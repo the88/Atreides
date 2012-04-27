@@ -1,0 +1,14 @@
+- data       = @report[:results]
+- dimensions = @report[:dimensions]
+- metrics    = @report[:metrics]
+- range      = (@report[:start_date].to_date .. @report[:end_date].to_date).to_a
+/ Atreides::Order visitors by date
+%tbody{:units => 'visit'}
+  - range.each do |date|
+    - point = data.points[range.index(date)]
+    - next unless point
+    %tr
+      %td
+        - value = point.dimensions.map{|m| m.values }.flatten.join(' ')
+        = link_to value.truncate(45), value, :title => value, :target => "_blank"
+      %td= point.metrics.map{|m| m.values }.flatten.join(' ')

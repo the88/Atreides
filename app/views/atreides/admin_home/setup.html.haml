@@ -1,0 +1,15 @@
+%h2 Setup - create the first administrator
+
+= semantic_form_for @user, :url => :atreides_do_setup, :as => "user" do |form|
+  #form_content{:class => "span-17"}
+    = error_messages_for :user
+    = form.inputs do 
+      = form.input :first_name, :label => ttt(:'.firstname'), :wrapper_html => { :class => "left half" }, :input_html => { :class => "title" }
+      = form.input :last_name, :label => ttt(:'.lastname'), :wrapper_html => { :class => "left half" }, :input_html => { :class => "title" }
+      = form.input :email, :label => ttt(:'.email'), :wrapper_html => { :class => "clear" }
+      = form.input :password, :label => ttt(:'.password'), :wrapper_html => { :class => "left half" }
+      = form.input :password_confirmation, :label => ttt(:'.password_confirmation'), :wrapper_html => { :class => "left half" }
+
+    = form.buttons do 
+      = form.commit_button ttt(:'.create')
+

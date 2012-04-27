@@ -1,0 +1,63 @@
+/* line 1, ../../../app/stylesheets/swfupload.sass */
+#divFileProgressContainer {
+  height: 75px; }
+
+/* line 6, ../../../app/stylesheets/swfupload.sass */
+#divFileProgress .progressWrapper {
+  width: 100%;
+  overflow: hidden; }
+/* line 10, ../../../app/stylesheets/swfupload.sass */
+#divFileProgress .progressContainer {
+  margin: 5px;
+  padding: 4px;
+  border: solid 1px #E8E8E8;
+  background-color: #F7F7F7;
+  overflow: hidden; }
+/* line 17, ../../../app/stylesheets/swfupload.sass */
+#divFileProgress .progressName {
+  font-size: 8pt;
+  font-weight: 700;
+  color: #555;
+  width: 100%;
+  height: 14px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden; }
+/* line 27, ../../../app/stylesheets/swfupload.sass */
+#divFileProgress .progressBarInProgress, #divFileProgress .progressBarComplete, #divFileProgress .progressBarError {
+  font-size: 0;
+  width: 0%;
+  height: 2px;
+  background-color: blue;
+  margin-top: 2px; }
+/* line 34, ../../../app/stylesheets/swfupload.sass */
+#divFileProgress .progressBarComplete {
+  width: 100%;
+  background-color: green;
+  visibility: hidden; }
+/* line 39, ../../../app/stylesheets/swfupload.sass */
+#divFileProgress .progressBarError {
+  width: 100%;
+  background-color: red;
+  visibility: hidden; }
+/* line 44, ../../../app/stylesheets/swfupload.sass */
+#divFileProgress .progressBarStatus {
+  margin-top: 2px;
+  width: 337px;
+  font-size: 7pt;
+  font-family: Arial;
+  text-align: left;
+  white-space: nowrap; }
+/* line 52, ../../../app/stylesheets/swfupload.sass */
+#divFileProgress a.progressCancel {
+  font-size: 0;
+  display: block;
+  height: 14px;
+  width: 14px;
+  background-image: url(/images/swfupload/cancelbutton.gif);
+  background-repeat: no-repeat;
+  background-position: -14px 0px;
+  float: right; }
+/* line 62, ../../../app/stylesheets/swfupload.sass */
+#divFileProgress a.progressCancel:hover {
+  background-position: 0px 0px; }

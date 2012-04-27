@@ -1,0 +1,6 @@
+%h2 #{ttt :'edit'} #{resource.full_name}
+
+= semantic_form_for resource, :url => admin_user_path(resource), :as => "user" do |form|
+  #form_content{:class => "span-17"}
+    = error_messages_for :user
+    = render :partial => "form", :locals => { :form => form }

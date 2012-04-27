@@ -1,0 +1,62 @@
+- self.extend Atreides::ApplicationHelper
+- @show_as_dash ||= false
+!!!
+%html
+  %head
+    %meta{"http-equiv"=>"Content-type", "content"=>"text/html; charset=utf-8"}
+    %title #{Settings.app_name}: #{ttt :'.admin_title'}
+    = yield :pre_head
+    = include_javascripts :admin
+    = include_stylesheets :admin
+    = csrf_meta_tag
+    = yield :head
+  %body
+    .container
+      #header
+        #nav
+          - if current_user
+            %ul
+              %li.nav-dashboard= link_to_unless_current ttt(:'.dashboard'), admin_path
+              %li.nav-archives= link_to_unless_current ttt(:'.archives'), admin_posts_path
+              %li.nav-users= link_to_unless_current ttt(:'.users'), admin_users_path
+              %li.nav-logout= link_to_unless_current ttt(:'.logout'), destroy_user_session_path
+
+              %li.nav-search
+                = semantic_form_for Atreides::Post.new, :url => admin_search_path, :html => {:method => :get, :class => "auto-hide-text", :id => "admin_search"} do |f|
+                  =link_to_function image_tag("admin/search_icon.png")
+                  =text_field_tag "search", (params[:search] || ttt(:'.search'))
+              - if Atreides::Site.count > 1
+                %li.nav-site
+                  #site_selector
+                    %label{:for => "site"} 
+                      Site
+                    .sites
+                      %ol
+                        %li
+                          %span=@current_site.name
+                        - Atreides::Site.all.each do |s|
+                          - next if s==@current_site
+                          %li
+                            = link_to s.name, admin_switch_site_path(:site => s.name)
+                    %span
+                      #{@current_site.name}
+
+        %h1= link_to_unless_current "atreides", admin_path
+
+      #body{:class => @show_as_dash ? "dashboard" : ""}
+        =image_tag "admin/content_top_edit_form.png", :id => "content_top_edit_form"
+        #content{:class => content_for?(:sidebar) ? "span-17" : "span-23 last"}
+          #flash_messages= raw(flash_messages)
+          = yield
+
+        / Show Sidebar if there is something to include
+        - if content_for?(:sidebar)
+          #sidebar{:class => "span-6 last"}
+            = yield :sidebar
+
+        .clear
+
+      #footer
+    / Yield js if there is any
+    - if content_for?(:js)
+      = yield :js

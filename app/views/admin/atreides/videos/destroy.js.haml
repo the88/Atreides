@@ -1,0 +1,3 @@
+- if resource.destroyed?
+  $("##{resource.dom_id(params[:list_id]||'videos_list')}").fadeOut(function(){ $(this).remove() })
+$("#flash_messages").html("#{escape_javascript(flash_messages)}").hide().fadeIn()

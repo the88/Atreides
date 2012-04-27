@@ -1,0 +1,65 @@
+- begin
+  - dropbox_session # In case we need to authorize an incoming url...
+- rescue
+  -# Do nothing
+= semantic_form_for resource, :url => (resource.new_record? ? admin_posts_path : admin_post_path(resource.id)), :as => "post", :multipart => true do |f|
+  #form_content{:class => "span-17"}
+    %h2= ttt(resource.new_record? ? "new_post" : "edit_post").html_safe
+    = error_messages_for_post
+    = f.semantic_errors
+    = f.inputs do
+      = f.input :title, :label => ttt(:title), :input_html => { :class => "title" }
+    #content_parts_container
+      #content_part_drop= ttt(:drop_content_part)
+      #content_part_loading= ttt(:loading_content_part)
+      - if resource.parts.empty?
+        .part-container
+          .empty-message= ttt("add_content_parts").html_safe
+      - else
+        - resource.parts.each do |part|
+          = render :partial => "admin/atreides/content_parts/form", :locals => {:post => resource, :part => part}
+        .part-container-bottom
+      .clear
+    - content_for :head do
+      :javascript
+        $(function(){
+          var container = $('#content_parts_container')
+
+          // Sortable list
+          container.sortable({
+            placeholder: "ui-state-highlight",
+            axis: 'y',
+            opacity: 0.8,
+            //revert: true,
+            items: '> .part-container, > .part-container-bottom',
+            update: function(event, ui) {
+              $(this).find('li.hidden input[id$=display_order]').each(function(i, el){ el.value = i })
+              fixRailsEmbeddedFormHashOrder($(this))
+            }
+          });
+
+          // Droppable
+          container.droppable({
+            accept: "#content_parts_drops_list > li",
+            tolerance: 'pointer',
+            activeClass: "droppable-active",
+            drop: function( event, ui ) {
+              container.addClass('loading')
+              $.get($(ui.draggable).attr('data-remote-path'))
+                .complete(function() {
+                  container.removeClass('loading')
+                  container.find('li.hidden input[id$=display_order]').each(function(i, el){ el.value = i })
+                  fixRailsEmbeddedFormHashOrder(container)
+                })
+            }
+          });
+
+          // Clean up form order on load
+          fixRailsEmbeddedFormHashOrder(container)
+
+        })
+    = render :partial => 'admin/atreides/posts/form_buttons', :locals => {:f => f}
+
+  = render :partial => 'admin/atreides/posts/form_sidebar', :locals => {:f => f}
+
+  .clear

@@ -1,0 +1,8 @@
+= render :partial => 'sidebar'
+
+= render :partial => 'admin/common/search_form'
+
+%h2 #{ttt :'.orders'}
+
+.clear
+= render :partial => 'admin/common/list_table', :locals => { :records => collection, :class_obj => Order, :list_cols => %w(order buyer items date total), :action_cols => %w() }

@@ -1,0 +1,4 @@
+$("#tablerow_#{params[:parent_id]}").after("#{escape_javascript(render(:partial => 'admin/common/list_table_row', :collection => collection, :as => :record, :locals => { :list_cols => @list_cols, :cols_hash => Atreides::Page.columns_hash, :ignore_cols => [], :action_cols => @action_cols, :record_name => :page }))}")
+
+// Mark expand button as expanded
+$('#tablerow_1 span.collapsed').addClass('expanded').removeClass('collapsed')

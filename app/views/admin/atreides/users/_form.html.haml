@@ -1,0 +1,19 @@
+= form.inputs do
+  = form.input :first_name, :label => ttt(:'.firstname'), :wrapper_html => { :class => "left half" }, :input_html => { :class => "title" }
+  = form.input :last_name, :label => ttt(:'.lastname'), :wrapper_html => { :class => "left half" }, :input_html => { :class => "title" }
+  = form.input :email, :label => ttt(:'.email'), :wrapper_html => { :class => "clear" }
+  = form.input :password, :label => ttt(:'.password') 
+  = form.input :password_confirmation, :label => ttt(:'.password_confirmation')
+  = form.input :role, :label => ttt(:role), :as => :select, :include_blank => false, 
+    :collection => Atreides::User.available_roles(current_user).map {|r| [ttc(:".#{r}"), r]},
+    :selected => resource.new_record? ? current_user.role : resource.role
+
+= form.buttons do
+  = form.commit_button ttt(:save)
+  %li.cancel
+    - if resource.new_record?
+      = link_to ttt(:cancel), admin_users_path, :class => "cancel"
+    - else
+      = link_to ttt(:back), admin_users_path, :class => "cancel"
+  %li.delete
+    = link_to ttt(:delete), admin_user_path(resource), :class => "cancel", :confirm => ttt(:are_you_sure), :method => "delete" if resource_class.can_destroy_admin? && !resource.new_record?

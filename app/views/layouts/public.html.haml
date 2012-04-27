@@ -1,0 +1,39 @@
+!!!
+%html{:prefix => "og: http://ogp.me/ns#", :xmlns => "http://www.w3.org/1999/xhtml", "xmlns:og" => "http://ogp.me/ns#", "xmlns:fb" => "http://www.facebook.com/2008/fbml"}
+  %head
+    %meta{"http-equiv"=>"Content-type", "content"=>"text/html; charset=utf-8"}
+    %title #{Settings.app_name}#{": #{@page_title}" if @page_title}
+    = facebook_meta_tags
+    = csrf_meta_tag
+    = raw analytical.head_prepend_javascript
+    = auto_discovery_link_tag :rss, feeds_path(:format => "rss")
+    = include_javascripts :public
+    = include_stylesheets :public
+    = yield :head
+    = raw analytical.head_append_javascript
+  %body
+    = raw analytical.body_prepend_javascript
+    .container
+      #header
+        #search_form
+          = semantic_form_for(Atreides::Post.new, :url => search_path, :html => { :method => :get, :class => "auto-hide-text"}) do |f|
+            =text_field_tag ttc('layouts.public.search'), (params[:search] || ttc('layouts.public.search')), :class => "text"
+            =submit_tag ttc('layouts.public.go')
+
+        %h1{:id => 'logo'}=link_to Settings.app_name, root_path
+
+        #nav
+          #date=raw Time.zone.now.strftime("<strong>%A</strong>, %B %d, %Y")
+          %ul
+            %li.home=link_to_unless_current ttc('layouts.public.home'), root_path
+            - if defined?(Settings.common_tags)
+              %li.diary=link_to_unless_current ttc('layouts.public.diary'), tagged_posts_path(Settings.common_tags.first)
+
+      #body.clear
+        = raw(flash_messages)
+
+        = yield
+
+      #footer
+
+    = raw analytical.body_append_javascript

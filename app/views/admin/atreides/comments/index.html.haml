@@ -1,0 +1,34 @@
+= render :partial => 'sidebar'
+
+%h2 #{ttt :'.comments'}
+
+.clear
+
+#comments_list
+  - @collection.response.each do |comment|
+    = render :partial => 'line', :locals => { :comment => comment}
+
+.clear
+
+%fieldset#comment_buttons.buttons.actions
+  %ol
+    %li.commit
+      - form_tag '/admin/comments/update_many', :method => :put do
+        = hidden_field_tag "comment_action", "approve"
+        %input#approve-selected.create{:type => "button", :value => ttc(".approve")}
+    %li.delete
+      - form_tag '/admin/comments/delete_many', :method => :delete do
+        %input#delete-selected.cancel{:type => "button", :value => ttc(".delete")}
+    %li.cancel
+      - form_tag '/admin/comments/update_many', :method => :put do
+        = hidden_field_tag "comment_action", "mark-spam"
+        %input#mark-as-spam-selected.cancel{:type => "button", :value => ttc(".mark as spam")}
+
+#pagination.pagination.clear
+  - if @collection.cursor.hasPrev
+    .previous= link_to tt("Previous"), admin_comments_path(params.merge(:cursor => @collection.cursor.prev))
+  - if @collection.cursor.hasNext
+    .next= link_to tt("Next"), admin_comments_path(params.merge(:cursor => @collection.cursor.next))
+    
+- content_for :js do
+  = coffeescript_include_tag 'comments'

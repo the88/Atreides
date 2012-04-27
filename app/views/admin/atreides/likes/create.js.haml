@@ -1,0 +1,2 @@
+var msg = "#{escape_javascript(resource.valid? like_label(@parent) ? "You already liked this")}"
+$("##{@parent.dom_id('like_label')}").html(msg)

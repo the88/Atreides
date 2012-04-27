@@ -1,0 +1,10 @@
+/ Featured Posts
+- featured_posts = Atreides::Post.published.tagged_with('featured').limit(3) rescue []
+#featured_videos
+  - featured_posts.each do |post|
+    .featured_video
+      %h2= link_to post.title, post_path(post, post.slug)
+      .divider
+      .featured-post-photo= link_to image_tag(post.photos.first.image.url(:splash), :width => "270"), post_path(post, post.slug)
+      %p.featured-post-body
+        = truncate_words(strip_tags(post.body), :length => 30, :omission => "...#{link_to(" #{ttt :'.more'}", post_path(post, post.slug), :class => "more")}")

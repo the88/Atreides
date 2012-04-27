@@ -1,0 +1,24 @@
+- today = Date.today
+- @date ||= today
+- content_for :sidebar do
+  %ul.summary
+    %li.new-content
+      = sidebar_new_content_link
+    %li.divider
+    %li= "#{ttt :'.x_features', :count => Atreides::Feature.published.count} #{ttt :'.published'}"
+    %li= "#{ttt :'.x_features', :count => Atreides::Feature.drafted.count} #{ttt :'.drafted'}"
+
+= render :partial => "atreides/admin/content_nav"
+
+- @collection.each do |tag, collection|
+  %h2 #{tag.humanize.titleize} Items
+  - list_id = "features_#{tag.underscore}_list"
+  %ul.archives{:id => list_id }
+    - collection.each do |r|
+      %li{:id => r.dom_id}
+        - img = r.thumbnail rescue ""
+        - link_to edit_admin_feature_path(r), :style => "background-image:url('#{img}')" do
+          %div.date-overlay=r.published_at.to_s(:month_and_day_ordinal) if r.published?
+          %span=truncate_words(strip_tags(r.title? ? r.title : r.caption), :length => 10)
+  = sortable_element("##{list_id}", :url => reorder_admin_features_path(:format => :js), :axis => "x")
+  %p.clear #{ttt :'.drag_and_drop_featured_items_to_change_their_display_order'}

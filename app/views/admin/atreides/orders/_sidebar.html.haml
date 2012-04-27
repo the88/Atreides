@@ -1,0 +1,20 @@
+- today = Date.today
+- @date ||= today
+- content_for :sidebar do
+  %ul.summary
+    %li.new-content
+      =sidebar_new_content_link
+    %li.divider
+    %li= ttt :'.x_orders', :count => Atreides::Order.count
+    %li.divider
+    %li= ttt :'.x_products', :count => Atreides::Product.count
+    %li= link_to ttt(:'.published'), admin_products_path(:state => 'published')
+    %li= link_to ttt(:'.drafts'), admin_products_path(:state => 'drafted', :month => @date.month, :year => @date.year)
+    %li.divider
+    %li #{ttt :'.filter'}:
+    %li
+      Month: 
+      =select_tag "archive_month", options_for_select(Date::MONTHNAMES.map{|m| [m, Date::MONTHNAMES.index(m)]}, @date.month), :onchange => "window.location = '#{filter_admin_orders_path}?state=#{params[:state]}&month='+this.value+'&year='+$('#archive_year').val()"
+    %li
+      Year: 
+      =select_tag "archive_year", options_for_select((today.year-5..today.year).to_a.reverse, @date.year), :onchange => "window.location = '#{filter_admin_orders_path}?year='+this.value+'&month='+$('#archive_month').val()"

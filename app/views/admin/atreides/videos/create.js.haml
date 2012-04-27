@@ -1,0 +1,9 @@
+- list_id = params[:list_id] || "videos_list"
+- resource_type = params[:resource_type] || "post"
+try {
+$("##{list_id}").append("#{escape_javascript(video_for_assoc(@video, list_id, resource_type))}")
+fixRailsEmbeddedFormHashOrder($('#content_parts_container'))
+} catch (err) {
+console.log("Error: "+err.description)
+console.debug(err)
+}

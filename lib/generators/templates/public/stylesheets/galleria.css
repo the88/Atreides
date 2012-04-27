@@ -1,0 +1,24 @@
+.galleria {
+  width:800px;
+  height:600px;
+}
+
+.galleria-image-nav-left {
+  margin-left: -45px;
+}
+
+.galleria-image-nav-right {
+  margin-right: -45px;
+}
+
+.galleria-info {
+  top: 529px;
+}
+
+.galleria-info-title {
+  font-weight: normal;
+}
+
+#main_content, .galleria-container, .galleria-stage {
+  overflow: visible;
+}

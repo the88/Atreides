@@ -1,0 +1,11 @@
+- today = Date.today
+- @date ||= today
+- content_for :sidebar do
+  %ul.summary
+    %li.new-content
+      =sidebar_new_content_link
+
+%h2 #{ttt :users}
+
+.clear
+= render :partial => 'admin/common/list_table', :locals => { :records => collection, :class_obj => Atreides::User, :list_cols => %w(name email role), :action_cols => %w() }

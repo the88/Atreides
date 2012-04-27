@@ -1,0 +1,85 @@
+#form_sidebar{:class => "sidebar span-6 last"}
+  = f.inputs do
+
+    / Content Parts
+    %li#content_parts_drops
+      %label= ttt("content_parts_drops")
+      %ul#content_parts_drops_list
+        - Atreides::ContentPart.content_types.each do |ct|
+          %li.content_parts_drop{:id => "content_part_#{ct}", :'data-remote-path' => new_admin_post_part_path(resource.new_record? ? '-' : resource.id, :content_type => ct, :format => :js)}
+            %span= ct.humanize
+            .draggable-sshot{:style => 'display:none'}= image_tag("admin/content_part_#{ct}.png")
+      %p.inline-hints= tt(:drag_drop_contant_parts_hint)
+      - content_for :head do
+        :javascript
+          $(function(){ $('#content_parts_drops_list li').draggable({
+            revert: "invalid",
+            cursor: "move",
+            helper: function(event, ui) {
+              return $(this).find('.draggable-sshot').clone().show();
+            },
+          }); })
+
+    = f.input :state, :as => "hidden", :wrapper_html => { :class => "post-hidden" }
+    - selected = (resource.pending? || resource.published?) ? (resource.published_at? ? :published_at : :publish_now) : resource.state.to_sym
+
+    - resource.published_at = (resource.published_at || Time.now).in_time_zone # Needed to show time in user's TZ
+    - label = (resource.published_at.past? ? tt(:'.published_on') : tt('.will_be_published_on')) + ": "
+
+    = f.input :state, :as => "select", :collection => resource.states_for_select, :selected => selected, :include_blank => false, :wrapper_html => { :class => "post-states" }
+    = f.input :published_at, :label => label, :as => "string", :wrapper_html => { :class => "date-picker", :style => "display:#{selected==:published_at ? 'block' : 'none'}"}
+    
+    / Tags
+    - if defined?(Settings.tags.posts.groups)
+      - (Settings.tags.posts.groups - %w(tags)).each do |group|
+        - next if Settings.tags.posts[group].empty?
+        %li{:class => "#{group.parameterize}-tag-group tag-picker"}
+          %label #{group.parameterize.tableize.singularize.humanize.titleize}
+          %ul{:class => "#{group}_tag_list" }
+            - Settings.tags.posts[group].each do |tag|
+              %li.machine_tag{:class => "#{group}_tag" }
+                = check_box_tag "post[#{group}_list][]", tag, resource.send("#{group}_list").include?(tag)
+                = tag.humanize.titleize
+
+      - if Settings.tags.posts.groups.include?('tags')
+        %li{:class => "tags-tag-group tag-picker"}
+          %label #{ttt :'.tags'}
+          %ul
+            - Settings.tags.posts.tags.each do |tag|
+              %li.jq_tags_token
+                = tag
+                = link_to_function "+", "$('.tag-picker input.jq_tags_editor_input').attr('value','#{tag}').blur()"
+          .clear
+          = text_area :post, "tag_list", :class => "tag-picker"
+          %p.inline-hints= tt(:'.tags_help')
+    = f.input :slug, :label => tt(:'.custom_url'), :as => "underline", :prefix => "/posts/", :hint => ttt(:'.leave_blank_to_create_automatically_from_the_title'), :wrapper_html => { :class => "underlined-input" }
+
+    %li.social-callbacks
+      %label= ttt('.cross_posting')
+      %ul
+        %li.machine_tag
+          - if resource.twitter_id?
+            = link_to(ttc('.crossposted_twitter'), "http://twitter.com/#{Settings.twitter.login}/status/#{resource.twitter_id}")
+          - elsif resource.tw_delayed_job
+            %span 
+              #{ttc('.crosspost_queued_twitter')}
+              %br
+              (#{resource.tw_delayed_job.run_at.to_s(:date_ordinal)})
+          - else
+            = check_box(:post, :tw_me)
+            = ttc '.crosspost_twitter'
+        %li.machine_tag
+          - if resource.facebook_id?
+            = link_to(ttc('.crossposted_facebook'), "http://facebook.com/pages/#{Settings.app_name.parameterize}/#{Settings.facebook.page_id}")
+          - elsif resource.fb_delayed_job
+            %span
+              #{ttc('.crosspost_queued_facebook')}
+              %br
+              (#{resource.fb_delayed_job.run_at.to_s(:date_ordinal)})
+          - else 
+            = check_box(:post, :fb_me)
+            = ttc '.crosspost_facebook'
+        %li#social_message
+          %label= ttt :'.message'
+          = text_area :post, :social_msg, :class=>"social_msg", :rows=>"4", :disabled => resource.twitter_id? && resource.facebook_id? && resource.live?
+          %span.social_msg_chars

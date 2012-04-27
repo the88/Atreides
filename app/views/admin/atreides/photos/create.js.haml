@@ -1,0 +1,18 @@
+try {
+$("#flash_messages").html("#{escape_javascript(flash_messages)}").hide().fadeIn()
+- parent_resource_name = params[:resource_type]
+- if resource.valid?
+  - if parent_resource_name == 'page' or (parent_resource_name == 'post' and params[:post_type] == 'post')
+    jQuery.wymeditors(0).insert('#{escape_javascript(image_tag(resource.image.url(:list)))}')
+  - elsif parent_resource_name == 'feature' and params[:feature_id]
+    - list_id = params[:list_id] || "feature_photo"
+    $("##{list_id}_ul").html("#{escape_javascript(photo_for_assoc(resource, @photoable, list_id))}")
+  - elsif parent_resource_name == 'post' and params[:post_type]=='photos'
+    - list_id = params[:list_id] || @photoable.dom_id("photos_list")
+    $("##{list_id}").append("#{escape_javascript(photo_for_assoc(resource, parent_resource_name, list_id))}")
+    $('##{list_id}').sortable('refresh')
+  fixRailsEmbeddedFormHashOrder($('#content_parts_container'))
+} catch (err) {
+console.log("Error: "+err.description)
+console.debug(err)
+}

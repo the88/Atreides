@@ -1,0 +1,8 @@
+- units = 'tweets'
+%tbody{:units => units.singularize}
+  - range      = (Date.today-1.month+1.day .. Date.today).to_a
+  - range.each do |date|
+    - day = @tweets.detect{|m|m[:date] == date}
+    %tr
+      %td= date.to_s(:db)
+      %td= day ? pluralize(day[:tweets], units) : 0

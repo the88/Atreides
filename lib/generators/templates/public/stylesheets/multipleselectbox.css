@@ -1,0 +1,33 @@
+.MultipleSelectBox {
+	border: 1px solid #aaa;
+/*  height: 200px;*/
+	list-style-type: none;
+	margin: 0;
+	overflow: auto;
+	padding: 1px 0;
+/*  width: 500px;*/
+}
+
+.MultipleSelectBox.selecting {
+	border: 1px solid black;
+}
+
+.MultipleSelectBox li {
+	border: 1px solid white;
+	cursor: pointer;
+	padding: 0 3px;
+}
+
+.MultipleSelectBox li.disabled {
+	color: gray;
+	font-style: italic;
+}
+
+.MultipleSelectBox li.selected {
+	border: 1px solid #F39814;
+	background-color: #F39814;
+}
+
+.MultipleSelectBox li.selecting {
+	border: 1px dotted black;
+}

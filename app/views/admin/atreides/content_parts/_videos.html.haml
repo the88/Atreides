@@ -1,0 +1,12 @@
+- part ||= resource
+- part_uid ||= part.new_record? ? part.object_id : part.id
+- videos_list_id  = "videos_list_#{part_uid}"
+%li.string.optional.video-url.half
+  %label{:for => "#{resource_type.to_s}_videos_attributes__url"} #{ttt :'.video_url'}
+  = text_field_tag "video_url"
+  = link_to ttt(:'.save'), admin_videos_path(:format => "js", :list_id => videos_list_id, :resource_type => resource_type), :'data-submit' => "#video_url", :after => "$('.video-url input').val(null)", :id => "save_video_btn", :remote => true, :'data-method' => 'POST', :'data-submit' => '#video_url'
+  %p.inline-hints #{tt :'.paste_in_a_URL_to_a_vimeo_or_youtube_video'}
+%li.video-list
+  = edit_videos_for_assoc(part, videos_list_id)
+  %p.inline-hints.clear #{ttt :'.reorder_and_caption_videos'}
+

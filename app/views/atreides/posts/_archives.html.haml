@@ -1,0 +1,19 @@
+- records ||= @posts
+%ul.archives
+  - records.each do |r|
+    - obj_type  = "#{r.class.table_name.to_s.singularize}_type".to_sym
+    - css_class = r.respond_to?(obj_type) ? r.send(obj_type) : ""
+    %li{:id => r.dom_id, :class => css_class}
+      - img = r.post_type.video? ? r.videos.first.thumb_url : r.photos.first.image.url(:thumb) rescue ""
+      = link_to send("#{r.class.table_name.to_s.singularize.downcase}_path", r.to_param, r.slug), :style => "background-image:url('#{img}')" do
+        %div.date-overlay=r.published_at.to_s(:month_and_day_ordinal) if r.published? and r.published_at?
+        %span=truncate_words(r.title? ? r.title : strip_tags(r.body), :length => 10)
+
+#pagination.pagination.clear
+  - if controller.action_name!="search" and !params[:month].blank?
+    - prev_date = @date - 1.month
+    .previous= link_to "Previous", url_for(params.merge(:month => prev_date.month, :year => prev_date.year))
+    - next_date = @date + 1.month
+    .next= link_to "Next", url_for(params.merge(:month => next_date.month, :year => next_date.year))
+  - elsif records.size==records.per_page
+    .more= link_to "More", url_for(params.merge(:page => records.current_page+1, :format => "js")), :remote => true, :method => :get, "data-type" => "script"
