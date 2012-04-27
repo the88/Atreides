@@ -13,7 +13,7 @@ initializer has already been created.
     rake atreides:install:migrations
 
 3) Configure the app to use the ActiveRecord session store, like this:
-(Otherwise, the flash photo uploader will not work)
+(Otherwise, the QQ photo uploader will not work)
 
     $ cat config/initializers/session_store.rb
     Rails.application.config.session_store :active_record_store,
