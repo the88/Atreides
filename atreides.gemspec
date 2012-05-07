@@ -5,7 +5,7 @@ $:.unshift lib unless $:.include?(lib)
 require 'atreides/version'
 
 Gem::Specification.new do |s|
-  s.name        = "Atreides"
+  s.name        = "atreides"
   s.version     = Atreides::VERSION.dup
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Lachlan Laycock", "Samuel Mendes", "Mathieu Raveaux", "Jérémy Van de Wyngaert", "William Alton"]
