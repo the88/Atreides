@@ -51,7 +51,7 @@ Gem::Specification.new do |s|
   s.add_dependency "twitter"
   s.add_dependency "unicode_utils"
   s.add_dependency "validates_email_format_of"
-  s.add_dependency "will_paginate", "3.0.pre2"
+  s.add_dependency "will_paginate", "~> 3.0.3"
   s.add_dependency "yard"
   s.add_dependency "memcache-client"
   s.add_dependency "analytical"
