@@ -8,8 +8,8 @@
     :collection => Atreides::User.available_roles(current_user).map {|r| [ttc(:".#{r}"), r]},
     :selected => resource.new_record? ? current_user.role : resource.role
 
-= form.buttons do
-  = form.commit_button ttt(:save)
+= form.actions do
+  = form.action :submit, :as => :button, :label => ttt(:save)
   %li.cancel
     - if resource.new_record?
       = link_to ttt(:cancel), admin_users_path, :class => "cancel"

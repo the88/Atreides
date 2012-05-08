@@ -6,5 +6,5 @@
       = form.input :email, :label => ttt(:'.email'), :input_html => { :class => "title" }
       = form.input :password, :input_html => { :class => "title" }
   
-    - form.buttons do
-      = form.commit_button ttt(:'.login')
+    - form.actions do
+      = form.action :submit, :as => :button, :label => ttt(:'.login')

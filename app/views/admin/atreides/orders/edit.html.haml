@@ -43,7 +43,7 @@
         = @order.created_at.to_s(:datetime_ordinal)
           
 
-    - f.buttons do
+    - f.actions do
       %li.commit
         = link_to "Orders", admin_pages_path, :class => "create"
 

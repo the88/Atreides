@@ -10,6 +10,6 @@
       = form.input :password, :label => ttt(:'.password'), :wrapper_html => { :class => "left half" }
       = form.input :password_confirmation, :label => ttt(:'.password_confirmation'), :wrapper_html => { :class => "left half" }
 
-    = form.buttons do 
-      = form.commit_button ttt(:'.create')
+    = form.actions do
+      = form.action :submit, :as => :button, :label => ttt(:'.create')
 
