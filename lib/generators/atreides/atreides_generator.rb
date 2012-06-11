@@ -31,7 +31,8 @@ module Atreides
            create_pages create_likes create_comments create_messages
            create_features create_products create_line_items create_links
            create_votes create_tweets create_sessions create_sites
-           create_content_parts add_userid_to_resources).each do |f|
+           create_content_parts add_userid_to_resources devise_create_users
+           add_role_to_users).each do |f|
           src = "#{f}.rb"
           dst = "db/migrate/#{src}"
           migration_template(src, dst) rescue puts $!
