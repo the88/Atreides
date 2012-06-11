@@ -1,4 +1,7 @@
 require 'digest/md5'
+
+require 'redcarpet'
+
 module Admin::Atreides::GithubHelper
 
   GH_OPTIONS = {

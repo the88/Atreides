@@ -10,6 +10,7 @@ require 'analytical'
 require 'jquery-rails'
 require 'aws/s3'
 require 'devise'
+require 'oauth2'
 
 require 'cancan'
 # TODO: pull request in CanCan
