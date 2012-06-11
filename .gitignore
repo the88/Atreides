@@ -14,3 +14,8 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
+spec/dummy/db/*.sqlite3
+spec/dummy/public/system/
+spec/dummy/log/*.log
+spec/dummy/tmp/
+spec/dummy/.sass-cache
