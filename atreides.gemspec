@@ -1,18 +1,18 @@
-# -*- encoding: utf-8 -*-
-lib = File.expand_path('../lib/', __FILE__)
-$:.unshift lib unless $:.include?(lib)
+$:.push File.expand_path("../lib", __FILE__)
 
-require 'atreides/version'
+# Maintain your gem's version:
+require "atreides/version"
 
+# Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "atreides"
   s.version     = Atreides::VERSION.dup
-  s.platform    = Gem::Platform::RUBY
   s.authors     = ["Lachlan Laycock", "Samuel Mendes", "Mathieu Raveaux", "Jérémy Van de Wyngaert", "William Alton"]
   s.email       = ["hello@lovethe88.com"]
   s.homepage    = "http://lovethe88.com"
   s.summary     = "KISS Content Management System"
   s.description = "Atreides is an engine providing a evented CMS following a KISS principle, updated for Heroku"
+  s.platform    = Gem::Platform::RUBY
 
   s.required_rubygems_version = ">= 1.3.6"
 
