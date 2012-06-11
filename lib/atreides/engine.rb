@@ -11,7 +11,7 @@ module Atreides
     # otherwise, we would get "could not find table 'xxxx'" exceptions.
     config.eager_load_paths -= [ paths["app/models"].first ]
     config.autoload_paths << paths["app/models"].first
-    config.autoload_paths += %W(#{Rails.root}/app/atreides #{Rails.root}/app/atreides/models)
+    config.autoload_paths += %W(#{Rails.root}/app/atreides/models)
     config.eager_load_paths += [ paths["app/inputs"].first ]
 
     # Force routes to be loaded if we are doing any eager load.
