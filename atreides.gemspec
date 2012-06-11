@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency "bluecloth"
   s.add_dependency "cancan"
   s.add_dependency "coffee-script"
-  s.add_dependency "delayed_job"
+  s.add_dependency "delayed_job_active_record"
   s.add_dependency "devise"
   s.add_dependency "dropbox-sdk"
   s.add_dependency "dynamic_form"

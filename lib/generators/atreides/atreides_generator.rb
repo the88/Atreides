@@ -24,7 +24,7 @@ module Atreides
 
       def create_migration_file
         generate('acts_as_taggable_on:migration')
-        generate('delayed_job')
+        generate('delayed_job:active_record')
         # generate('devise:install') # Run 'rails g devise:install' instead!
 
         %w(create_videos create_photos create_orders create_posts
