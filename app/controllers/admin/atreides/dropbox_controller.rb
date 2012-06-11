@@ -19,27 +19,22 @@ class Admin::Atreides::DropboxController < Atreides::ApplicationController
 
   def list
     @dropbox_path = request[:path] || '/'
-    dropbox_session.mode = :dropbox
-    ls = dropbox_session.list(@dropbox_path)
-    @dirs = ls.select { |item| item.directory? }
-    @imgs = ls.select { |item| !item.directory? && item.mime_type =~ /image/ }
-    @imgs = @imgs.delete_if { |item| ['image/x-icon', 'image/x-photoshop'].include? item.mime_type }
+    ls = dropbox_client.metadata(@dropbox_path)['contents']
+    @dirs = ls.select { |item| item['is_dir'] }
+    @imgs = ls.select { |item| !item['is_dir'] && item['mime_type'] =~ /image/ }
+    @imgs = @imgs.delete_if { |item| ['image/x-icon', 'image/x-photoshop'].include? item['mime_type'] }
   end
 
   def thumb
     @path = request[:path]
-    dropbox_session.mode = :dropbox
     headers['Content-Type'] = 'image/jpeg'
-    self.response_body = proc do |resp, output|
-      @res ||= begin puts "Requesting..."; dropbox_session.thumbnail(@path) end
-      output.write @res
-    end
+    self.response_body = dropbox_client.thumbnail(URI.escape(@path))
   end
 
   private
 
   def authorized?
-    session[:dropbox_session].present?
+    dropbox_session.authorized?
   end
 
 end

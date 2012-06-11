@@ -17,6 +17,7 @@ class Atreides::Photo < Atreides::Base
       :all => Settings.photo_conv_options || "-density 72 " 
     },
     :path             => Settings.s3_enabled? ? ":attachment/:id/:style/:basename.:extension" : ":rails_root/public/system/:attachment/:id/:style/:basename.:extension",
+    :url              => Settings.s3_enabled? ? ":attachment/:id/:style/:basename.:extension" : "/system/:attachment/:id/:style/:basename.:extension",
     :s3_credentials   => (Settings.s3.symbolize_keys rescue nil),
     :bucket           => [Settings.app_name, Rails.env].join('-').parameterize.to_s,
     :log_command      => Rails.env.development?
@@ -104,9 +105,8 @@ class Atreides::Photo < Atreides::Base
     if (image_file_name?)
       self.sizes = {}
       self.image.queued_for_write.each {|key,file|
-        next unless File.exists?(file)
         self.sizes[key.to_sym]={}
-        geo = Paperclip::Geometry.from_file(file)
+        geo = Paperclip::Geometry.from_file(file.path)
         %w(width height).each{|dim|
           self.sizes[key.to_sym][dim.to_sym] = geo.send(dim.to_sym).to_i
         }

@@ -129,6 +129,6 @@
       });
   - else
     - puts "Must authorize dropbox !"
-    = link_to "Connect with Dropbox", dropbox_authorize_link(request.referer.gsub(/\?.+/,"")+"?add_content[]=photos", :target => '_self', :title => "Connect with Dropbox"
+    = link_to "Connect with Dropbox", dropbox_authorize_link+"?add_content[]=photos", :target => '_self', :title => "Connect with Dropbox"
     :javascript
       $('#dropbox_uploader a').tipsy({gravity: 'w'})

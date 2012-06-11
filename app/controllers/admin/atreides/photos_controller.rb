@@ -8,23 +8,26 @@ class Admin::Atreides::PhotosController < Atreides::AdminController
 
   def create
     if params[:dropbox_path]
-      dropbox_session.mode = :dropbox
       puts "Downloading from dropbox..."
       start = Time.now
-      data = StringIO.new dropbox_session.download(params[:dropbox_path])
+      data = dropbox_client.get_file(params[:dropbox_path])
       puts "Downloaded in #{Time.now - start}..."
       filename = File.basename params[:dropbox_path]
       puts "Filename: #{filename}"
     else
       # Flash photo upload
-      data = StringIO.new request.body.read
+      data = request.body.read
       filename = params[:qqfile]
     end
-    data.class.send(:define_method, "original_filename") do
-      filename
-    end
 
-    @photo = end_of_association_chain.new(:image => data, :image_file_name => filename)
+    extension = File.extname(filename)
+    basename = File.basename(filename, extension)
+    tempfile = Tempfile.new([basename, extension], :encoding => data.encoding)
+    tempfile.write(data)
+    tempfile.rewind
+
+    @photo = end_of_association_chain.new
+    @photo.image = tempfile
 
     # Features belong to the photo and not the otherway
     if photoable && photoable.is_a?(Atreides::Feature)

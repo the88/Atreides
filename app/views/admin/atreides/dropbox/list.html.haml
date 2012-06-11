@@ -15,12 +15,12 @@
 
   %ul.selector
     - for dir in @dirs
-      %li.directory{ :class => dir.icon}
-        %a.directory{ :rel => dir.path }= basename dir.path
+      %li.directory{ :class => dir['icon']}
+        %a.directory{ :rel => dir['path'] }= basename dir['path']
     - for img in @imgs
       %li.selected
-        %img{:src => admin_dropbox_thumbnail_path(:path => img.path)}
-        %a.image{ :rel => img.path }= basename img.path
+        %img{:src => admin_dropbox_thumbnail_path(:path => img['path'])}
+        %a.image{ :rel => img['path'] }= basename img['path']
     - unless @imgs.size > 0 || @dirs.size > 0
       %li.back
         %a.directory{:rel => path} &larr; No image found.

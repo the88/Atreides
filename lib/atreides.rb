@@ -5,7 +5,7 @@ require 'settingslogic'
 require 'will_paginate'
 require 'acts_as_commentable'
 require 'validates_email_format_of'
-require "dropbox"
+require 'dropbox_sdk'
 require 'analytical'
 require 'jquery-rails'
 

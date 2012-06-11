@@ -4,7 +4,6 @@ source "http://rubygems.org"
 gemspec
 
 gem "aws-s3",  :require => "aws/s3"
-gem "dropbox"
 gem "eventmachine", ">= 1.0.0.beta.3"
 gem "thin"
 

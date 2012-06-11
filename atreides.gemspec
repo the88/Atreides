@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency "coffee-script"
   s.add_dependency "delayed_job"
   s.add_dependency "devise"
-  s.add_dependency "dropbox"
+  s.add_dependency "dropbox-sdk"
   s.add_dependency "dynamic_form"
   s.add_dependency "formtastic"
   s.add_dependency "gattica"
