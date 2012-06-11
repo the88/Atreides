@@ -42,7 +42,6 @@ module Atreides
       def create_configuration_file
         copy_file 'initializer.rb', 'config/initializers/atreides.rb'
         copy_file 'string_extensions.rb', 'config/initializers/string_extensions.rb'
-        copy_file 'sass.rb', 'config/initializers/sass.rb'
         copy_file 'new_relic.rb', 'config/initializers/new_relic.rb'
         copy_file 'unicorn.rb', 'config/unicorn.rb'
         copy_file 'settings.yml', 'config/settings.yml'
