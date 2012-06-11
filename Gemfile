@@ -3,7 +3,6 @@
 source "http://rubygems.org"
 gemspec
 
-gem "aws-s3",  :require => "aws/s3"
 
 gem "analytical", :git => "git://github.com/mathieuravaux/analytical.git"
 gem "gattica", :git => "http://github.com/chrisle/gattica.git"
