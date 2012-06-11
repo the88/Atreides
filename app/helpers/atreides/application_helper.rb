@@ -122,6 +122,10 @@ module Atreides::ApplicationHelper
     %($(#{ActiveSupport::JSON.encode(element_id)}).sortable(#{options_for_javascript(options)});)
   end
 
+  def sortable_element(element_id, options = {})
+    javascript_tag(sortable_element_js(element_id, options))
+  end
+
   def remote_function(options)
     opts = {
       :type     => options[:type] || options[:method] || 'post',
