@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -19,8 +20,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.string   "commentable_type"
     t.integer  "user_id"
     t.datetime "moderated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
   end
 
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
@@ -34,8 +35,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.string   "display_type"
     t.string   "content_type"
     t.integer  "display_order",    :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -47,8 +48,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.datetime "locked_at"
     t.datetime "failed_at"
     t.string   "locked_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
@@ -62,8 +63,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.string   "caption"
     t.string   "url"
     t.datetime "published_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "site_id"
   end
 
@@ -75,8 +76,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.integer  "likeable_id"
     t.string   "likeable_type"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   add_index "likes", ["likeable_id"], :name => "index_likes_on_likeable_id"
@@ -91,8 +92,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.integer  "price_cents",    :default => 0
     t.string   "price_currency"
     t.integer  "qty",            :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "line_items", ["order_id"], :name => "index_line_items_on_order_id"
@@ -104,8 +105,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.string   "caption"
     t.string   "url"
     t.integer  "display_order", :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   add_index "links", ["post_id"], :name => "index_links_on_post_id"
@@ -122,8 +123,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   add_index "messages", ["messagable_id"], :name => "index_messages_on_messagable_id"
@@ -159,8 +160,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.string   "slug"
     t.datetime "published_at"
     t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "likes_count",    :default => 0
     t.integer  "comments_count", :default => 0
     t.integer  "votes_count",    :default => 0
@@ -190,8 +191,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "sizes",              :limit => 3000
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
     t.integer  "display_order",                      :default => 0
   end
 
@@ -200,8 +201,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.string   "slug"
     t.datetime "published_at"
     t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.integer  "tumblr_id"
     t.integer  "likes_count",                          :default => 0
     t.integer  "comments_count",                       :default => 0
@@ -241,8 +242,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.integer  "comments_count", :default => 0
     t.integer  "likes_count",    :default => 0
     t.integer  "votes_count",    :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "products", ["comments_count"], :name => "index_products_on_comments_count"
@@ -252,8 +253,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
@@ -262,8 +263,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
   create_table "sites", :force => true do |t|
     t.string   "name"
     t.string   "lang"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "sites", ["name"], :name => "index_sites_on_name", :unique => true
@@ -293,28 +294,28 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.string   "profile_image_url"
     t.string   "to_user"
     t.integer  "reach",                           :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
   end
 
   add_index "tweets", ["tweeted_at"], :name => "index_tweets_on_tweeted_at"
   add_index "tweets", ["twitter_id"], :name => "index_tweets_on_twitter_id", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string   "email",                               :default => "", :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
-    t.string   "remember_token"
+    t.string   "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "first_name"
     t.string   "last_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "role"
   end
 
@@ -325,8 +326,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.string   "caption"
     t.string   "url",             :limit => 3000
     t.string   "vimeo_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.integer  "display_order",                   :default => 0
     t.string   "embed",           :limit => 3000
     t.integer  "width"
@@ -341,8 +342,8 @@ ActiveRecord::Schema.define(:version => 20110617101343) do
     t.integer  "value"
     t.integer  "user_id"
     t.string   "ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   add_index "votes", ["ip"], :name => "index_votes_on_ip"
