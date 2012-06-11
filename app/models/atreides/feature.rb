@@ -61,6 +61,9 @@ class Atreides::Feature < Atreides::Base
     elsif photo_id?
       photo.image(size)
     else
+      # FIXME: THIS NEEDS TO BE MOVED TO A VIEW/PRESENTER/DECORATOR
+      # asset_path('atreides/missing_thumb.png')
+
       "/images/missing_thumb.png"
     end
   end

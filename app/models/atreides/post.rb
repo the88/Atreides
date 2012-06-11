@@ -192,6 +192,10 @@ class Atreides::Post < Atreides::Base
     elsif first_video
       first_video.thumb_url
     end
+
+    # FIXME: THIS NEEDS TO BE MOVED TO A VIEW/PRESENTER/DECORATOR
+    # asset_path('atreides/missing_thumb.png')
+
     url || "/images/missing_thumb.png"
   end
 

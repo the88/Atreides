@@ -63,6 +63,10 @@ class Atreides::Page < Atreides::Base
     # Find the first thumbnail image
     url = nil
     url = photos.first.image.url(size) unless photos.empty?
+
+    # FIXME: THIS NEEDS TO BE MOVED TO A VIEW/PRESENTER/DECORATOR
+    # asset_path('atreides/missing_thumb.png')
+
     url || "/images/missing_thumb.png"
   end
 
