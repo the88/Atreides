@@ -49,6 +49,7 @@ module Atreides
         copy_file 'delayed_job.rb', 'config/initializers/delayed_job.rb'
         copy_file 'disqussion.rb', 'config/initializers/disqussion.rb'
         copy_file 'Procfile', 'Procfile'
+        gsub_file 'config/application.rb', 'config.active_record.whitelist_attributes = true', 'config.active_record.whitelist_attributes = false'
       end
     end
   end
