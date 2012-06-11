@@ -12,7 +12,7 @@ rake db:migrate
 rails s
 ```
 
-Then visit <http://localhost/admin> to get started.
+Then visit <http://localhost:3000/admin> to get started.
 
 Many of the plugins require configuration settings. See config/settings.yml.
 
