@@ -36,7 +36,7 @@ class Atreides::LikesController < Atreides::PublicController
   end
 
   def parent
-    @parent ||= Atreides::Post.find_by_slug(params[:post_id]) || 
+    @parent ||= Atreides::Post.find_by_slug(params[:post_id]) ||
                 Atreides::Post.find(params[:post_id])
   end
 

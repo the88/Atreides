@@ -39,7 +39,7 @@ describe 'Atreides' do
 end
 
 describe 'Atreides::Admin' do
-  
+
   it 'should switch admin site' do
     { :get => '/admin/switch_site/www' }.should route_to(:controller => 'atreides/admin_home', :action => 'switch_site', :site => 'www')
   end
@@ -59,5 +59,5 @@ describe 'Atreides::Admin' do
   it 'should display new page' do
     { :get => '/admin/pages/new' }.should route_to(:controller => 'admin/atreides/pages', :action => 'new')
   end
-  
+
 end

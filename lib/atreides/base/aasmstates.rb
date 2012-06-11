@@ -1,6 +1,6 @@
 module Atreides
   class Base < ActiveRecord::Base
-    
+
     #
     # Common class responsible for the management of Atreides model states. The focus is on managing the states between creation and publication of content.
     #
@@ -27,7 +27,7 @@ module Atreides
           aasm_event :queue do
             transitions :from => [:pending, :published, :drafted], :to => :queued
           end
-          
+
           #
           # Validation
           #
@@ -53,12 +53,12 @@ module Atreides
           # Callbacks
           #
           after_initialize :set_initial_state
-          
+
           # Make sure that the state of all objects are set after initialization
           def set_initial_state
             # Touch the state attribute and if missing reload
             self.state rescue self.reload
-            
+
             self.state ||= self.class.aasm_initial_state
           end
 
@@ -70,7 +70,7 @@ module Atreides
           #
           # Methods
           #
-          
+
           # Create a list if states used in a HTML select drop-down
           def states_for_select
             [

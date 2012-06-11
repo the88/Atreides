@@ -1,4 +1,4 @@
-class AtreidesBuilder < Formtastic::SemanticFormBuilder 
+class AtreidesBuilder < Formtastic::SemanticFormBuilder
 
   def underline_input(method, options)
     type = :string
@@ -11,7 +11,7 @@ class AtreidesBuilder < Formtastic::SemanticFormBuilder
     "<span>#{options[:prefix]}</span>".html_safe <<
     self.send(form_helper_method, method, html_options)
   end
-  
+
   def files_input(method, options)
     type = :string
     form_helper_method = :file_field
@@ -22,7 +22,7 @@ class AtreidesBuilder < Formtastic::SemanticFormBuilder
     self.label(method, options_for_label(options)) <<
     self.send(form_helper_method, method, html_options)
   end
-  
+
   def price_input(method, options)
     type = :string
     form_helper_method = :text_field
@@ -34,6 +34,6 @@ class AtreidesBuilder < Formtastic::SemanticFormBuilder
     "<span>$</span>".html_safe <<
     self.send(form_helper_method, method, html_options)
   end
-  
+
 end
 

@@ -1,10 +1,10 @@
-# Class to aid in the publishing of posts to Facebook. 
+# Class to aid in the publishing of posts to Facebook.
 # This is typically used with Delayed Job in a background process
 # Eg:
 #  Delayed::Job.enqueue(TumblrPostPublisherJob.new(post.id))
-# 
+#
 # It requires that there is a 'tumblr' section in your settings.yml config file
-# 
+#
 FbPostPublisherJob = Struct.new(:post_id)
 class FbPostPublisherJob
 
@@ -13,16 +13,16 @@ class FbPostPublisherJob
   require 'uri'
   require 'yaml'
   require 'mini_fb'
-  
+
   include Rails.application.routes.url_helpers
   default_url_options[:host] = Settings.domain
-  
+
   # Executes the job. This authorizes the client with Facebook using settings.yml configuration
   # It will update the post object with the posts facebook_id on success
   # @return [Int] the tumblr id of the newly created post
   def perform
     post = Atreides::Post.find post_id
-    
+
     # Abort if already posted
     return if post.facebook_id?
 
@@ -44,7 +44,7 @@ class FbPostPublisherJob
       :from => Settings.facebook.page_id, # Post as the page
       :link => url,
       :source => (!post.first_video.nil?) ? post.first_video.url : img_url,
-      :caption => body, 
+      :caption => body,
       :description => Settings.app_name,
       :picture => img_url,
       :likes => true

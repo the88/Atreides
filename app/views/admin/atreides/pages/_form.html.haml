@@ -1,5 +1,5 @@
 = semantic_form_for resource, :url => (resource.new_record? ? admin_pages_path : admin_page_path(resource)), :as => "page" do |f|
-  
+
   #form_content{:class => "span-17"}
     %h2= ttt("#{params[:action].to_s}_page".downcase)
     = f.semantic_errors

@@ -58,7 +58,7 @@ class Atreides::ContentPart < Atreides::Base
     def display_types
       @@display_types
     end
-    
+
     def base_class
       self
     end
@@ -81,7 +81,7 @@ class Atreides::ContentPart < Atreides::Base
   end
 
   private
-  
+
   def add_to_queue
     # Set the display order to be last
     self.display_order ||= Atreides::ContentPart.where(:contentable_id => self.contentable_id, :contentable_type => self.contentable_type).count

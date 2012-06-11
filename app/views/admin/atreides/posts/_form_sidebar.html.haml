@@ -28,7 +28,7 @@
 
     = f.input :state, :as => "select", :collection => resource.states_for_select, :selected => selected, :include_blank => false, :wrapper_html => { :class => "post-states" }
     = f.input :published_at, :label => label, :as => "string", :wrapper_html => { :class => "date-picker", :style => "display:#{selected==:published_at ? 'block' : 'none'}"}
-    
+
     / Tags
     - if defined?(Settings.tags.posts.groups)
       - (Settings.tags.posts.groups - %w(tags)).each do |group|
@@ -61,7 +61,7 @@
           - if resource.twitter_id?
             = link_to(ttc('.crossposted_twitter'), "http://twitter.com/#{Settings.twitter.login}/status/#{resource.twitter_id}")
           - elsif resource.tw_delayed_job
-            %span 
+            %span
               #{ttc('.crosspost_queued_twitter')}
               %br
               (#{resource.tw_delayed_job.run_at.to_s(:date_ordinal)})
@@ -76,7 +76,7 @@
               #{ttc('.crosspost_queued_facebook')}
               %br
               (#{resource.fb_delayed_job.run_at.to_s(:date_ordinal)})
-          - else 
+          - else
             = check_box(:post, :fb_me)
             = ttc '.crosspost_facebook'
         %li#social_message

@@ -111,14 +111,14 @@ class Atreides::Post < Atreides::Base
   class << self
 
     def next(post)
-      with_exclusive_scope { 
+      with_exclusive_scope {
         # Due to problems with the default_scope ordering the 'live' scope must come AFTER the order scope
         where("published_at >= ? and id != ?", post.published_at, post.id).order("published_at asc, id asc").live.first
       }
     end
 
     def previous(post)
-      with_exclusive_scope { 
+      with_exclusive_scope {
         # Due to problems with the default_scope ordering the 'live' scope must come AFTER the order scope
         where("published_at <= ? and id != ?", post.published_at, post.id).order("published_at desc, id desc").live.first
       }
@@ -167,13 +167,13 @@ class Atreides::Post < Atreides::Base
     @related_posts += Atreides::Post.live.all(:conditions => ["posts.id not in (?)", @related_posts.map(&:id)+[id]], :limit => max - @related_posts.size) if @related_posts.size < max rescue []
     @related_posts
   end
-  
+
   # Return the first found text/video/photo
   def first_body
     (part = parts.where(:content_type => :text).detect{|p| p.body? }) ? part.body : ""
   end
   alias_method :body, :first_body
-  
+
   def first_photo
     (part = parts.where(:content_type => :photos).detect{|p| !p.photos.first.nil? }) ? part.photos.first : nil
   end
@@ -183,7 +183,7 @@ class Atreides::Post < Atreides::Base
     (part = parts.where(:content_type => :videos).detect{|p| !p.videos.first.nil? }) ? part.videos.first : nil
   end
   alias_method :video, :first_video
-  
+
   # Return the first found photo
   def thumbnail(size = :thumb)
     # Find the first thumbnail image
@@ -194,7 +194,7 @@ class Atreides::Post < Atreides::Base
     end
     url || "/images/missing_thumb.png"
   end
-  
+
 
   def update_twitter_id(twitter_id)
     self.twitter_id = twitter_id
@@ -232,7 +232,7 @@ class Atreides::Post < Atreides::Base
   def tumblr_me=(value)
     @tumblr_me = (value.is_a?(TrueClass) || value.is_a?(FalseClass)) ? value : !value.to_i.zero?
   end
-  
+
   private
 
   def content_parts

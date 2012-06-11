@@ -142,7 +142,7 @@ class Atreides::Order < Atreides::Base
 
     # Authorization is zero if account is globally in test mode, you cannot capture:
     unless auth.authorization == "0"
-      capture = gateway.capture(price, capture.authorization) #, purchase_options) 
+      capture = gateway.capture(price, capture.authorization) #, purchase_options)
     end
 
     update_attribute(:gateway_data, capture)

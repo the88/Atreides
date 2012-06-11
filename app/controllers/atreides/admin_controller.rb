@@ -32,7 +32,7 @@ class Atreides::AdminController < Atreides::ApplicationController
   before_filter :set_resource_request_name
 
   layout 'admin'
-  
+
   private
 
   def set_resource_request_name
@@ -53,7 +53,7 @@ class Atreides::AdminController < Atreides::ApplicationController
   end
 
   def current_site
-    # Use session as key for 
+    # Use session as key for
     @current_site ||= if session[:site_name]
       Atreides::Site.find_by_name(session[:site_name])
     elsif !request.subdomains.empty?
@@ -64,9 +64,9 @@ class Atreides::AdminController < Atreides::ApplicationController
     session[:site_name] = @current_site.name
     @current_site
   end
-  
+
   def post
-    @post ||= Atreides::Post.find_by_id(params[:post_id]) || 
+    @post ||= Atreides::Post.find_by_id(params[:post_id]) ||
               Atreides::Post.new
   end
 

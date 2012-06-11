@@ -2,7 +2,7 @@
   =render :partial => "list", :locals => { :collection => [resource] }
 
 .clear
-  
+
 #page_nav
   = link_to tt(".arrow_previous"), previous_post_path(resource), :class => "left" if resource.previous
   = link_to tt(".arrow_next"), next_post_path(resource), :class => "right" if resource.next

@@ -3,7 +3,7 @@ class CreateTweets < ActiveRecord::Migration
     create_table :tweets, :force => true do |t|
       t.datetime :tweeted_at
       t.string :text, :length => 140
-      if Rails.database.mysql? 
+      if Rails.database.mysql?
         t.column :twitter_id, 'BIGINT UNSIGNED'
       elsif Rails.database.postgresql?
         t.column :twitter_id, 'BIGINT'

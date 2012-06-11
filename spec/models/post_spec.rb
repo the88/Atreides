@@ -18,7 +18,7 @@ describe Atreides::Post do
       post.save.should eql(false)
       post.errors[:parts].nil?.should eql(false)
       post.errors[:title].nil?.should eql(false)
-      
+
       post.title = "My test post"
       post.parts << Factory(:content_part_text)
       # puts post.errors.full_messages.to_sentence unless post.valid?
@@ -35,19 +35,19 @@ describe Atreides::Post do
       post = Atreides::Post.new(:state => "drafted")
       post.state.to_sym.should be :drafted
     end
-    
+
     it "should create a post from content-part attributes" do
       parts = [Factory(:content_part_text), Factory(:content_part_photos), Factory(:content_part_videos)]
       post = Atreides::Post.new(:title => "test post with parts", :state => "drafted", :part_ids => parts.map(&:id), :parts_attributes => parts.map(&:attributes))
       post.valid?.should eql(true)
       post.save.should eql(true)
     end
-    
+
   end
-  
+
   describe "next & previous" do
-    
-    
+
+
     before do
       Atreides::Post.delete_all
       @posts = []

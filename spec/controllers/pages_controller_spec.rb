@@ -5,7 +5,7 @@ describe Atreides::PagesController do
     it "should log the page view, with author and tag data, to google analytics" do
       @page = Factory.create(:published_page, :site => Atreides::Site.default)
       @page.live?.should eql(true)
-      
+
       @analytical = mock("analytical")
       controller.stub!(:analytical).and_return(@analytical)
       @analytical.should_receive(:custom_event).with('Tag', 'view', 'a_tag')

@@ -2,9 +2,9 @@
   = form.input :first_name, :label => ttt(:'.firstname'), :wrapper_html => { :class => "left half" }, :input_html => { :class => "title" }
   = form.input :last_name, :label => ttt(:'.lastname'), :wrapper_html => { :class => "left half" }, :input_html => { :class => "title" }
   = form.input :email, :label => ttt(:'.email'), :wrapper_html => { :class => "clear" }
-  = form.input :password, :label => ttt(:'.password') 
+  = form.input :password, :label => ttt(:'.password')
   = form.input :password_confirmation, :label => ttt(:'.password_confirmation')
-  = form.input :role, :label => ttt(:role), :as => :select, :include_blank => false, 
+  = form.input :role, :label => ttt(:role), :as => :select, :include_blank => false,
     :collection => Atreides::User.available_roles(current_user).map {|r| [ttc(:".#{r}"), r]},
     :selected => resource.new_record? ? current_user.role : resource.role
 

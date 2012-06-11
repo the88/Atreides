@@ -4,7 +4,7 @@ class Admin::Atreides::CommentsController < Atreides::AdminController
   def index
     super
   end
-  
+
   def update_many
     posts = Disqussion::Posts.new
     case params[:comment_action]
@@ -15,14 +15,14 @@ class Admin::Atreides::CommentsController < Atreides::AdminController
     end if params[:comment_action]
     redirect_to admin_comments_path
   end
-  
+
   def delete_many
     Disqussion::Posts.new.remove params[:comment_ids] if params[:comment_ids]
     redirect_to admin_comments_path
   end
-  
+
   private
-  
+
   # Query options are passed this way:
   # from:username
   # email:joe@bar.com
@@ -38,10 +38,10 @@ class Admin::Atreides::CommentsController < Atreides::AdminController
       opts
     end
   end
-  
+
   def collection
     @collection ||= Disqussion::Forums.new.listPosts(Settings.disqus.forum, extract_options)
   end
-  
+
   include Atreides::Extendable
 end

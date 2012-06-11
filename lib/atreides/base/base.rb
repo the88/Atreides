@@ -1,5 +1,5 @@
 module Atreides
-  
+
   # Base class inherited by every model in Atreides
   class Base < ActiveRecord::Base
 

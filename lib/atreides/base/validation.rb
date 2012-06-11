@@ -8,7 +8,7 @@ module Atreides
       def self.included(recipient)
         recipient.class_eval do
           before_validation :update_slug
-          
+
           # Sets the object's slug. Slugs are used to create SEO friendly URLs.
           def update_slug
             # Set slug if not set

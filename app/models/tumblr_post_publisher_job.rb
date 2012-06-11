@@ -1,11 +1,11 @@
-# Class to aid in the publishing of posts to Tumblr. 
+# Class to aid in the publishing of posts to Tumblr.
 # This is typically used with Delayed Job in a background process
 # Eg:
 #  Delayed::Job.enqueue(TumblrPostPublisherJob.new(post.id))
-# 
-# 
+#
+#
 # It requires that there is a 'tumblr' section in your settings.yml config file
-# 
+#
 TumblrPostPublisherJob = Struct.new(:post_id)
 class TumblrPostPublisherJob
 
@@ -18,7 +18,7 @@ class TumblrPostPublisherJob
   # It will update the post object with the posts tumblr_id on success
   # @return [Int] the tumblr id of the newly created post
   def perform
-    
+
     return false unless Settings.has_key?('tumblr')
 
     # Find objects
@@ -31,10 +31,10 @@ class TumblrPostPublisherJob
     tumblr = {
       :slug => post.slug
     }
-    
+
     add_link_for_more = false
     part = posts.first
-    
+
     case part.content_type
     when "text"
       tumblr.merge!({

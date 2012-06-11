@@ -23,7 +23,7 @@ Net::HTTP.class_eval do
     end
 
     headers['content-type'] ||= "application/x-www-form-urlencoded"
-    
+
     t0 = Time.now
     httpreq = EM::HttpRequest.new(uri).send(req.class::METHOD.downcase.to_sym, opts)
 

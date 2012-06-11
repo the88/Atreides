@@ -8,7 +8,7 @@
     <%= content_tag(:span, (self.respond_to?(field_func) ? send(field_func, record) : record.send(col))) %>
   </td>
   <% end %>
-  <% action_cols.each do |action| 
+  <% action_cols.each do |action|
     action_func = "#{action}_link"
     %>
   <td class="action_link">

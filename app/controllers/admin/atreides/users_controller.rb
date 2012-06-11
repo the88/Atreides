@@ -41,10 +41,10 @@ class Admin::Atreides::UsersController < Atreides::AdminController
   def method_for_build
     :build_admin
   end
-  
+
   def end_of_association_chain
     Atreides::User
   end
-  
+
   include Atreides::Extendable
 end

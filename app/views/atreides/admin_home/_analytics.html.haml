@@ -37,11 +37,11 @@
   - report_id = rep_title + "_data"
   - if rep_title=='tweets'
     .chart{:class => 'tweet-reach'}
-      %h3 
+      %h3
         = ttt :'.tweet_reach'
         %span= number_with_delimiter(@tweet_reach)
     .chart{:class => 'tweet-exposure'}
-      %h3 
+      %h3
         = ttt :'.tweet_exposure'
         %span= number_with_delimiter(@tweet_exposure)
     .clear
@@ -49,13 +49,13 @@
   - if rep_title=='fb_page_views'
     - if @fb_page_views
       .chart{:class => 'fb-page-views'}
-        %h3 
-          #{ttt(:".fb_page_total_views")}: 
+        %h3
+          #{ttt(:".fb_page_total_views")}:
           %span= number_with_delimiter(@fb_page_views.data.first.values[3].sum{|h| h['value'].to_i})
     - if @fb_page_likes
       .chart{:class => 'fb-page-likes'}
-        %h3 
-          #{ttt(:".fb_page_total_likes")}: 
+        %h3
+          #{ttt(:".fb_page_total_likes")}:
           %span= number_with_delimiter(@fb_page_likes.data.first.values[3].sum{|h| h['value'].to_i})
     .clear
 

@@ -1,5 +1,5 @@
 = render :partial => 'admin/edit_head_content'
-  
+
 = semantic_form_for resource, :url => (resource.new_record? ? admin_products_path : admin_product_path(resource)) do |f|
   = f.semantic_errors
   #form_content{:class => "span-17"}

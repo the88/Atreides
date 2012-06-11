@@ -12,8 +12,8 @@ class Atreides::User < Atreides::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role
-  
-  
+
+
   #
   # Constants
   #
@@ -28,20 +28,20 @@ class Atreides::User < Atreides::Base
   has_many :likes
   has_many :posts, :class_name => "Atreides::Post", :through => :author_id
   has_many :pages, :class_name => "Atreides::Page", :through => :author_id
-  
+
   #
   # Behvaiours
   #
   attr_accessible :first_name, :last_name
   # attr_accessible :twitter_token, :twitter_secret, :profile_pic_url, :fb_session_key
-  
+
   #
   # Validations
   #
   validates :email, :presence => true, :uniqueness => true
   validates :first_name, :presence => true
   validates :last_name, :presence => true
-  
+
 
   #
   # Callbacks
@@ -52,7 +52,7 @@ class Atreides::User < Atreides::Base
   # Scopes
   #
   scope :admins, lambda { where(:role => :admin) }
-  
+
   #
   # Class Methods
   #
@@ -114,7 +114,7 @@ class Atreides::User < Atreides::Base
 
     # Update qty
     item.qty += qty
-    
+
     item.save
     item
   end

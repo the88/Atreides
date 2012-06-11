@@ -7,7 +7,7 @@ describe "Dummy app overrides" do
     end
 
     it "inserts .greet in Atreides::Post" do
-      post = Atreides::Post.new 
+      post = Atreides::Post.new
       post.greet.should eq("Hey you ! (from Post#greet)")
     end
   end

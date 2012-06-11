@@ -9,7 +9,7 @@ module Atreides::PostsHelper
   def post_item(post)
     content_tag(:div, :class => "post-title") do
       link_to_unless_current(post.title? ? post.title : post.published_at.to_s(:date_ordinal), post_path(post, post.slug))
-    end + 
+    end +
     post.parts.map do |part|
       case part.content_type.to_sym
       when :photos
@@ -25,12 +25,12 @@ module Atreides::PostsHelper
   end
 
   def photos_part(part)
-    contentable = part.contentable 
+    contentable = part.contentable
     obj_type = contentable.class.to_s.demodulize.downcase
     # Rejection cases
     return unless %w(post product page).include?(obj_type.to_s)
     return if part.photos.empty?
-    
+
     detail_path = send("#{obj_type}_path", contentable.to_param, contentable.slug)
     image_size = :list # Is this needed? -> detail_page? ? :medium : :list
     thumb_panes = detail_page? ? 6 : 4
@@ -51,13 +51,13 @@ module Atreides::PostsHelper
           end
         end.join.html_safe
       end +
-      
+
       # Only show thumbs on details page
       if thumb_photos.size > 1 && (!detail_page? || is_gallery)
         content_tag(:div, :class => "slideshow-controls") do
           content_tag(:ul, :class => "slideshow-controls-container #{'carousel' if detail_page? && thumb_photos.size > thumb_panes}") do
             thumb_photos.map do |p|
-              content_tag(:li) do 
+              content_tag(:li) do
                 link_to(image_tag(p.image.url(:thumb), :size => "95x95"), send("#{obj_type}_path", contentable, contentable.slug, :anchor => p.dom_id), :class => (p==thumb_photos.last ? "last" : ""))
               end
             end.join.html_safe
@@ -72,7 +72,7 @@ module Atreides::PostsHelper
   def text_part(part)
     post  = part.contentable
     parts = part.body.to_s.split('<!--more-->')
-    
+
     if parts.size > 1 && controller.action_name!='show'
       parts.first.to_s + "... " + link_to("Continue reading #{post.title}.", post_path(post, post.slug))
     else
@@ -93,8 +93,8 @@ module Atreides::PostsHelper
   end
 
   def post_action_links(post)
-    content_tag(:div, :class => "post-links clear") do 
-      content_tag(:ul) do 
+    content_tag(:div, :class => "post-links clear") do
+      content_tag(:ul) do
         lnks = [
           link_to("+ Share", post_url(post, post.slug), :class => "share", :title => "#{Settings.app_name} - #{post.title}"),
           post.tag_list.map{|t| link_to(t.titleize, tagged_posts_path(t), :class => "tag") }

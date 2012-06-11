@@ -13,8 +13,8 @@ class Atreides::Photo < Atreides::Base
   has_attached_file :image,
     :styles           => Settings.photo_dimensions.dup.symbolize_keys,
     :storage          => Settings.s3_enabled? ? :s3 : :filesystem,
-    :convert_options  => { 
-      :all => Settings.photo_conv_options || "-density 72 " 
+    :convert_options  => {
+      :all => Settings.photo_conv_options || "-density 72 "
     },
     :path             => Settings.s3_enabled? ? ":attachment/:id/:style/:basename.:extension" : ":rails_root/public/system/:attachment/:id/:style/:basename.:extension",
     :url              => Settings.s3_enabled? ? ":attachment/:id/:style/:basename.:extension" : "/system/:attachment/:id/:style/:basename.:extension",
@@ -31,7 +31,7 @@ class Atreides::Photo < Atreides::Base
   #
   belongs_to :photoable, :polymorphic => true, :touch => true
   has_many :features, :class_name => "Atreides::Feature"
-  
+
   # using :dependent => :nullify just did not worked on the has_many :features association
   # so we make this to make each features clean and valid
   before_destroy :clean_features
@@ -52,13 +52,13 @@ class Atreides::Photo < Atreides::Base
   #
   # Scopes
   #
-  default_scope :order => "display_order asc, id desc" 
+  default_scope :order => "display_order asc, id desc"
 
   #
   # Class Methods
   #
   class << self
-    
+
     def base_class
       self
     end

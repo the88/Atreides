@@ -13,7 +13,7 @@ module Atreides::AdminHelper
     dom_id = opts[:dom_id]
     css_class = "upload-btn"
     css_upload = "upload-progress"
-    
+
     content_tag(:div, :id => dom_id, :class => "upload-container") do
       content_tag(:div, :class => "#{css_class}") do
         content_tag(:noscript, "Please enable JavaScript to use file uploader.")
@@ -119,7 +119,7 @@ module Atreides::AdminHelper
               $('#flash').html('Error from server trying to upload image: '+message).addClass('error flash').show()
             })
         });
-    ")  
+    ")
   end
 
   def edit_photos_for_assoc(object, list_id = nil)
@@ -159,11 +159,11 @@ module Atreides::AdminHelper
 
   def feature_photo_for_assoc(photo, object, list_id = "photos_list", thumb_size = :thumb)
     attr_name  = 'photo_attributes'
-    
+
     content_tag(:li, :id => (photo ? photo.dom_id(list_id) : nil), :class => "feature-photo-for-assoc") do
       # Do full photo delete if used just by feature, otherwise remove from feature
       if photo
-        image_tag(photo.image.url(thumb_size), :class => "photo-thumb", :size => photo.size(thumb_size).values.join('x')) + 
+        image_tag(photo.image.url(thumb_size), :class => "photo-thumb", :size => photo.size(thumb_size).values.join('x')) +
         hidden_field_tag("#{object.class.to_s.downcase}[#{attr_name}][id]", photo.id) +
         hidden_field_tag("#{object.class.to_s.downcase}[#{attr_name}][display_order]", photo.display_order)
       end
@@ -171,8 +171,8 @@ module Atreides::AdminHelper
   end
 
   def edit_photos_sortable(list_id = "photos_list")
-    sortable_element("##{list_id}", 
-      # :url => reorder_admin_photos_path(:format => :js), 
+    sortable_element("##{list_id}",
+      # :url => reorder_admin_photos_path(:format => :js),
       :axis => false,
       :update => "function() { $('##{list_id} input[id$=display_order]').each(function(i, el){ el.value = i }) }"
     )
@@ -206,19 +206,19 @@ module Atreides::AdminHelper
     content_tag(:div, "", :id => "ga_visitors", :class => "graph") +
     javascript_tag("
     $(document).ready(function() {
-      
+
     })
     ")
   end
 
   def link_to_preview
     obj = params[:controller]=~/pages/ ? 'page' : 'post'
-    
+
     link_to_function(ttt(:preview), %Q{
-      $('iframe.preview-pane').dialog({ 
-        modal: true,  
-        width:960,  
-        height:500, 
+      $('iframe.preview-pane').dialog({
+        modal: true,
+        width:960,
+        height:500,
         open: function() {
           $(this).css('width',960)
           var form = $('form##{obj}_edit, form##{obj}_new').
@@ -234,7 +234,7 @@ module Atreides::AdminHelper
     }, :class => "preview") +
     content_tag(:iframe, "", :id => "#{obj}_preview", :class => "preview-pane", :src => "about:blank", :width => 1, :height => 1, :name => "#{obj}_preview")
   end
-  
+
   def seconds_from_now(datetime)
     Time.now.to_i - Time.at(datetime.to_i).to_i
   end

@@ -22,8 +22,8 @@
     %li.divider
     %li #{ttt :'.filter'}
     %li
-      Month: 
+      Month:
       =select_tag "archive_month", options_for_select(Date::MONTHNAMES.map{|m| [m, Date::MONTHNAMES.index(m)]}, @date.month), :onchange => "window.location = '#{admin_posts_path}?state=#{params[:state]}&month='+this.value+'&year='+$('#archive_year').val()"
     %li
-      Year: 
+      Year:
       =select_tag "archive_year", options_for_select((today.year-5..today.year).to_a.reverse, @date.year), :onchange => "window.location = '#{admin_posts_path}?year='+this.value+'&month='+$('#archive_month').val()"

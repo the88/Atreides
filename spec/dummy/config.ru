@@ -43,7 +43,7 @@ if defined? Thin
   require "em-synchrony"
   # Load our em-net-http hack to set options
   require  ::File.expand_path('../config/initializers/em-net-http_override.rb', __FILE__)
-  
+
   use Rack::CommonLogger
   use Rack::ShowExceptions
   use Rack::FiberPool

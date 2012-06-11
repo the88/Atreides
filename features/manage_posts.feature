@@ -2,7 +2,7 @@ Feature: Manage posts
   In order to animate its Atreides
   An administrative user
   wants to add, edit and delete posts
-  
+
   Background:
     Given the following accounts:
       | email                   | first_name | last_name         | password |  admin  |
@@ -19,12 +19,12 @@ Feature: Manage posts
     # Then show me the posts
     Then I should see "Hey guys"
     And  I should see "New expo"
-  
+
   Scenario: List the drafted posts
     Given I am on the drafted admin posts page
     Then show me the posts
     And I should see "My draft"
-  
+
   Scenario: Create a post
     Given I am on the posts admin page
     And I follow "Post"
@@ -34,7 +34,7 @@ Feature: Manage posts
     And I press "Save"
     Then I should see "New event"
     # Then I should see "Successfully updated!"
-  
+
   Scenario: Delete a post
     Given I am on the posts admin page
     When I follow "New expo"

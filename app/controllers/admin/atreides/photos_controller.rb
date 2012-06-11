@@ -40,7 +40,7 @@ class Admin::Atreides::PhotosController < Atreides::AdminController
     else
       @photo.photoable = photoable
     end
-    
+
     super do |success, failure|
       success.json { render @photo.to_json }
       success.js   { render :template => "admin/atreides/photos/create.js.haml", :layout => false, :status => :ok }
@@ -67,10 +67,10 @@ class Admin::Atreides::PhotosController < Atreides::AdminController
 
   def photoable
     @photoable ||= if params[:content_part_id] || params[:part_id]
-      Atreides::ContentPart.find_by_id((params[:content_part_id] || params[:part_id]).to_i) || 
+      Atreides::ContentPart.find_by_id((params[:content_part_id] || params[:part_id]).to_i) ||
       Atreides::ContentPart.new(:content_type => 'photos', :photos => [resource])
     elsif params[:feature_id]
-      current_site.features.find_by_id(params[:feature_id].to_i) || 
+      current_site.features.find_by_id(params[:feature_id].to_i) ||
       current_site.features.new
     end
   end

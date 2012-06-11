@@ -7,7 +7,7 @@ class Atreides::HomeController < Atreides::PublicController
 
   def search
   end
-  
+
   def feeds
     respond_to do |wants|
       wants.rss {

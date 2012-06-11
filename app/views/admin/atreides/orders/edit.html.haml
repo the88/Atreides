@@ -1,7 +1,7 @@
 = render :partial => 'admin/edit_head_content'
-  
+
 = semantic_form_for @order, :url => admin_order_path(@order) do |f|
-  
+
   #form_content{:class => "span-17 order-form form"}
     %h2 #{ttt :'.order'} ##{@order.number} #{ttt :'.by'} #{@order.full_name} #{ttt :'.for'} #{@order.final_amount.format}
     = f.semantic_errors
@@ -37,11 +37,11 @@
               %td= li.qty
               %td= li.price.format
               %td= li.total_price.format
-            
+
       %li.date
         %label #{ttt :'.date'}
         = @order.created_at.to_s(:datetime_ordinal)
-          
+
 
     - f.actions do
       %li.commit

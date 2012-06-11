@@ -2,7 +2,7 @@ require 'unicode_utils'
 
 module Atreides
 
-  # Implement a series of helpers to translate Atreides. 
+  # Implement a series of helpers to translate Atreides.
   # These are injected into ActionView::Helpers::TranslationHelper
   module I18nHelpers
 
