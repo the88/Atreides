@@ -25,7 +25,7 @@ module Atreides
       def create_migration_file
         generate('acts_as_taggable_on:migration')
         generate('delayed_job:active_record')
-        # generate('devise:install') # Run 'rails g devise:install' instead!
+        generate('devise:install')
 
         %w(create_videos create_photos create_orders create_posts
            create_pages create_likes create_comments create_messages
@@ -46,8 +46,6 @@ module Atreides
         copy_file 'unicorn.rb', 'config/unicorn.rb'
         copy_file 'settings.yml', 'config/settings.yml'
         copy_file 'oembed.yml', 'config/oembed.yml'
-        copy_file 'devise.rb', 'config/initializers/devise.rb'
-        copy_file 'locales/devise_en.yml', 'config/locales/devise_en.yml'
         copy_file 'delayed_job.rb', 'config/initializers/delayed_job.rb'
         copy_file 'disqussion.rb', 'config/initializers/disqussion.rb'
         copy_file 'Procfile', 'Procfile'
