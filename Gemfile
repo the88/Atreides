@@ -14,8 +14,6 @@ gem "hpricot"
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-gem "gattica", :git => "http://github.com/chrisle/gattica.git"
-
 gem "thin", :require => nil
 gem "eventmachine", ">= 1.0.0.beta.3", :require => nil
 gem "em-http-request", :require => nil

@@ -40,11 +40,6 @@ module Atreides
       end
 
       def create_configuration_file
-        append_to_file "Gemfile" do
-%Q{
-gem "gattica", :git => "http://github.com/chrisle/gattica.git"
-}
-        end
         copy_file 'initializer.rb', 'config/initializers/atreides.rb'
         copy_file 'string_extensions.rb', 'config/initializers/string_extensions.rb'
         copy_file 'sass.rb', 'config/initializers/sass.rb'
