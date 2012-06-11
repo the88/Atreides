@@ -31,8 +31,6 @@ module Dummy
 
     config.allow_concurrency = true
 
-    config.cache_store = :mem_cache_store, {:compress => true}
-
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

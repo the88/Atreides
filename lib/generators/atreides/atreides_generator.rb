@@ -39,15 +39,11 @@ module Atreides
       end
 
       def create_configuration_file
-        # Use Dalli store
         append_to_file "Gemfile" do
 %Q{
-gem 'dalli'
-gem "gattica", :git => "http://github.com/mathieuravaux/gattica.git"
+gem "gattica", :git => "http://github.com/chrisle/gattica.git"
 }
         end
-        gsub_file 'config/environments/production.rb', "# config.cache_store = :mem_cache_store", "config.cache_store = :dalli_store"
-
         copy_file 'initializer.rb', 'config/initializers/atreides.rb'
         copy_file 'string_extensions.rb', 'config/initializers/string_extensions.rb'
         copy_file 'sass.rb', 'config/initializers/sass.rb'
@@ -60,9 +56,6 @@ gem "gattica", :git => "http://github.com/mathieuravaux/gattica.git"
         copy_file 'delayed_job.rb', 'config/initializers/delayed_job.rb'
         copy_file 'disqussion.rb', 'config/initializers/disqussion.rb'
         copy_file 'Procfile', 'Procfile'
-
-        # Session store with Dalli/Memcache setup built-in
-        copy_file 'session_store.rb', 'config/initializers/session_store.rb'
       end
     end
   end

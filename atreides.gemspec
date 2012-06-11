@@ -52,7 +52,6 @@ Gem::Specification.new do |s|
   s.add_dependency "validates_email_format_of"
   s.add_dependency "will_paginate", "~> 3.0.3"
   s.add_dependency "yard"
-  s.add_dependency "memcache-client"
   s.add_dependency "analytical"
   s.add_dependency "yajl-ruby"
   s.add_dependency "disqussion"
