@@ -2,10 +2,10 @@
 - @date ||= today
 - content_for :pre_head do
   // Must be loaded before jQuery
-  = javascript_include_tag 'raphael-min.js', 'raphael.path.methods.js', 'raphael.pie.js'
+  = javascript_include_tag 'atreides/raphael-min.js', 'atreides/raphael.path.methods.js', 'atreides/raphael.pie.js'
 - content_for :head do
-  = javascript_include_tag 'raphael.analytics.js'
-  
+  = javascript_include_tag 'atreides/raphael.analytics.js'
+
 - content_for :sidebar do
   %h2
     / - link_to edit_admin_user_path(current_user) do
@@ -15,13 +15,13 @@
   %ul.summary
     %li.divider
     %li.home
-      = image_tag "admin/dashboard_controls_open.png"
+      = image_tag "atreides/admin/dashboard_controls_open.png"
       =link_to Settings.domain, root_path
     %li.posts-count
-      = image_tag "admin/dashboard_controls_posts.png"
+      = image_tag "atreides/admin/dashboard_controls_posts.png"
       = link_to ttt(:'.x_posts', :count => Atreides::Post.published.count), admin_posts_path
     %li.drafts-count
-      = image_tag "admin/dashboard_controls_drafts.png"
+      = image_tag "atreides/admin/dashboard_controls_drafts.png"
       = link_to ttt(:'.x_drafts', :count => Atreides::Post.drafted.count), admin_posts_path(:state => "drafted")
     %li.divider
 

@@ -2,7 +2,6 @@ require "rails"
 
 module Atreides
   class Engine < Rails::Engine
-    paths['app/coffeescripts']  = 'app/coffeescripts'
     paths['db/migrate']         = 'db/migrate'
     # paths['atreides/base']    = 'atreides/base'
 
@@ -15,7 +14,6 @@ module Atreides
 
     config.gem 'devise'
     config.gem 'cancan'
-    config.gem 'barista'
 
     # Force routes to be loaded if we are doing any eager load.
     config.before_eager_load { |app| app.reload_routes! }
@@ -23,6 +21,10 @@ module Atreides
     initializer :load_overrides do
       filename = File.expand_path('config/initializers/overrides', Rails.root)
       require filename if File.exists?(filename)
+    end
+
+    initializer "atreides.asset_pipeline" do |app|
+      app.config.assets.precompile += %w( atreides/admin_edit.js atreides/admin.js atreides/public.js atreides/admin.css atreides/public.css )
     end
 
     rake_tasks do

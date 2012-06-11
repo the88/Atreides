@@ -12,11 +12,6 @@ module Atreides
     # Class definitions
     #
     self.abstract_class = true
-  
-    # Fix broken paths from TinyMCE
-    def fix_tiny_mce
-      self.body = body.gsub(%r{src=\"(.*)/system/images/}, "src=\"/system/images/") if body?
-    end
 
     # Give a string identifying the model based on it's properties.
     # In order:

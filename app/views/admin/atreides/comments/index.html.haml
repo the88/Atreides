@@ -29,6 +29,6 @@
     .previous= link_to tt("Previous"), admin_comments_path(params.merge(:cursor => @collection.cursor.prev))
   - if @collection.cursor.hasNext
     .next= link_to tt("Next"), admin_comments_path(params.merge(:cursor => @collection.cursor.next))
-    
+
 - content_for :js do
-  = coffeescript_include_tag 'comments'
+  = javascript_include_tag 'atreides/comments'

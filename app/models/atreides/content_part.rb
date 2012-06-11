@@ -45,7 +45,6 @@ class Atreides::ContentPart < Atreides::Base
   #
   after_initialize :set_display_type
   before_create :add_to_queue
-  before_save :fix_tiny_mce
 
   #
   # Class Methods

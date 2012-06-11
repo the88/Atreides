@@ -5,8 +5,8 @@
     %meta{"http-equiv"=>"Content-type", "content"=>"text/html; charset=utf-8"}
     %title #{Settings.app_name}#{": #{@page_title}" if @page_title}
     = csrf_meta_tag
-    = include_javascripts :public
-    = include_stylesheets :public
+    = javascript_include_tag 'atreides/public'
+    = stylesheet_link_tag 'atreides/public'
     = yield :head
   %body
   .container

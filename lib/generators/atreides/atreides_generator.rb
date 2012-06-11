@@ -55,7 +55,6 @@ gem "gattica", :git => "http://github.com/mathieuravaux/gattica.git"
         copy_file 'unicorn.rb', 'config/unicorn.rb'
         copy_file 'settings.yml', 'config/settings.yml'
         copy_file 'oembed.yml', 'config/oembed.yml'
-        copy_file 'assets.yml', 'config/assets.yml'
         copy_file 'devise.rb', 'config/initializers/devise.rb'
         copy_file 'locales/devise_en.yml', 'config/locales/devise_en.yml'
         copy_file 'delayed_job.rb', 'config/initializers/delayed_job.rb'
@@ -64,45 +63,9 @@ gem "gattica", :git => "http://github.com/mathieuravaux/gattica.git"
         copy_file 'em-net-http_override.rb', 'config/initializers/em-net-http_override.rb'
         copy_file 'Procfile', 'Procfile'
 
-        empty_directory 'app/stylesheets'
-        create_file 'app/stylesheets/public.scss'
-        create_file 'app/stylesheets/admin.scss'
-
         # Session store with Dalli/Memcache setup built-in
         copy_file 'session_store.rb', 'config/initializers/session_store.rb'
-
-        # Static assets
-        copy_dir_contents 'public', 'public'
       end
-
-      private
-
-      def copy_dir_contents(source_dir, target_dir)
-
-        ignore_if_exists = %w(public.js admin.js public.css admin.css)
-
-        base_dir = File.join(File.dirname(__FILE__), '../templates', source_dir)
-        raise "Base dir not found: #{base_dir}" unless Dir.exists?(base_dir)
-        Dir.new(base_dir).each do |file|
-          next if %w(. .. .DS_Store).include?(file)
-
-          base_path = File.join(base_dir, file)
-          source_path = File.join(source_dir, file)
-          target_path = File.join(target_dir, file)
-
-          # Skip files in ignore list if they exists
-          next if ignore_if_exists.include?(File.basename(file)) and File.exists?(target_path)
-
-          if File.directory?(base_path)
-            # Recurse into dir
-            copy_dir_contents(source_path, File.join(target_dir, file))
-          else
-            # Copy files
-            copy_file base_path, target_path
-          end
-        end
-      end
-
     end
   end
 end

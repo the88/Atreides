@@ -7,13 +7,6 @@ Spork.prefork do
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
   require File.expand_path("../dummy/config/environment.rb",  __FILE__)
-  module Jammit
-    remove_const :PUBLIC_ROOT
-    remove_const :ASSET_ROOT
-    PUBLIC_ROOT = File.expand_path("../dummy/public", __FILE__)
-    ASSET_ROOT = File.expand_path("../dummy", __FILE__)
-  end
-  Jammit.load_configuration(File.expand_path("../dummy/config/assets.yml",  __FILE__))
   require "rspec/rails"
   require "capybara/rspec"
   require "factory_girl"

@@ -27,9 +27,9 @@ module Admin::Atreides::PostsHelper
     content_tag(:li, :id => video.dom_id(list_id)) do
       hidden_field_tag("#{resource_type}[parts_attributes][0][video_ids][]", video.id) +
       if video.new_record?
-        link_to_function image_tag("admin/remove.png"), "$('##{video.dom_id(list_id)}').fadeOut(function(){ $(this).remove() })"
+        link_to_function image_tag("atreides/admin/remove.png"), "$('##{video.dom_id(list_id)}').fadeOut(function(){ $(this).remove() })"
       else
-        link_to(image_tag("admin/remove.png"), admin_video_path(video, :format => :js, :list_id => list_id), :remote => true, :'data-method' => :delete, :confirm => "Are you sure?")
+        link_to(image_tag("atreides/admin/remove.png"), admin_video_path(video, :format => :js, :list_id => list_id), :remote => true, :'data-method' => :delete, :confirm => "Are you sure?")
       end +
       content_tag(:div, video.embed(:width => width, :height => height).html_safe, :id => video.dom_id) +
       text_area_tag("#{resource_type}[parts_attributes][0][videos_attributes][][caption]", video.caption) +

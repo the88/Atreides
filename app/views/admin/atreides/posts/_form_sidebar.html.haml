@@ -8,7 +8,7 @@
         - Atreides::ContentPart.content_types.each do |ct|
           %li.content_parts_drop{:id => "content_part_#{ct}", :'data-remote-path' => new_admin_post_part_path(resource.new_record? ? '-' : resource.id, :content_type => ct, :format => :js)}
             %span= ct.humanize
-            .draggable-sshot{:style => 'display:none'}= image_tag("admin/content_part_#{ct}.png")
+            .draggable-sshot{:style => 'display:none'}= image_tag("atreides/admin/content_part_#{ct}.png")
       %p.inline-hints= tt(:drag_drop_contant_parts_hint)
       - content_for :head do
         :javascript

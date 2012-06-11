@@ -7,8 +7,8 @@
     = csrf_meta_tag
     = raw analytical.head_prepend_javascript
     = auto_discovery_link_tag :rss, feeds_path(:format => "rss")
-    = include_javascripts :public
-    = include_stylesheets :public
+    = javascript_include_tag 'atreides/public'
+    = stylesheet_link_tag 'atreides/public'
     = yield :head
     = raw analytical.head_append_javascript
   %body

@@ -6,8 +6,8 @@
     %meta{"http-equiv"=>"Content-type", "content"=>"text/html; charset=utf-8"}
     %title #{Settings.app_name}: #{ttt :'.admin_title'}
     = yield :pre_head
-    = include_javascripts :admin
-    = include_stylesheets :admin
+    = javascript_include_tag 'atreides/admin'
+    = stylesheet_link_tag 'atreides/admin'
     = csrf_meta_tag
     = yield :head
   %body
@@ -23,7 +23,7 @@
               %li.nav-logout= link_to_unless_current ttt(:'.logout'), destroy_user_session_path
               %li.nav-search
                 = semantic_form_for Atreides::Post.new, :url => admin_search_path, :html => {:method => :get, :class => "auto-hide-text", :id => "admin_search"} do |f|
-                  = link_to_function image_tag("admin/search_icon.png"), ''
+                  = link_to_function image_tag("atreides/admin/search_icon.png"), ''
                   =text_field_tag "search", (params[:search] || ttt(:'.search'))
               - if Atreides::Site.count > 1
                 %li.nav-site
@@ -44,7 +44,7 @@
         %h1= link_to_unless_current "atreides", admin_path
 
       #body{:class => @show_as_dash ? "dashboard" : ""}
-        =image_tag "admin/content_top_edit_form.png", :id => "content_top_edit_form"
+        = image_tag "atreides/admin/content_top_edit_form.png", :id => "content_top_edit_form"
         #content{:class => content_for?(:sidebar) ? "span-17" : "span-23 last"}
           #flash_messages= raw(flash_messages)
           = yield

@@ -40,7 +40,6 @@ class Atreides::Page < Atreides::Base
   # Callbacks
   #
   before_validation :update_slug
-  before_save :fix_tiny_mce
 
   def update_slug
     # Set slug if not set or changed
