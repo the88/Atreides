@@ -6,7 +6,7 @@ gemspec
 gem "aws-s3",  :require => "aws/s3"
 
 gem "analytical", :git => "git://github.com/mathieuravaux/analytical.git"
-gem "gattica", :git => "http://github.com/mathieuravaux/gattica.git"
+gem "gattica", :git => "http://github.com/chrisle/gattica.git"
 
 gem "thin", :require => nil
 gem "eventmachine", ">= 1.0.0.beta.3", :require => nil
