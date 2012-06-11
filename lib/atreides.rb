@@ -9,6 +9,7 @@ require 'dropbox_sdk'
 require 'analytical'
 require 'jquery-rails'
 require 'aws/s3'
+require 'devise'
 
 require 'cancan'
 # TODO: pull request in CanCan
