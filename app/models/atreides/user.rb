@@ -5,7 +5,7 @@ class Atreides::User < Atreides::Base
     devise :database_authenticatable, :registerable,
            :recoverable, :rememberable, :trackable, :validatable
   rescue NoMethodError
-    puts "[WARNING] The Devise initializer seems to be missing. If you are generating `devise:install`, this is normal."
+    puts "[WARNING] The Devise initializer seems to be missing. If you are generators, this is normal."
     def self.devise *args
     end
   end
