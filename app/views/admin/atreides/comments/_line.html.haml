@@ -11,7 +11,7 @@
         %span.comment-name
           = comment.author.name
           %span
-            = "(#{comment.author.email}):" unless comment.author.email.empty?
+            = "(#{comment.author.email}):" unless comment.author.email.blank?
         %span.comment-body= comment.raw_message
     .comment-time
       Posted
@@ -27,7 +27,7 @@
       .comment-name
         = link_to comment.author.name, comment.author.url, :class => "profile-launcher", "data-profile-username" => comment.author.username, :target => "_blank"
         %span
-          != "(#{mail_to(comment.author.email)})" unless comment.author.email.empty?
+          != "(#{mail_to(comment.author.email)})" unless comment.author.email.blank?
         / %small
         /   = link_to "#{comment.ipAddress}.", "?query=ip:#{comment.ipAddress}"
         /   = link_to comment.author.url, comment.author.url, :target => "_blank"
