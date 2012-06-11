@@ -76,7 +76,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "cucumber-rails", "~> 0.3.2"
   s.add_development_dependency "autotest"
   s.add_development_dependency "autotest-rails"
-  s.add_development_dependency "ruby-debug19"
   s.add_development_dependency "database_cleaner"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "ruby_parser"
