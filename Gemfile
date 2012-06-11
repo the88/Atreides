@@ -4,19 +4,19 @@ source "http://rubygems.org"
 gemspec
 
 gem "aws-s3",  :require => "aws/s3"
-gem "eventmachine", ">= 1.0.0.beta.3"
-gem "thin"
 
 gem "analytical", :git => "git://github.com/mathieuravaux/analytical.git"
 gem "gattica", :git => "http://github.com/mathieuravaux/gattica.git"
-gem "em-http-request", :git => "git://github.com/igrigorik/em-http-request.git",  :tag => "b8138b7edc671e24235e"
-gem "em-net-http"
-gem "em-synchrony", :git => "git://github.com/igrigorik/em-synchrony.git"
+
+gem "thin", :require => nil
+gem "eventmachine", ">= 1.0.0.beta.3", :require => nil
+gem "em-http-request", :require => nil
+gem "em-net-http", :require => nil
+gem "em-synchrony", :require => nil
 
 group :development, :test do
   gem 'capybara'
   gem 'awesome_print'
-  gem 'thin'
   gem 'growl'
   gem 'ruby-growl'
   gem 'hpricot'
