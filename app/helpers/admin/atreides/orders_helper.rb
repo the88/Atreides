@@ -16,7 +16,7 @@ module Admin::Atreides::OrdersHelper
     order.line_items.map{|li|
       photo = li.product.photos.first
       link_to(
-        image_tag(photo ? photo.image.url(:thumb) : "atriedes/admin/product.png", :size => "50x50"), admin_product_path(li.product),
+        image_tag(photo ? photo.image.url(:thumb) : "atreides/admin/product.png", :size => "50x50"), admin_product_path(li.product),
         :title => "#{li.product.title} - #{li.size} x #{li.qty}"
       )
     }.join
