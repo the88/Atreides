@@ -50,6 +50,8 @@ module Atreides
         copy_file 'disqussion.rb', 'config/initializers/disqussion.rb'
         copy_file 'Procfile', 'Procfile'
         gsub_file 'config/application.rb', 'config.active_record.whitelist_attributes = true', 'config.active_record.whitelist_attributes = false'
+        remove_file 'public/index.html'
+        remove_file 'assets/images/rails.png'
       end
     end
   end
