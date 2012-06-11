@@ -58,7 +58,6 @@ gem "gattica", :git => "http://github.com/mathieuravaux/gattica.git"
         copy_file 'devise.rb', 'config/initializers/devise.rb'
         copy_file 'locales/devise_en.yml', 'config/locales/devise_en.yml'
         copy_file 'delayed_job.rb', 'config/initializers/delayed_job.rb'
-        copy_file 'formtastic_config.rb', 'config/initializers/formtastic_config.rb'
         copy_file 'disqussion.rb', 'config/initializers/disqussion.rb'
         copy_file 'em-net-http_override.rb', 'config/initializers/em-net-http_override.rb'
         copy_file 'Procfile', 'Procfile'

@@ -15,8 +15,8 @@
         %p.inline-hints.clear #{ttt :'.upload_reorder_and_caption_photos'}
       = f.input :body, :label => ttt(:'.body'), :as => 'text', :wrapper_html => { :class => "rich-text" }, :required => true
 
-    - f.buttons do
-      = f.commit_button "Save #{resource.class.to_s}"
+    - f.actions do
+      = f.action :submit, :as => :button, :label => "Save #{resource.class.to_s}"
       %li.cancel
         = link_to ttt(:'.back'), admin_products_path, :class => "cancel"
 

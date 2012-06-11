@@ -13,14 +13,14 @@
 %fieldset#comment_buttons.buttons.actions
   %ol
     %li.commit
-      - form_tag '/admin/comments/update_many', :method => :put do
+      = form_tag '/admin/comments/update_many', :method => :put do
         = hidden_field_tag "comment_action", "approve"
         %input#approve-selected.create{:type => "button", :value => ttc(".approve")}
     %li.delete
-      - form_tag '/admin/comments/delete_many', :method => :delete do
+      = form_tag '/admin/comments/delete_many', :method => :delete do
         %input#delete-selected.cancel{:type => "button", :value => ttc(".delete")}
     %li.cancel
-      - form_tag '/admin/comments/update_many', :method => :put do
+      = form_tag '/admin/comments/update_many', :method => :put do
         = hidden_field_tag "comment_action", "mark-spam"
         %input#mark-as-spam-selected.cancel{:type => "button", :value => ttc(".mark as spam")}
 

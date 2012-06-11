@@ -32,8 +32,8 @@
       = f.input :caption, :label => ttt(:'.caption'), :as => 'text', :input_html => { :style => "height:10em;" }
       = f.input :url, :label => ttt(:'.url'), :input_html => { :class => "title" }
 
-    = f.buttons do
-      = f.commit_button ttt(:save)
+    = f.actions do
+      = f.action :submit, :as => :button, :label => ttt(:save)
       %li.cancel
         = link_to ttt(:back), admin_features_path, :class => "cancel"
       %li.delete
@@ -41,13 +41,13 @@
 
   #form_sidebar{:class => "sidebar span-6 last"}
     = f.inputs do
-      = f.input :state, :as => "hidden", :wrapper_html => { :class => "post-hidden" }
       - selected = (@feature.pending? || @feature.published?) ? (@feature.published_at? ? :published_at : :published_now) : @feature.state.to_sym
 
       - @feature.published_at = (@feature.published_at || Time.now).in_time_zone # Needed to show time in user's TZ
       - label = @feature.published_at.past? ? "Published on: " : "Will be published on:"
 
       = f.input :state, :as => "select", :collection => @feature.states_for_select, :selected => selected, :include_blank => false, :wrapper_html => { :class => "post-states" }
+      = f.input :state, :as => "hidden", :wrapper_html => { :class => "post-hidden" }
       = f.input :published_at, :label => label, :as => "string", :wrapper_html => { :class => "date-picker", :style => "display:#{selected==:published_at ? 'block' : 'none'}"}
 
       - if defined?(Settings.tags.posts.features)
