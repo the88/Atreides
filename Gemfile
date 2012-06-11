@@ -14,7 +14,6 @@ gem "hpricot"
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-gem "analytical", :git => "git://github.com/mathieuravaux/analytical.git"
 gem "gattica", :git => "http://github.com/chrisle/gattica.git"
 
 gem "thin", :require => nil
