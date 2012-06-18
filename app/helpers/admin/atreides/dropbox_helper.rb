@@ -23,7 +23,10 @@ module Admin::Atreides::DropboxHelper
 
   def new_dropbox_session
     DropboxSession.new(Settings.dropbox.key, Settings.dropbox.secret).tap do |dropbox_session|
-      dropbox_session.get_request_token
+      begin
+        dropbox_session.get_request_token
+      rescue
+      end
     end
   end
 

@@ -3,11 +3,7 @@
 - photos_list_id  = "photos_list_#{part_uid}"
 %li.photos-upload
   %label= ttt(:photos)
-  = render(:partial => 'admin/atreides/dropbox/uploader', :locals => { :part_id => (part.id || '-'), :list_id => photos_list_id })
-  %span.or or
-  = multi_file_uploader(:url => send("admin_#{resource_type.to_s}_part_photos_path", :"#{resource_type.to_s}_id" => (part.contentable_id || '-'), :part_id => (part.id || '-'), :format => :js, :list_id => photos_list_id), :css_parent_class => "photos-upload", :dom_id => "multi_file_uploader_#{part_uid}")
-  / - if dropbox_session.authorized?
-  /   %p.inline-hints.clear= link_to 'Unlink Dropbox', :admin_dropbox_unlink
+  = photos_uploaders(part, photos_list_id, resource_type, part_uid)
   %p.inline-hints.clear= tt('.upload_hint')
 %li.photos-display-type
   %label= ttt('.gallery_display')
