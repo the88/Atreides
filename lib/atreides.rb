@@ -5,10 +5,12 @@ require 'settingslogic'
 require 'will_paginate'
 require 'acts_as_commentable'
 require 'validates_email_format_of'
-require 'jammit'
-require 'barista'
-require "dropbox"
+require 'dropbox_sdk'
 require 'analytical'
+require 'jquery-rails'
+require 'aws/s3'
+require 'devise'
+require 'oauth2'
 
 require 'cancan'
 # TODO: pull request in CanCan

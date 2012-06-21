@@ -8,23 +8,26 @@ class Admin::Atreides::PhotosController < Atreides::AdminController
 
   def create
     if params[:dropbox_path]
-      dropbox_session.mode = :dropbox
       puts "Downloading from dropbox..."
       start = Time.now
-      data = StringIO.new dropbox_session.download(params[:dropbox_path])
+      data = dropbox_client.get_file(params[:dropbox_path])
       puts "Downloaded in #{Time.now - start}..."
       filename = File.basename params[:dropbox_path]
       puts "Filename: #{filename}"
     else
       # Flash photo upload
-      data = StringIO.new request.body.read
+      data = request.body.read
       filename = params[:qqfile]
     end
-    data.class.send(:define_method, "original_filename") do
-      filename
-    end
 
-    @photo = end_of_association_chain.new(:image => data, :image_file_name => filename)
+    extension = File.extname(filename)
+    basename = File.basename(filename, extension)
+    tempfile = Tempfile.new([basename, extension], :encoding => data.encoding)
+    tempfile.write(data)
+    tempfile.rewind
+
+    @photo = end_of_association_chain.new
+    @photo.image = tempfile
 
     # Features belong to the photo and not the otherway
     if photoable && photoable.is_a?(Atreides::Feature)
@@ -37,7 +40,7 @@ class Admin::Atreides::PhotosController < Atreides::AdminController
     else
       @photo.photoable = photoable
     end
-    
+
     super do |success, failure|
       success.json { render @photo.to_json }
       success.js   { render :template => "admin/atreides/photos/create.js.haml", :layout => false, :status => :ok }
@@ -64,10 +67,10 @@ class Admin::Atreides::PhotosController < Atreides::AdminController
 
   def photoable
     @photoable ||= if params[:content_part_id] || params[:part_id]
-      Atreides::ContentPart.find_by_id((params[:content_part_id] || params[:part_id]).to_i) || 
+      Atreides::ContentPart.find_by_id((params[:content_part_id] || params[:part_id]).to_i) ||
       Atreides::ContentPart.new(:content_type => 'photos', :photos => [resource])
     elsif params[:feature_id]
-      current_site.features.find_by_id(params[:feature_id].to_i) || 
+      current_site.features.find_by_id(params[:feature_id].to_i) ||
       current_site.features.new
     end
   end

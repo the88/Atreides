@@ -1,10 +1,10 @@
-# Class to aid in the publishing of posts to Twitter. 
+# Class to aid in the publishing of posts to Twitter.
 # This is typically used with Delayed Job in a background process
 # Eg:
 #  Delayed::Job.enqueue(TwCommentPublisherJob.new(post.id, url))
-# 
+#
 # It requires that there is a 'twitter' section in your settings.yml config file
-# 
+#
 TwPostPublisherJob = Struct.new(:post_id)
 class TwPostPublisherJob
 
@@ -28,7 +28,7 @@ class TwPostPublisherJob
     # Abort if already posted
     return if post.twitter_id?
 
-    # Auth user 
+    # Auth user
     Twitter.configure do |config|
       config.consumer_key = Settings.twitter.consumer_key
       config.consumer_secret = Settings.twitter.consumer_secret
@@ -40,7 +40,7 @@ class TwPostPublisherJob
     bitly = Bitly.new(Settings.bitly.login, Settings.bitly.key)
     url = post_url(:id => post.to_param, :slug => post.slug.to_s)
     short_url = bitly.shorten(url.to_s).short_url rescue url
-    
+
     # Build message
     body = !post.social_msg.blank? ? post.social_msg : post.title.truncate(160 - 1 - short_url.size)
     msg = "New Post! #{body} #{short_url}"

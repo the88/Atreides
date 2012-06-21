@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe Atreides::Page do
-  
+
   before do
     @page = Factory(:page)
   end
-  
+
   it "should be valid and create a page" do
     page = Atreides::Page.new(:state => "pending")
     page.valid?.should eql(true)

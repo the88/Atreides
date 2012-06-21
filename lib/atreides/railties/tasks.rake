@@ -1,37 +1,4 @@
 module ActiveRecord
-  class Migrator
-    class << self
-      def migrations(paths)
-        paths = Array.wrap(paths)
-
-        files = Dir[*paths.map { |p| "#{p}/[0-9]*_*.rb" }]
-
-        seen = Hash.new false
-
-        migrations = files.map do |file|
-          version, name = file.scan(/([0-9]+)_([_a-z0-9]*).rb/).first
-
-          raise IllegalMigrationNameError.new(file) unless version
-          version = version.to_i
-          name = name.camelize
-
-          raise DuplicateMigrationVersionError.new(version) if seen[version]
-          raise DuplicateMigrationNameError.new(name) if seen[name]
-
-          seen[version] = seen[name] = true
-        
-          migration = MigrationProxy.new
-          migration.name = name
-          migration.filename = file
-          migration.version = version
-          migration
-        end
-
-        migrations.sort_by(&:version)
-      end
-    end
-  end
-  
   class Migration
     class << self
       def copy(destination, sources, options = {})

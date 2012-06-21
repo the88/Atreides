@@ -1,0 +1,9 @@
+//  require atreides/backbone-0.3.3
+//= require atreides/jtags
+//= require atreides/fileuploader
+//= require atreides/jquery.tipsy
+//= require atreides/facebox
+//= require atreides/jquery.multipleselectbox
+//= require atreides/jquery.jBreadCrumb.1.1
+//= require atreides/jquery.swfupload
+//= require atreides/swfupload/swfupload

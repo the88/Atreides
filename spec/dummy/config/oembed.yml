@@ -11,7 +11,7 @@
 
 :youtube:
   :format: "json"
-  :schemes: 
+  :schemes:
     - "http://www.youtube.com/watch?v=*"
     - "http://www.youtube.com/embed/*"
     - "http://www.youtu.be/*"
@@ -28,7 +28,7 @@
   :format: "json"
   :schemes:
     - "http://*.amazon.(com|co.uk|de|ca|jp)/*/(gp/product|o/ASIN|obidos/ASIN|dp)/*"
-    - "http://*.amazon.(com|co.uk|de|ca|jp)/(gp/product|o/ASIN|obidos/ASIN|dp)/*"        
+    - "http://*.amazon.(com|co.uk|de|ca|jp)/(gp/product|o/ASIN|obidos/ASIN|dp)/*"
     - "http://*.collegehumor.com/video:*"
     - "http://*.funnyordie.com/videos/*"
     - "http://video.google.com/videoplay?*"
@@ -56,7 +56,7 @@
   :format: "xml"
   :schemes:
     - "http://*.flickr.com/*"
-    
+
 :viddler:
   :format: "xml"
   :schemes:

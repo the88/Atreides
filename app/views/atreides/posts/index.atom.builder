@@ -11,7 +11,7 @@ atom_feed :language => 'en-US' do |feed|
       feed.entry(post, :id => "tag:#{Settings.domain},#{time.year}:#{post.id.to_s}", :url => post_url(post, post.slug)) do |entry|
         entry.title(post.title)
         entry.content(post_item(post), :type => 'html')
-        entry.author do |author| 
+        entry.author do |author|
           author.name(Settings.app_name)
         end
       end

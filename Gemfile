@@ -1,25 +1,24 @@
-# reference: http://yehudakatz.com/2010/12/16/clarifying-the-roles-of-the-gemspec-and-gemfile/
-
 source "http://rubygems.org"
+
+# Declare your gem's dependencies in atreides.gemspec.
+# Bundler will treat runtime dependencies like base dependencies, and
+# development dependencies will be added by default to the :development group.
 gemspec
 
-gem "aws-s3",  :require => "aws/s3"
-gem "dropbox"
-gem "eventmachine", ">= 1.0.0.beta.3"
-gem "thin"
+gem "capybara"
+gem "awesome_print"
+gem "hpricot"
 
-gem "analytical", :git => "git://github.com/mathieuravaux/analytical.git"
-gem "gattica", :git => "http://github.com/mathieuravaux/gattica.git"
-gem "em-http-request", :git => "git://github.com/igrigorik/em-http-request.git",  :tag => "b8138b7edc671e24235e"
-gem "em-net-http"
-gem "em-synchrony", :git => "git://github.com/igrigorik/em-synchrony.git"
+# Declare any dependencies that are still in development here instead of in
+# your gemspec. These might include edge Rails or gems from your path or
+# Git. Remember to move these dependencies to your gemspec before releasing
+# your gem to rubygems.org.
 
-group :development, :test do
-  gem 'capybara'
-  gem 'awesome_print'
-  gem 'thin'
-  gem 'growl'
-  gem 'ruby-growl'
-  gem 'hpricot'
-  gem 'guard'
-end
+gem "thin", :require => nil
+gem "eventmachine", ">= 1.0.0.beta.3", :require => nil
+gem "em-http-request", :require => nil
+gem "em-net-http", :require => nil
+gem "em-synchrony", :require => nil
+
+# To use debugger
+# gem 'ruby-debug19', :require => 'ruby-debug'

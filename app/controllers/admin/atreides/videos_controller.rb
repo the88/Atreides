@@ -8,7 +8,7 @@ class Admin::Atreides::VideosController < Atreides::AdminController
     elsif params.key?(:video_url)
       end_of_association_chain.new(:url => params[:video_url], :part => part)
     end
-    
+
     if @video.save
       respond_to do |wants|
         wants.js
@@ -31,13 +31,13 @@ class Admin::Atreides::VideosController < Atreides::AdminController
       render :nothing => true, :status => :error
     end
   end
-  
+
   def destroy
     super do |wants|
       wants.js
     end
   end
-  
+
 
   private
 

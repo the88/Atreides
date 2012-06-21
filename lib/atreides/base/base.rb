@@ -1,5 +1,5 @@
 module Atreides
-  
+
   # Base class inherited by every model in Atreides
   class Base < ActiveRecord::Base
 
@@ -11,21 +11,7 @@ module Atreides
     #
     # Class definitions
     #
-    self.abstract_class = false
-  
-    self.instance_eval do
-
-      # Prevent the table name from being called 'bases'
-      def table_name
-        @table_name ||= self.name.split('::').last.tableize
-      end
-
-    end
-
-    # Fix broken paths from TinyMCE
-    def fix_tiny_mce
-      self.body = body.gsub(%r{src=\"(.*)/system/images/}, "src=\"/system/images/") if body?
-    end
+    self.abstract_class = true
 
     # Give a string identifying the model based on it's properties.
     # In order:

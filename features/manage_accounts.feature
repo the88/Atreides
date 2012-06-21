@@ -2,7 +2,7 @@ Feature: Manage accounts
   In order to manage its collaborators
   An administrative user
   wants to add, edit and rename their user accounts
-  
+
   Background:
     Given the following accounts:
       | email                    | first_name | last_name         | password |  admin  |
@@ -15,7 +15,7 @@ Feature: Manage accounts
     Then I should see "Richardson"
     And  I should see "normal"
     And  I should see "deletable"
-  
+
   @as_admin
   Scenario: Register a new account
     Given I am on the new account page

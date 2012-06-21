@@ -11,7 +11,7 @@ class Atreides::Product < Atreides::Base
   has_many :line_items
   has_many :orders, :through => :line_items
   has_many :sizes, :order => "display_order"
-  
+
   #
   # Behaviours
   #

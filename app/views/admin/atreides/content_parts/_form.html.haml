@@ -2,20 +2,20 @@
 - post ||= Atreides::Post.new
 - part ||= resource
 - resource_type ||= :post
-- f = Formtastic::Helpers::FormHelper.builder.new(resource_type, post, self, {}, nil)
-.part-container{:id => part.dom_id}
-  = f.inputs :for => [:parts, part] do |fp|
-    - if deletable
-      %li.part-delete-btn
-        - unless part.new_record?
-          = link_to image_tag("admin/remove.png"), send("admin_#{resource_type.to_s}_part_path", post, part, :format => 'js'), :remote => true, :'data-method' => :delete
-        - else
-          = link_to_function image_tag("admin/remove.png"), "$(this).parents('.part-container').fadeOut(function(){ $(this).remove() })"
-      %li.part-drag-handle
-        = image_tag("admin/resize.png")
-    = fp.input :id, :as => :hidden unless part.new_record?
-    = fp.input :content_type, :as => :hidden
-    = fp.input :display_order, :as => :hidden
-    = render :partial => "admin/atreides/content_parts/#{part.content_type}", :locals => {:f => fp, :part => part, :resource_type => resource_type}
-  .clear
-  .part-break
+= semantic_fields_for resource_type, post do |post_form|
+  .part-container{:id => part.dom_id}
+    = post_form.inputs :for => [:parts, part] do |fp|
+      - if deletable
+        %li.part-delete-btn
+          - unless part.new_record?
+            = link_to image_tag("atreides/admin/remove.png"), send("admin_#{resource_type.to_s}_part_path", post, part, :format => 'js'), :remote => true, :'data-method' => :delete
+          - else
+            = link_to_function image_tag("atreides/admin/remove.png"), "$(this).parents('.part-container').fadeOut(function(){ $(this).remove() })"
+        %li.part-drag-handle
+          = image_tag("atreides/admin/resize.png")
+      = fp.input :id, :as => :hidden unless part.new_record?
+      = fp.input :content_type, :as => :hidden
+      = fp.input :display_order, :as => :hidden
+      = render :partial => "admin/atreides/content_parts/#{part.content_type}", :locals => {:f => fp, :part => part, :resource_type => resource_type}
+    .clear
+    .part-break

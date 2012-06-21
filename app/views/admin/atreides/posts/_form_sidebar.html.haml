@@ -8,7 +8,7 @@
         - Atreides::ContentPart.content_types.each do |ct|
           %li.content_parts_drop{:id => "content_part_#{ct}", :'data-remote-path' => new_admin_post_part_path(resource.new_record? ? '-' : resource.id, :content_type => ct, :format => :js)}
             %span= ct.humanize
-            .draggable-sshot{:style => 'display:none'}= image_tag("admin/content_part_#{ct}.png")
+            .draggable-sshot{:style => 'display:none'}= image_tag("atreides/admin/content_part_#{ct}.png")
       %p.inline-hints= tt(:drag_drop_contant_parts_hint)
       - content_for :head do
         :javascript
@@ -20,15 +20,15 @@
             },
           }); })
 
-    = f.input :state, :as => "hidden", :wrapper_html => { :class => "post-hidden" }
     - selected = (resource.pending? || resource.published?) ? (resource.published_at? ? :published_at : :publish_now) : resource.state.to_sym
 
     - resource.published_at = (resource.published_at || Time.now).in_time_zone # Needed to show time in user's TZ
     - label = (resource.published_at.past? ? tt(:'.published_on') : tt('.will_be_published_on')) + ": "
 
     = f.input :state, :as => "select", :collection => resource.states_for_select, :selected => selected, :include_blank => false, :wrapper_html => { :class => "post-states" }
+    = f.input :state, :as => "hidden", :wrapper_html => { :class => "post-hidden" }
     = f.input :published_at, :label => label, :as => "string", :wrapper_html => { :class => "date-picker", :style => "display:#{selected==:published_at ? 'block' : 'none'}"}
-    
+
     / Tags
     - if defined?(Settings.tags.posts.groups)
       - (Settings.tags.posts.groups - %w(tags)).each do |group|
@@ -61,7 +61,7 @@
           - if resource.twitter_id?
             = link_to(ttc('.crossposted_twitter'), "http://twitter.com/#{Settings.twitter.login}/status/#{resource.twitter_id}")
           - elsif resource.tw_delayed_job
-            %span 
+            %span
               #{ttc('.crosspost_queued_twitter')}
               %br
               (#{resource.tw_delayed_job.run_at.to_s(:date_ordinal)})
@@ -76,7 +76,7 @@
               #{ttc('.crosspost_queued_facebook')}
               %br
               (#{resource.fb_delayed_job.run_at.to_s(:date_ordinal)})
-          - else 
+          - else
             = check_box(:post, :fb_me)
             = ttc '.crosspost_facebook'
         %li#social_message

@@ -15,7 +15,7 @@ Disqussion::Posts.class_eval %Q{
       end
       a
     end
-    
+
     def column_names
       ["isJuliaFlagged","isFlagged","forum","parent","media","isApproved","dislikes","raw_message","isSpam","thread","points","createdAt","message","isHighlighted","ipAddress","id","isDeleted","likes","author"]
     end

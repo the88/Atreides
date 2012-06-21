@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 describe Atreides::PostsController do
-  
+
   before do
     @post = Factory(:post, :published_at => 1.hour.ago, :site => Atreides::Site.default)
   end
-  
+
   describe "GET /posts" do
-    
+
     render_views
-    
+
     it "should GET the index" do
       get :index
       response.should be_success
@@ -79,7 +79,7 @@ describe Atreides::PostsController do
 
     it "should redirect to the next post" do
       @posts.all?(&:valid?).should eql(true)
-      
+
       get :next, :id => @posts[1].id
       response.should be_redirect
       response.should redirect_to(post_path(@posts[0], @posts[0].slug))
@@ -93,13 +93,13 @@ describe Atreides::PostsController do
   end
 
   describe "POST /posts/preview" do
-    
+
     it "previews a new post" do
       # Send post to preview and make sure it renders with posted attributes
       post_atts = Factory.attributes_for(:published_post).symbolize_keys
       post_atts[:parts_attributes] = [Factory.attributes_for(:content_part_text).symbolize_keys]
       post_atts.delete(:parts)
-      
+
       # Standard post
       post :preview, :post => post_atts
       response.should be_success
@@ -112,7 +112,7 @@ describe Atreides::PostsController do
       })
       response.should be_success
     end
-    
+
     it "previews an existing post" do
       # Send post to preview and make sure it renders with posted attributes
       post_atts = Factory(:post_to_be_published_now).attributes.symbolize_keys
@@ -132,5 +132,5 @@ describe Atreides::PostsController do
       response.should be_success
     end
   end
-  
+
 end

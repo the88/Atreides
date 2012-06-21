@@ -13,7 +13,7 @@ module Atreides::AdminHelper
     dom_id = opts[:dom_id]
     css_class = "upload-btn"
     css_upload = "upload-progress"
-    
+
     content_tag(:div, :id => dom_id, :class => "upload-container") do
       content_tag(:div, :class => "#{css_class}") do
         content_tag(:noscript, "Please enable JavaScript to use file uploader.")
@@ -72,7 +72,7 @@ module Atreides::AdminHelper
     css_link = ".add-inline-photo a"
     css_loading = ".add-inline-photo img"
     link_to_function(tt(:'.add_inline_photo'), "$('##{css_flash}').swfupload('selectFile')") +
-    image_tag("loading.gif", :style => "display:none") +
+    image_tag("atreides/loading.gif", :style => "display:none") +
     content_tag(:div, "", :id => css_flash) do
       content_tag(:span, "", :id => "spanButtonPlaceholder")
     end +
@@ -91,14 +91,14 @@ module Atreides::AdminHelper
             file_upload_limit : '0',
             file_queue_limit : '1',
             // Button Settings
-            //button_image_url : '/images/blank.gif', // Relative to the SWF file
+            //button_image_url : '#{image_path('atreides/blank.gif')}', // Relative to the SWF file
             button_placeholder_id : 'spanButtonPlaceholder',
-            button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+            //button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
             button_cursor: 'pointer',
             button_width: $('##{css_flash}').width(),
             button_height: $('##{css_flash}').height(),
             // Flash Settings
-            flash_url : '/flash/swfupload.swf'
+            flash_url : '#{asset_path('atreides/swfupload.swf')}'
         });
         // assign our event handlers
         $('##{css_flash}')
@@ -119,7 +119,7 @@ module Atreides::AdminHelper
               $('#flash').html('Error from server trying to upload image: '+message).addClass('error flash').show()
             })
         });
-    ")  
+    ")
   end
 
   def edit_photos_for_assoc(object, list_id = nil)
@@ -148,8 +148,8 @@ module Atreides::AdminHelper
   def post_photo_for_assoc(photo, object, list_id = "photos_list", thumb_size = :thumb)
     param_name = (object.is_a?(String) ? object : object.class.to_s).demodulize.downcase
     content_tag(:li, :id => photo.dom_id(list_id), :class => "post-photo-for-assoc") do
-      link_to(image_tag("admin/remove.png"), admin_photo_path(photo, :format => :js, :list_id => list_id), :remote => true, :method => :delete, :confirm => "Are you absolutely sure?") +
-      image_tag(photo.image.url(thumb_size), :class => "photo-thumb", :size => photo.size(thumb_size).values.join('x')) + 
+      link_to(image_tag("atreides/admin/remove.png"), admin_photo_path(photo, :format => :js, :list_id => list_id), :remote => true, :method => :delete, :confirm => "Are you absolutely sure?") +
+      image_tag(photo.image.url(thumb_size), :class => "photo-thumb", :size => photo.size(thumb_size).values.join('x')) +
       hidden_field_tag("post[parts_attributes][0][photo_ids][]", photo.id) +
       text_area_tag("post[parts_attributes][0][photos_attributes][][caption]", photo.caption) +
       hidden_field_tag("post[parts_attributes][0][photos_attributes][][id]", photo.id) +
@@ -159,11 +159,11 @@ module Atreides::AdminHelper
 
   def feature_photo_for_assoc(photo, object, list_id = "photos_list", thumb_size = :thumb)
     attr_name  = 'photo_attributes'
-    
+
     content_tag(:li, :id => (photo ? photo.dom_id(list_id) : nil), :class => "feature-photo-for-assoc") do
       # Do full photo delete if used just by feature, otherwise remove from feature
       if photo
-        image_tag(photo.image.url(thumb_size), :class => "photo-thumb", :size => photo.size(thumb_size).values.join('x')) + 
+        image_tag(photo.image.url(thumb_size), :class => "photo-thumb", :size => photo.size(thumb_size).values.join('x')) +
         hidden_field_tag("#{object.class.to_s.downcase}[#{attr_name}][id]", photo.id) +
         hidden_field_tag("#{object.class.to_s.downcase}[#{attr_name}][display_order]", photo.display_order)
       end
@@ -171,8 +171,8 @@ module Atreides::AdminHelper
   end
 
   def edit_photos_sortable(list_id = "photos_list")
-    sortable_element("##{list_id}", 
-      # :url => reorder_admin_photos_path(:format => :js), 
+    sortable_element("##{list_id}",
+      # :url => reorder_admin_photos_path(:format => :js),
       :axis => false,
       :update => "function() { $('##{list_id} input[id$=display_order]').each(function(i, el){ el.value = i }) }"
     )
@@ -206,19 +206,19 @@ module Atreides::AdminHelper
     content_tag(:div, "", :id => "ga_visitors", :class => "graph") +
     javascript_tag("
     $(document).ready(function() {
-      
+
     })
     ")
   end
 
   def link_to_preview
     obj = params[:controller]=~/pages/ ? 'page' : 'post'
-    
+
     link_to_function(ttt(:preview), %Q{
-      $('iframe.preview-pane').dialog({ 
-        modal: true,  
-        width:960,  
-        height:500, 
+      $('iframe.preview-pane').dialog({
+        modal: true,
+        width:960,
+        height:500,
         open: function() {
           $(this).css('width',960)
           var form = $('form##{obj}_edit, form##{obj}_new').
@@ -229,15 +229,12 @@ module Atreides::AdminHelper
             attr('target','#{obj}_preview').
             hide().
             appendTo($('#body'));
-          form.find('.wym_box').remove();
-          if (jQuery.wymeditors(0))
-            form.find('.rich_text textarea').val(jQuery.wymeditors(0).html());
           form.submit().remove();
         } })
     }, :class => "preview") +
     content_tag(:iframe, "", :id => "#{obj}_preview", :class => "preview-pane", :src => "about:blank", :width => 1, :height => 1, :name => "#{obj}_preview")
   end
-  
+
   def seconds_from_now(datetime)
     Time.now.to_i - Time.at(datetime.to_i).to_i
   end

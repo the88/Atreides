@@ -46,11 +46,11 @@ class Atreides::Tweet < Atreides::Base
       while continue do
         # Get most recent tweets
         tweets = twitter[:search].search.json?(
-          :q => Settings.twitter.search_for, 
+          :q => Settings.twitter.search_for,
           :since_id => Atreides::Tweet.maximum(:twitter_id),
           # :since => (Atreides::Tweet.maximum(:tweeted_at) || 1.month.ago).to_date.to_s,
           # :max_id => self.minimum(:twitter_id, :conditions => ["created_at >= ?", started_at]),
-          :rpp => per_page, 
+          :rpp => per_page,
           :lang => "all"
         ).results
 
@@ -79,12 +79,12 @@ class Atreides::Tweet < Atreides::Base
           tweets.each do |twt|
             u = users.detect{|u|u.screen_name.downcase==twt.from_user}
             self.create(
-              :twitter_id => twt.id, 
+              :twitter_id => twt.id,
               :tweeted_at => Time.zone.parse(twt.created_at),
               :text => twt.text,
               :from_user => twt.from_user,
               :to_user => twt.to_user,
-              :reach => (u ? u.followers_count : 0), 
+              :reach => (u ? u.followers_count : 0),
               :profile_image_url => twt.profile_image_url
             )
           end
@@ -101,9 +101,9 @@ class Atreides::Tweet < Atreides::Base
       require 'grackle' unless defined?(Grackle)
       @twitter ||= Grackle::Client.new(:auth => {
         :type => :oauth,
-        :consumer_key => Settings.twitter.consumer_key, 
+        :consumer_key => Settings.twitter.consumer_key,
         :consumer_secret => Settings.twitter.consumer_secret,
-        :token => Settings.twitter.app_user_token, 
+        :token => Settings.twitter.app_user_token,
         :token_secret => Settings.twitter.app_user_secret
       })
       # Show debugging info

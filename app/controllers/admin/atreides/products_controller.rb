@@ -21,14 +21,14 @@ class Admin::Atreides::ProductsController < Atreides::AdminController
       i = 0
       params[:product][:sizes_attributes].each{|s| s[:display_order] = (i+=1) }
     end
-    
+
     # Set product price
     params[:product][:price] = params[:product][:price].to_money
-    
+
     # Mark as destroyed if not included in the list
     resource.sizes.each do |s|
       unless params[:product][:sizes_attributes].map(&:id).include?(s.id)
-        params[:product][:sizes_attributes] << {:id => s.id, :_destroy => true}  
+        params[:product][:sizes_attributes] << {:id => s.id, :_destroy => true}
       end
     end
   end

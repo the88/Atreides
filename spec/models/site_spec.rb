@@ -34,7 +34,7 @@ describe Atreides::Site do
       site.errors[:lang].nil?.should eql(false)
     end
   end
-  
+
   describe "site scoping" do
     before do
       @site_www = Atreides::Site.default
@@ -63,12 +63,12 @@ describe Atreides::Site do
       @site_www.posts.include?(@post_www).should eql(true)
       @site_www.pages.include?(@page_www).should eql(true)
       @site_www.features.include?(@feature_www).should eql(true)
-      
+
       # Negatives
       @site_blog.posts.include?(@post_www).should eql(false)
       @site_blog.pages.include?(@page_www).should eql(false)
       @site_blog.features.include?(@feature_www).should eql(false)
-      
+
       @site_www.posts.include?(@post_blog).should eql(false)
       @site_www.pages.include?(@page_blog).should eql(false)
       @site_www.features.include?(@feature_blog).should eql(false)

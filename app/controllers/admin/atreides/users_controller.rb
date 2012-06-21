@@ -20,7 +20,7 @@ class Admin::Atreides::UsersController < Atreides::AdminController
   end
 
   def admins
-    @users = end_of_association_chain.admins.all.paginate(:page => params[:page])
+    @users = end_of_association_chain.admins.paginate(:page => params[:page])
     render "index"
   end
 
@@ -31,7 +31,7 @@ class Admin::Atreides::UsersController < Atreides::AdminController
   end
 
   def collection
-    @users ||= end_of_association_chain.all.paginate(:page => params[:page])
+    @users ||= end_of_association_chain.paginate(:page => params[:page])
   end
 
   def resource_request_name
@@ -41,10 +41,10 @@ class Admin::Atreides::UsersController < Atreides::AdminController
   def method_for_build
     :build_admin
   end
-  
+
   def end_of_association_chain
     Atreides::User
   end
-  
+
   include Atreides::Extendable
 end

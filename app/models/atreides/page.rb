@@ -3,7 +3,7 @@ class Atreides::Page < Atreides::Base
   include Atreides::Base::Taggable
   include Atreides::Base::AasmStates
   include Atreides::Base::Validation
-  
+
   #
   # Constants
   #
@@ -28,7 +28,7 @@ class Atreides::Page < Atreides::Base
   # Validations
   #
   validate :site_id, :presence => true
-  validates_presence_of :title, :body, :slug, :unless => :pending? 
+  validates_presence_of :title, :body, :slug, :unless => :pending?
   validate :slug, :uniqueness => true, :if => :slug?, :scope => :site_id
 
   #
@@ -40,7 +40,6 @@ class Atreides::Page < Atreides::Base
   # Callbacks
   #
   before_validation :update_slug
-  before_save :fix_tiny_mce
 
   def update_slug
     # Set slug if not set or changed
@@ -59,15 +58,19 @@ class Atreides::Page < Atreides::Base
   #
   # Instance Methods
   #
-  
+
   def thumbnail(size = :thumb)
     # Find the first thumbnail image
     url = nil
     url = photos.first.image.url(size) unless photos.empty?
+
+    # FIXME: THIS NEEDS TO BE MOVED TO A VIEW/PRESENTER/DECORATOR
+    # asset_path('atreides/missing_thumb.png')
+
     url || "/images/missing_thumb.png"
   end
-  
-  
+
+
   def children
     @children ||= self.class.find_all_by_parent_id(id)
   end

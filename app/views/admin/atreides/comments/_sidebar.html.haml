@@ -17,7 +17,7 @@
                 - else
                   %input#show_approved{:type => "checkbox", :name => "filter[]", :value => "approved"}/
                 = ttt ".approved"
-            
+
             %li.machine_tag
               %label#filter-unapproved{:for => "show_unapproved"}
                 - if params.has_key?(:filter) && params[:filter].include?("unapproved")
@@ -50,4 +50,3 @@
               %label#filter-button.hidden{:for => "submit_button", :style => "display:none"}
                 %input#submit_button{:type => "submit"}
                 = ttt ".submit"
-            

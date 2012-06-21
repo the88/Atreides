@@ -22,7 +22,7 @@ class Admin::Atreides::ContentPartsController < Atreides::AdminController
       render :nothing => true, :status => :error
     end
   end
-  
+
   def destroy
     super do |wants|
       wants.html { head :ok }
@@ -31,7 +31,7 @@ class Admin::Atreides::ContentPartsController < Atreides::AdminController
       wants.js
     end
   end
-  
+
 
   private
 

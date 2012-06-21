@@ -6,7 +6,7 @@
       = link_to(post_path(p, p.slug), :style => p.thumbnail.nil? ? "" : "background-image:url(#{p.thumbnail})") do
         %div.date-overlay=p.published_at.to_s(:month_and_day_ordinal)
         %span=p.title? ? p.title : strip_tags(p.body)
-        
+
   -if collection.respond_to?(:per_page) and collection.size == collection.per_page
     - url_opts = {:page => collection.current_page+1}
     %li#more_posts_btn

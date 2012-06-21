@@ -24,14 +24,15 @@ module Atreides
 
       def create_migration_file
         generate('acts_as_taggable_on:migration')
-        generate('delayed_job')
-        # generate('devise:install') # Run 'rails g devise:install' instead!
+        generate('delayed_job:active_record')
+        generate('devise:install')
 
         %w(create_videos create_photos create_orders create_posts
            create_pages create_likes create_comments create_messages
            create_features create_products create_line_items create_links
            create_votes create_tweets create_sessions create_sites
-           create_content_parts add_userid_to_resources).each do |f|
+           create_content_parts add_userid_to_resources devise_create_users
+           add_role_to_users).each do |f|
           src = "#{f}.rb"
           dst = "db/migrate/#{src}"
           migration_template(src, dst) rescue puts $!
@@ -39,70 +40,19 @@ module Atreides
       end
 
       def create_configuration_file
-        # Use Dalli store
-        append_to_file "Gemfile" do
-%Q{
-gem 'dalli'
-gem "gattica", :git => "http://github.com/mathieuravaux/gattica.git"
-}
-        end
-        gsub_file 'config/environments/production.rb', "# config.cache_store = :mem_cache_store", "config.cache_store = :dalli_store"
-
         copy_file 'initializer.rb', 'config/initializers/atreides.rb'
         copy_file 'string_extensions.rb', 'config/initializers/string_extensions.rb'
-        copy_file 'sass.rb', 'config/initializers/sass.rb'
         copy_file 'new_relic.rb', 'config/initializers/new_relic.rb'
         copy_file 'unicorn.rb', 'config/unicorn.rb'
         copy_file 'settings.yml', 'config/settings.yml'
         copy_file 'oembed.yml', 'config/oembed.yml'
-        copy_file 'assets.yml', 'config/assets.yml'
-        copy_file 'devise.rb', 'config/initializers/devise.rb'
-        copy_file 'locales/devise_en.yml', 'config/locales/devise_en.yml'
         copy_file 'delayed_job.rb', 'config/initializers/delayed_job.rb'
-        copy_file 'formtastic_config.rb', 'config/initializers/formtastic_config.rb'
         copy_file 'disqussion.rb', 'config/initializers/disqussion.rb'
-        copy_file 'em-net-http_override.rb', 'config/initializers/em-net-http_override.rb'
         copy_file 'Procfile', 'Procfile'
-
-        empty_directory 'app/stylesheets'
-        create_file 'app/stylesheets/public.scss'
-        create_file 'app/stylesheets/admin.scss'
-
-        # Session store with Dalli/Memcache setup built-in
-        copy_file 'session_store.rb', 'config/initializers/session_store.rb'
-
-        # Static assets
-        copy_dir_contents 'public', 'public'
+        gsub_file 'config/application.rb', 'config.active_record.whitelist_attributes = true', 'config.active_record.whitelist_attributes = false'
+        remove_file 'public/index.html'
+        remove_file 'assets/images/rails.png'
       end
-
-      private
-
-      def copy_dir_contents(source_dir, target_dir)
-
-        ignore_if_exists = %w(public.js admin.js public.css admin.css)
-
-        base_dir = File.join(File.dirname(__FILE__), '../templates', source_dir)
-        raise "Base dir not found: #{base_dir}" unless Dir.exists?(base_dir)
-        Dir.new(base_dir).each do |file|
-          next if %w(. .. .DS_Store).include?(file)
-
-          base_path = File.join(base_dir, file)
-          source_path = File.join(source_dir, file)
-          target_path = File.join(target_dir, file)
-
-          # Skip files in ignore list if they exists
-          next if ignore_if_exists.include?(File.basename(file)) and File.exists?(target_path)
-
-          if File.directory?(base_path)
-            # Recurse into dir
-            copy_dir_contents(source_path, File.join(target_dir, file))
-          else
-            # Copy files
-            copy_file base_path, target_path
-          end
-        end
-      end
-
     end
   end
 end

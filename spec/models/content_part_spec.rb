@@ -5,7 +5,7 @@ describe Atreides::ContentPart do
 
     before do
     end
-    
+
     #
     # Validation Fails
     #
@@ -58,9 +58,9 @@ describe Atreides::ContentPart do
       part.valid?.should eql(true)
       part.save.should eql(true)
     end
-    
+
   end
-  
+
   describe "creation" do
 
     it "should create a content-part from photo attributes" do

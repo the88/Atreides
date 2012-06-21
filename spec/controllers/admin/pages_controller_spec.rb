@@ -45,7 +45,7 @@ describe Admin::Atreides::PagesController do
       assigns(:page).class.should be Atreides::Page
     end
   end
-  
+
   describe "GET edit" do
     it "assigns the requested page as @page" do
       page = Factory.create(:published_page, :site => @site_www)

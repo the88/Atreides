@@ -22,7 +22,7 @@ class Atreides::Site < Atreides::Base
   # Scopes
   #
   default_scope :order => "id asc"
-  
+
   #
   # Callbacks
   #
@@ -32,14 +32,14 @@ class Atreides::Site < Atreides::Base
   # Class Methods
   #
   class << self
-    
+
     # Use www or go for the first one
     def default
       find_by_name('www') || first || create(:name => 'www', :lang => I18n.locale)
     end
-    
+
   end
-  
+
   #
   # Instance methods
   #
@@ -47,9 +47,9 @@ class Atreides::Site < Atreides::Base
     # Symbolize to make easier to integrate w I18n
     read_attribute(:lang) ? read_attribute(:lang).to_sym : nil
   end
-  
+
   private
-  
+
   def set_default_lang
     # Set the default value
     self.lang ||= I18n.locale if new_record?

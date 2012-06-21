@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 %gallery>
   %album
-    -unless resource.nil? or resource.photos.empty? 
+    -unless resource.nil? or resource.photos.empty?
       -resource.photos.each do |photo|
         %img{ :src => photo.image.url }

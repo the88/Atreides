@@ -22,7 +22,7 @@ class Admin::Atreides::FeaturesController < Atreides::AdminController
       wants.html { redirect_to edit_admin_feature_path(resource) }
     end
   end
-  
+
   def create
     super do |wants|
       wants.html { redirect_to admin_features_path }
@@ -49,15 +49,15 @@ class Admin::Atreides::FeaturesController < Atreides::AdminController
   end
 
   private
-  
+
   def end_of_association_chain
     current_site.features
   end
-  
+
   def recource
     @feature ||= super
   end
-  
+
 
   include Atreides::Extendable
 end

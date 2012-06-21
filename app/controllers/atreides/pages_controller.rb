@@ -5,7 +5,7 @@ class Atreides::PagesController < Atreides::PublicController
     @page_title = resource.title
     super
   end
-  
+
   def preview
     @page = end_of_association_chain.new(params[:page])
     @page.id ||= 0
@@ -18,15 +18,15 @@ class Atreides::PagesController < Atreides::PublicController
       }
     end
   end
-  
+
   private
-  
+
   def end_of_association_chain
     current_site.pages.live
   end
 
   def resource
-    @page ||= end_of_association_chain.find_by_slug(params[:page_slug]) || 
+    @page ||= end_of_association_chain.find_by_slug(params[:page_slug]) ||
               end_of_association_chain.find_by_slug(params[:id])
   end
 

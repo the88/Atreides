@@ -38,7 +38,7 @@ class Admin::Atreides::PagesController < Atreides::AdminController
   private
 
   def resource
-    @page ||= end_of_association_chain.find_by_slug(params[:id]) || 
+    @page ||= end_of_association_chain.find_by_slug(params[:id]) ||
               end_of_association_chain.find_by_id(params[:id])
   end
 
@@ -50,7 +50,7 @@ class Admin::Atreides::PagesController < Atreides::AdminController
       end_of_association_chain.roots.by_state(params[:state] || 'published').order(order)
     end
   end
-  
+
   def end_of_association_chain
     current_site.pages
   end

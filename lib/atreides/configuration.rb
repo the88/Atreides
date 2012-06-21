@@ -33,9 +33,9 @@ class Atreides::Configuration
 
   def inject_overrides atreides_class
     # Rails.logger.debug { "Injecting overrides in class #{atreides_class.inspect} !" }
-    
+
     modules = @@overrides[atreides_class.to_s.to_sym] || []
-    
+
     modules.uniq.each do |hostapp_module_name|
       begin
         host_module = hostapp_module_name.to_s.constantize
@@ -48,9 +48,9 @@ class Atreides::Configuration
         puts <<-ERR
         Atreides configuration error !
         Following Atreides's configuration, here: #{from.inspect}
-        
+
         Atreides's' '#{atreides_class.to_s}' class should be overriden by a class named #{hostapp_module_name.inspect}.
-        
+
         This #{hostapp_module_name.inspect} class could not be loaded !
 
         ERR

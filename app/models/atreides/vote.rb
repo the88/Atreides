@@ -34,7 +34,7 @@ class Atreides::Vote < Atreides::Base
   def yes!
     update_attributes!(:value => 1)
   end
-  
+
   def no!
     update_attributes!(:value => 0)
   end

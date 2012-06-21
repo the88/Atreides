@@ -15,9 +15,9 @@ module Atreides::ApplicationHelper
     str += tag(:meta, :property => "og:url", :content => request.url) + "\n"
     str += tag(:meta, :property => "og:site_name", :content => Settings.app_name) + "\n"
     str += tag(:meta, :property => "og:type", :content => "article") + "\n"
-    
+
     return str unless page_object.respond_to?(:post_type)
-    
+
     str += case page_object.post_type.to_s
     when "video"
       unless page_object.videos.empty?
@@ -42,7 +42,7 @@ module Atreides::ApplicationHelper
     end
     str.html_safe
   end
-  
+
   def page_title
     return "" if page_object.nil?
 
@@ -99,7 +99,7 @@ module Atreides::ApplicationHelper
 
   def truncate_words(txt, ops = {})
     ops.reverse_merge({
-      :length => 100, 
+      :length => 100,
       :omission   => "..."
     })
     words = txt.to_s.split()
@@ -121,7 +121,11 @@ module Atreides::ApplicationHelper
 
     %($(#{ActiveSupport::JSON.encode(element_id)}).sortable(#{options_for_javascript(options)});)
   end
-  
+
+  def sortable_element(element_id, options = {})
+    javascript_tag(sortable_element_js(element_id, options))
+  end
+
   def remote_function(options)
     opts = {
       :type     => options[:type] || options[:method] || 'post',
@@ -130,7 +134,7 @@ module Atreides::ApplicationHelper
     }
     opts.each_pair{|k,v| opts[k] = "'#{v}'" }
     opts[:data] = options[:data] if options.key?(:data)
-    
+
     [:success, :complete, :beforeSend, :error].each do |k|
       opts[k] = "function(){" + options[k] + "}" if options.key?(k)
     end
@@ -178,7 +182,7 @@ module Atreides::ApplicationHelper
       "text"
     end
   end
-  
+
   def action_link(action, record, record_name, final_options = {})
     url = case action.to_sym
     when :show, :destroy, :update

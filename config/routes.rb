@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   match "/admin/search", :to => "atreides/admin_home#search", :as => :admin_search
   match '/admin/analytics.(:format)', :to => "atreides/admin_home#analytics", :as => :admin_analytics
   match '/admin/analytics_data/:report', :to => "atreides/admin_home#analytics_data", :as => :admin_analytics_data
+  match '/admin/github/issues', :to => 'admin/atreides/github#index', :as => :admin_github
+  match '/admin/github/issues/:id', :to => 'admin/atreides/github#show', :as => :admin_github_issue
   match '/admin/switch_site/:site', :to => "atreides/admin_home#switch_site", :as => :admin_switch_site
   get   '/admin/setup/', :to => "atreides/admin_home#setup", :as => :atreides_setup
   post  '/admin/setup/', :to => "atreides/admin_home#setup!", :as => :atreides_do_setup
@@ -93,10 +95,10 @@ Rails.application.routes.draw do
     end
   end
   match "/posts/:id/:slug", :to => "atreides/posts#show", :as => "post", :via => "get"
-  
+
   # RSS Feeds
   match "/feeds(.:format)", :to => "atreides/home#feeds", :as => "feeds"
-  
+
   # Search
   match "/search", :to => "atreides/home#search", :as => "search"
 

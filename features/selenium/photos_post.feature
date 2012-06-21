@@ -21,6 +21,5 @@ Feature: Add a photo gallery
     Given I am authenticated as "terry@lovethe88.com" with "********"
     Given I am on the new photos post page
     Then pause 100 seconds
-    
+
     # Given I am on the new post admin page
-    

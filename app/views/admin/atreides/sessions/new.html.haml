@@ -6,8 +6,8 @@
       = form.input :email, :input_html => { :class => "title" }
       = form.input :password, :input_html => { :class => "title" }
       = form.input :remember_me, :as => :boolean if devise_mapping.rememberable?
-  
-    = form.buttons do
-      = form.commit_button "Login"
+
+    = form.actions do
+      = form.action :submit, :as => :button, :label => "Login"
 
 /= render :partial => "devise/shared/links"

@@ -1,19 +1,19 @@
 class CreateContentParts < ActiveRecord::Migration
   def self.up
     create_table :content_parts, :force => true do |t|
-      t.text        :body, :default => "" 
+      t.text        :body, :default => ""
       t.references  :contentable, :polymorphic => true
       t.string      :display_type
       t.string      :content_type
       t.integer     :display_order, :default => 0
       t.timestamps
     end
-    
+
     # Update videos table
     add_column :videos, :content_part_id, :integer
     # Migrate old videos to new content-parts
     # ...
-    
+
     # Migrate posts bodies to content-parts
     Atreides::Post.where("post_type = 'post' AND body is not null").all.each do |p|
       p.parts.create(:content_type => 'text', :body => p.body)
@@ -22,13 +22,13 @@ class CreateContentParts < ActiveRecord::Migration
     # Migrate posts bodies to content-parts
     Atreides::Post.where("post_type = 'photos'").all.each do |p|
       photos = Atreides::Photo.where({:photoable_id => p.id, :photoable_type => 'Atreides::Post'}).all
-      p.parts.create(:content_type => 'photos', :photos => photos) 
+      p.parts.create(:content_type => 'photos', :photos => photos)
       p.parts.create(:content_type => 'text', :body => p.body) if p.body?
     end
 
     Atreides::Post.where("post_type = 'videos'").all.each do |p|
       videos = Atreides::Video.where({:post_id => p.id}).all
-      p.parts.create(:content_type => 'videos', :videos => p.videos) 
+      p.parts.create(:content_type => 'videos', :videos => p.videos)
       p.parts.create(:content_type => 'text', :body => p.body) if p.body?
     end
 

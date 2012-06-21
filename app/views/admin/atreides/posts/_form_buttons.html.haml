@@ -1,5 +1,5 @@
-= f.buttons do
-  = f.commit_button ttt(:save), 'data-disable-with' => "Saving"
+= f.actions do
+  = f.action :submit, :as => :button, :label => ttt(:save), :button_html => { 'data-disable-with' => "Saving" }
   %li.commit
     / = link_to_preview
   %li.cancel

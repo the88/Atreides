@@ -1,5 +1,5 @@
 = semantic_form_for resource, :url => (resource.new_record? ? admin_pages_path : admin_page_path(resource)), :as => "page" do |f|
-  
+
   #form_content{:class => "span-17"}
     %h2= ttt("#{params[:action].to_s}_page".downcase)
     = f.semantic_errors
@@ -9,8 +9,8 @@
         = add_inline_photo admin_photos_path(:format => :js)
       = f.input :body, :label => ttt(:body), :as => 'text', :wrapper_html => { :class => "rich-text" }, :input_html => { :style => "height:25em;" }, :required => true
 
-    = f.buttons do
-      = f.commit_button ttt(:save)
+    = f.actions do
+      = f.action :submit, :as => :button, :label => ttt(:save)
       %li.commit
         / = link_to_preview
       %li.cancel
@@ -20,7 +20,9 @@
 
   #form_sidebar{:class => "sidebar span-6 last"}
     = f.inputs do
-      = f.input :state, :as => "select", :collection => resource.states_for_select, :selected => resource.state, :include_blank => false, :wrapper_html => { :class => "post-states" }
+      - selected = (resource.pending? || resource.published?) ? (resource.published_at? ? :published_at : :publish_now) : resource.state.to_sym
+      = f.input :state, :as => "select", :collection => resource.states_for_select, :selected => selected, :include_blank => false, :wrapper_html => { :class => "post-states" }
+      = f.input :state, :as => "hidden", :wrapper_html => { :class => "page-hidden" }
       = f.input :published_at, :label => ttt(:'.publish_on'), :as => "string", :wrapper_html => { :class => "date-picker" }
       = f.input :parent_id, :as => "select", :label => ttt(:'.parent'), :wrapper_html => { :class => "parent-picker" }, :collection => Atreides::Page.published.all.map{|p| [p.title, p.id]}
       = f.input :tag_list, :label => ttt(:'.tags'), :as => "text", :wrapper_html => { :class => "tag-picker" }
