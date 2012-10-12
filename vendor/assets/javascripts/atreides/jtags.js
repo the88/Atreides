@@ -2,6 +2,7 @@ $.fn.tags = function(){
 	var origin_element = this;
 
 	var o = {
+	  cache: {},
 		e: null,
 		ed: null,
 		tags:[],
@@ -27,30 +28,51 @@ $.fn.tags = function(){
 				.click(function(){
 					$(that.ed).find('input').focus();
 				})
-				.find('input')
-					.unbind()
-					.blur(function(){
-						that.add_tag();
-					})
-					.keydown(function(e){
-					  if(e.keyCode == 13){
-					    e.preventDefault();
-				    }
-					})
-					.keyup(function(e){
-						switch(e.keyCode){
-							case 13:	// Return is pressed
-							case 188:	// comma is pressed
-								that.add_tag();
-								break;
-						}
-					});
+
+			var tagInput = $(this.ed).find('input')
+      tagInput
+				.unbind()
+				.blur(function(){
+					that.add_tag();
+				})
+				.keydown(function(e){
+				  if(e.keyCode == 13){
+				    e.preventDefault();
+			    }
+				})
+				.keyup(function(e){
+					switch(e.keyCode){
+						case 13:	// Return is pressed
+						case 188:	// comma is pressed
+							that.add_tag();
+							break;
+					}
+				});
+
+			tagInput.autocomplete({
+			  source: function( request, response ) {
+          var term = request.term;
+          if ( term in that.cache ) {
+            response( that.cache[ term ] );
+            return;
+          }
+
+          $.getJSON( "/admin/tags/", request, function( data, status, xhr ) {
+            that.cache[ term ] = data;
+            response( data );
+          });
+        },
+			  minLength: 1,
+			  select: function(event, ui){
+
+			  }
+			})
 
 			r = $(this.e).val().split(',');
 			this.tags = []
 			for(i in r)
 			{
-				r[i] = r[i].replace(/[",]/gi, '').replace(/\s+/,"-");
+				r[i] = r[i].replace(/[",]/gi, '');
 				if(r[i] != '')
 				{	this.tags.push(r[i]);	}
 			}
@@ -59,13 +81,13 @@ $.fn.tags = function(){
 
 		add_tag:function(){
 		  var input = $(this.ed).find('input')
-			var tag_txt = input.length ? input[0].value.replace(/[",]/gi, '').replace(/\s+/,"-") : '';
+			var tag_txt = input.length ? input[0].value.replace(/[",]/gi, '') : '';
 
 			if( (tag_txt != '') && (jQuery.inArray(tag_txt, this.tags) < 0) ){
 				this.tags.push(tag_txt);
 				this.refresh_list();
 			}
-			$(this.ed).find('input').val('');
+			$(this.ed).find('input').val('').autocomplete("close");
 		},
 		remove_tag:function(tag_txt){
 			r = [];
