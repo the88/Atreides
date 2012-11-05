@@ -1,65 +1,447 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Atreides by the88</title>
-    
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Atriedes.  Open Source Easy Publishing CMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Open Source Easy Publishing CMS">
+    <meta name="author" content="The 88">
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+    <style>
+
+    /* GLOBAL STYLES
+    -------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
+
+    body {
+      padding-bottom: 40px;
+      color: #5a5a5a;
+    }
+
+
+
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-wrapper {
+      position: relative;
+      z-index: 10;
+      margin-top: 20px;
+      margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+    }
+
+    /* Remove border and change up box shadow for more contrast */
+    .navbar .navbar-inner {
+      border: 0;
+      -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+         -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+              box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    }
+
+    /* Downsize the brand/project name a bit */
+    .navbar .brand {
+      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    }
+
+    /* Navbar links: increase padding for taller navbar */
+    .navbar .nav > li > a {
+      padding: 15px 20px;
+    }
+
+    /* Offset the responsive button for proper vertical alignment */
+    .navbar .btn-navbar {
+      margin-top: 10px;
+    }
+
+
+
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Carousel base class */
+    .carousel {
+      margin-bottom: 60px;
+    }
+
+    .carousel .container {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .carousel-control {
+      background-color: transparent;
+      border: 0;
+      font-size: 120px;
+      margin-top: 0;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    }
+
+    .carousel .item {
+      height: 500px;
+    }
+    .carousel img {
+      min-width: 100%;
+      height: 500px;
+    }
+
+    .carousel-caption {
+      background-color: transparent;
+      position: static;
+      max-width: 550px;
+      padding: 0 20px;
+      margin-bottom: 100px;
+    }
+    .carousel-caption h1,
+    .carousel-caption .lead {
+      margin: 0;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    }
+    .carousel-caption .btn {
+      margin-top: 10px;
+    }
+
+
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketing .span4 {
+      text-align: center;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+
+    /* Featurettes
+    ------------------------- */
+
+    .featurette-divider {
+      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette {
+      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+    }
+    .featurette-image {
+      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+    }
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+    .featurette-image.pull-left {
+      margin-right: 40px;
+    }
+    .featurette-image.pull-right {
+      margin-left: 40px;
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+
+
+    /* RESPONSIVE CSS
+    -------------------------------------------------- */
+
+    @media (max-width: 979px) {
+
+      .container.navbar-wrapper {
+        margin-bottom: 0;
+        width: auto;
+      }
+      .navbar-inner {
+        border-radius: 0;
+        margin: -20px 0;
+      }
+
+      .carousel .item {
+        height: 500px;
+      }
+      .carousel img {
+        width: auto;
+        height: 500px;
+      }
+
+      .featurette {
+        height: auto;
+        padding: 0;
+      }
+      .featurette-image.pull-left,
+      .featurette-image.pull-right {
+        display: block;
+        float: none;
+        max-width: 40%;
+        margin: 0 auto 20px;
+      }
+    }
+
+
+    @media (max-width: 767px) {
+
+      .navbar-inner {
+        margin: -20px;
+      }
+
+      .carousel {
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+      .carousel .container {
+
+      }
+      .carousel .item {
+        height: 300px;
+      }
+      .carousel img {
+        height: 300px;
+      }
+      .carousel-caption {
+        width: 65%;
+        padding: 0 70px;
+        margin-bottom: 40px;
+      }
+      .carousel-caption h1 {
+        font-size: 30px;
+      }
+      .carousel-caption .lead,
+      .carousel-caption .btn {
+        font-size: 18px;
+      }
+
+      .marketing .span4 + .span4 {
+        margin-top: 40px;
+      }
+
+      .featurette-heading {
+        font-size: 30px;
+      }
+      .featurette .lead {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+    }
+
+	.spacer {
+	    margin-top: 40px; 
+	}
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Atreides</h1>
-        <p>Simple rails CMS</p>
-        <p class="view"><a href="https://github.com/the88/Atreides">View the Project on GitHub <small>the88/Atreides</small></a></p>
-        <ul>
-          <li><a href="https://github.com/the88/Atreides/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/the88/Atreides/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/the88/Atreides">Fork On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <p><img src="http://s3.amazonaws.com/the88/images/atreides-300.png" alt="Atreides by The 88"></p>
 
-<h3>Welcome to GitHub Pages.</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+    <!-- NAVBAR
+    ================================================== -->
+    <!-- Wrap the .navbar in .container to center it on the page and provide easy way to target it with .navbar-wrapper. -->
+    <div class="container navbar-wrapper">
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+      <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+          <a class="brand" href="#">Atreides</a>
+          <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+        
+            <ul class="nav">
+              <li><a href="#features">Features</a></li>
+              <li><a href="#examples">Examples</a></li>
+			  <li><a href="#installation">Installation</a></li>
+       		  <li><a href="#credits">Credits</a></li>
+            </ul>
+			<ul class="nav pull-right">
+				<li><a href="https://github.com/the88/Atreides/">Github</a></li>
+			</ul>
+          
+        </div><!-- /.navbar-inner -->
+      </div><!-- /.navbar -->
 
-<h3>Designer Templates</h3>
+    </div><!-- /.container -->
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
 
-<h3>Rather Drive Stick?</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="./img/bg.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Atreides CMS</h1>
+              <p class="lead">A free Tumblr inspired CMS with easy publishing workflow with rich media and social features.</p>
+              <a class="btn btn-large btn-primary" href="https://github.com/the88/Atreides/">Get it at Github</a>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
 
-<h3>Authors and Contributors</h3>
+    </div><!-- /.carousel -->
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
 
-<h3>Support or Contact</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/the88">the88</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div id="features" class="container marketing">
+
+
+
+      <!-- START THE FEATURETTES -->
+
+
+
+      <div class="featurette">
+        <img class="featurette-image pull-right" src="http://placehold.it/512x512">
+        <h2 class="featurette-heading">First featurette headling. <span class="muted">It'll blow your mind.</span></h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="featurette">
+        <img class="featurette-image pull-left" src="http://placehold.it/512x512">
+        <h2 class="featurette-heading">Oh yeah, it's that good. <span class="muted">See for yourself.</span></h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="featurette">
+        <img class="featurette-image pull-right" src="http://placehold.it/512x512">
+        <h2 class="featurette-heading">And lastly, this one. <span class="muted">Checkmate.</span></h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+
+	<!-- EXAMPLES -->
+	<div id="examples">
+	<h2 class="featurette-heading">Examples.<span class="muted"> Sites created with Atreides.</span></h2>
+	</div>
+
+      <!-- Row1 -->
+      <div class="row spacer">
+        <div class="span4">
+          <a href="http://yvanrodic.com"><img class="img-polaroid" src="./img/examples/yvan.jpg"></a>
+        </div><!-- /.span4 -->
+        <div class="span4">
+          <a href="http://pacegallery.com"><img class="img-polaroid" src="./img/examples/pace.jpg"></a>
+        </div><!-- /.span4 -->
+        <div class="span4">
+          <a href="http://focusforwardfilms.com"><img class="img-polaroid" src="./img/examples/focusforward.jpg"></a>
+        </div><!-- /.span4 -->
+      </div><!-- /.row -->
+
+      <!-- Row2 -->
+      <div class="row spacer">
+        <div class="span4">
+          <a href="http://kanonvodka.com"><img class="img-polaroid" src="./img/examples/kanon.jpg"></a>
+        </div><!-- /.span4 -->
+        <div class="span4">
+          <a href="http://cacreativeonline.com"><img class="img-polaroid" src="./img/examples/cacreative.jpg"></a>
+        </div><!-- /.span4 -->
+        <div class="span4">
+          <a href="http://mursegame.com"><img class="img-polaroid" src="./img/examples/murse.jpg"></a>
+        </div><!-- /.span4 -->
+      </div><!-- /.row -->
+
+      <!-- Row3 -->
+      <div class="row spacer">
+        <div class="span4">
+          <a href="http://henryleutwyler.com"><img class="img-polaroid" src="./img/examples/henry.jpg"></a>
+        </div><!-- /.span4 -->
+        <div class="span4">
+          <a href="http://neverlandlost.com"><img class="img-polaroid" src="./img/examples/neverland.jpg"></a>
+        </div><!-- /.span4 -->
+        <div class="span4">
+          <a href="http://marlenemarino.com"><img class="img-polaroid" src="./img/examples/marlene.jpg"></a>
+        </div><!-- /.span4 -->
+      </div><!-- /.row -->
+
+<hr class="featurette-divider">
+
+
+	<!-- /END EXAMPLES -->
+	
+		<!-- INSTALLATION -->
+
+		<div id="installation">
+		<h2 class="featurette-heading">Installation</h2>
+		</div>
+	    <div class="featurette">
+	      <p>Installation is quick. See the <a href="https://github.com/the88/Atreides/blob/master/README.md">See the readme for more info.</a></p>
+		<pre>
+rails new cool_website
+cd cool_website
+echo "gem 'atreides'" >> Gemfile
+bundle install # or bundle update
+rails g atreides
+rake db:migrate
+rails s</pre>
+		<p>Then visit http://localhost:3000/admin to get started.</p>
+		<p>Many of the plugins require configuration settings. See config/settings.yml.</p>
+	    </div>
+
+
+	<hr class="featurette-divider">
+
+		<!-- /END INSTALLATION -->	
+	
+	<!-- CREDIT -->
+	
+	<div id="credit">
+	<h2 class="featurette-heading">Credits</h2>
+	</div>
+    <div class="featurette">
+      <a href="http://lovethe88.com"><img class="featurette-image pull-right" src="./img/logo-the88.png"></a>
+      <p class="lead">The 88 is a bespoke digital agency located in New York City. </p>
+	<p>Contributions by Lachlan Laycock, Chad Jackson, Harry Bernstein, Mathieu Ravaux, Jérémy Van de Wyngaert, William Alton, Adam Copeland, Benjamin Manns</p>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+		
+
+<hr class="featurette-divider">
+
+	<!-- /END CREDIT -->
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p><a href="http://lovethe88.com">Created by The 88</a> &middot; <a href="#">Github</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+
   </body>
 </html>
