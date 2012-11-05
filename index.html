@@ -8,6 +8,8 @@
     <meta name="author" content="The 88">
     <link href="./css/bootstrap.css" rel="stylesheet">
     <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
     <style>
 
     /* GLOBAL STYLES
@@ -255,7 +257,7 @@
 
   </head>
 
-  <body>
+  <body onload="prettyPrint()">
 
 
 
@@ -402,9 +404,9 @@
 		</div>
 	    <div class="featurette">
 	      <p>Installation is quick. See the <a href="https://github.com/the88/Atreides/blob/master/README.md">See the readme for more info.</a></p>
-		<pre>
-rails new cool_website
-cd cool_website
+		<pre class="prettyprint">
+rails new atreides_website
+cd atreides_website
 echo "gem 'atreides'" >> Gemfile
 bundle install # or bundle update
 rails g atreides
