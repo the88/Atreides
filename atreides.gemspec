@@ -7,7 +7,7 @@ require "atreides/version"
 Gem::Specification.new do |s|
   s.name        = "atreides"
   s.version     = Atreides::VERSION.dup
-  s.authors     = ["Lachlan Laycock", "Samuel Mendes", "Mathieu Raveaux", "Jérémy Van de Wyngaert", "William Alton"]
+  s.authors     = ["The 88"]
   s.email       = ["hello@lovethe88.com"]
   s.homepage    = "http://lovethe88.com"
   s.summary     = "KISS Content Management System"
