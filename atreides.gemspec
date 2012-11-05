@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = Atreides::VERSION.dup
   s.authors     = ["The 88"]
   s.email       = ["hello@lovethe88.com"]
-  s.homepage    = "http://lovethe88.com"
+  s.homepage    = "http://the88.github.com/Atreides/"
   s.summary     = "KISS Content Management System"
-  s.description = "Atreides is an engine providing a evented CMS following a KISS principle, updated for Heroku"
+  s.description = "Atreides is an engine providing a evented CMS following a KISS principle"
   s.platform    = Gem::Platform::RUBY
 
   s.required_rubygems_version = ">= 1.3.6"
