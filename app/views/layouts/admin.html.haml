@@ -11,6 +11,7 @@
     = csrf_meta_tag
     = yield :head
   %body
+    #fb-root
     .container
       #header
         #nav
@@ -21,6 +22,8 @@
               %li.nav-users= link_to_unless_current ttt(:'.users'), admin_users_path
               %li.nav-github= link_to_unless_current ttt(:'.github'), admin_github_path
               %li.nav-logout= link_to_unless_current ttt(:'.logout'), destroy_user_session_path
+              - if current_user.admin?
+                %li.nav-facebook= link_to_unless_current ttt(:'.facebook'), admin_facebook_path
               %li.nav-search
                 = semantic_form_for Atreides::Post.new, :url => admin_search_path, :html => {:method => :get, :class => "auto-hide-text", :id => "admin_search"} do |f|
                   = link_to_function image_tag("atreides/admin/search_icon.png"), ''

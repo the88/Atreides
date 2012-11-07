@@ -19,6 +19,7 @@ en:
         logout: logout
         search: search
         users: users
+        facebook: facebook
         github: issues
 
     atreides:

@@ -4,6 +4,7 @@
 //= require atreides/jquery.easing.1.3
 //= require jquery-ui
 //= require atreides/admin_base
+//= require atreides/admin.facebook
 
 /*
  * Atreides - Admin Behaviours

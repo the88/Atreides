@@ -21,6 +21,10 @@ Rails.application.routes.draw do
   post  '/admin/setup/', :to => "atreides/admin_home#setup!", :as => :atreides_do_setup
 
   namespace :admin do
+    get "facebook" => "atreides/facebook#index", :as => :facebook
+    post "facebook" => "atreides/facebook#update", :as => :update_facebook
+    delete "facebook" => "atreides/facebook#destroy", :as => :destroy_facebook
+
     resources :posts, :controller => "atreides/posts" do
       collection do
         match ':state/:month/:year(.:format)', :to => "atreides/posts#index", :as => :filter, :constraints => { :state => "published", :year => /\d{4}/, :month => /\d{1,2}/ }

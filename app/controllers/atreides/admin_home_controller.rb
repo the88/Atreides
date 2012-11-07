@@ -59,12 +59,12 @@ class Atreides::AdminHomeController < Atreides::ApplicationController
     # TODO: parameterize the dates
     if params[:since]
       @since = Date.parse(params[:since]).beginning_of_day.to_date
-      @until = (@since + 31.days).beginning_of_day.to_date
-      @until = Date.today if @until > Date.today
     else
       @since = 1.month.ago.beginning_of_day.to_date
-      @until = Time.now.beginning_of_day.to_day
     end
+
+    @until = Time.now.end_of_month.beginning_of_day.to_date
+    @until = Date.today - 1.day if @until > Date.today
 
     puts "From #{@since.to_s} to #{@until.to_s}"
 
@@ -82,7 +82,7 @@ class Atreides::AdminHomeController < Atreides::ApplicationController
       @tweets = Atreides::Tweet.analytics(@since)
     when :fb_page_views
       # Facebook insights API
-      if Settings.facebook && Settings.facebook.page_token && Settings.facebook.page_id
+      if Settings.facebook && fb_page_token && Settings.facebook.page_id
         # @fb_page_views = fb.get(Settings.facebook.page_id, :type => 'insights/page_views/day', :params => {:since => @since})
         @fb_page_views = fetch_with_caching(5.minutes) do
           fb.get(Settings.facebook.page_id, :type => 'insights/page_impressions/day', :params => {:since => @since})
@@ -90,7 +90,7 @@ class Atreides::AdminHomeController < Atreides::ApplicationController
       end
     when :fb_page_likes
       # Facebook insights API
-      if Settings.facebook && Settings.facebook.page_token && Settings.facebook.page_id
+      if Settings.facebook && fb_page_token && Settings.facebook.page_id
         # @fb_page_likes = fb.get(Settings.facebook.page_id, :type => 'insights/page_like_adds/day', :params => {:since => @since})
         @fb_page_likes = fetch_with_caching(5.minutes) do
           fb.get(Settings.facebook.page_id, :type => 'insights/page_fan_adds/day', :params => {:since => @since})
@@ -194,7 +194,11 @@ class Atreides::AdminHomeController < Atreides::ApplicationController
 
   def fb
     MiniFB.disable_logging
-    @fb ||= MiniFB::OAuthSession.new(Settings.facebook.page_token)
+    @fb ||= MiniFB::OAuthSession.new(fb_page_token)
+  end
+
+  def fb_page_token
+    @page_token ||= Atreides::Preference.get("facebook.page_token")
   end
 
   def fetch_with_caching(duration, &block)

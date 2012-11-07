@@ -1,0 +1,29 @@
+- content_for :js do
+  :javascript
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=#{Settings.facebook.app_id}";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+- content_for :sidebar do
+  %ul
+    %li
+      %a.deauthenticate-facebook{:href => "javascript:;"}Clear current Facebook session
+      This will enable you to log in to a different account
+    %li{:style => "padding-top: 15px"}
+      %hr
+    %li
+      %a.clear-system{:href => "/admin/facebook", :"data-method" => "delete"} Un-associate account
+      Remove account currently associated with Pace Admin Analytics
+
+%h2 Facebook Analytics Setup
+%p#status
+%p
+  If you are an admin for the Pace Facebook page and the analytics aren't working, follow the directions below:
+%p.login-container{:style => "display: none;"}
+  %a.fb-login{:href => "javascript:;"} Click here to log into Facebook and then authenticate
+%p.access-container{:style => "display: none;"}
+  %a.authenticate-facebook{:href => "javascript:;"} Click here to authenticate

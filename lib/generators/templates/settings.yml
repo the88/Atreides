@@ -28,36 +28,13 @@ common: &common
     user_token:
     user_secret:
   facebook:
-    # GoTo:
-    # http://graph.facebook.com/oauth/authorize?client_id=CLIENT_ID&redirect_uri=REDIRECT_URL
-    # -> Get code param and save as the token
-    # GoTo:
-    #   https://graph.facebook.com/oauth/access_token?client_id=CLIENT_ID&redirect_uri=REDIRECT_URL&client_secret=CLIENT_SECRET&code=CODE
-    # -> Put resulting access_token into user_token val below
-    # -> Create a OAuth access_token object with: access_token = OAuth2::AccessToken.new(client, Settings.facebook.user_token)
-    # -> Get your page's access_token with: access_token.get("/me/accounts")
-    # -> Put the page's access_token into page_token below
-    secret_key:
-    api_key:
-    code:
-    user_token:
-    page_token:
     page_id:
     app_id:
+    app_secret:
   twitter:
     login:
     consumer_key:
     consumer_secret:
-    # oauth = Twitter::OAuth.new(Settings.twitter.consumer_key, Settings.twitter.consumer_secret, :sign_in => true)
-    # oauth.set_callback_url(app.root_url(:host => Settings.domain))
-    # rtoken  = oauth.request_token.token
-    # rsecret = oauth.request_token.secret
-    # oauth.request_token.authorize_url
-    # -- Go to above URL and sign-in/approve the app and retrieve the verifier param from the return-to-app URL
-    # oauth_verifier = VERIFIER_KEY
-    # oauth.authorize_from_request(rtoken, rsecret, oauth_verifier)
-    # oauth.access_token.token -> use below
-    # oauth.access_token.secret -> use below
     app_user_token:
     app_user_secret:
     search_for: atreides OR "The 88" OR "Le 88"
@@ -100,11 +77,6 @@ production:
     profile_id:
   domain: atreides.com
   facebook:
-    # See instructions above
-    secret_key:
-    api_key:
-    code:
-    user_token:
-    page_token:
+    app_secret:
     page_id:
     app_id:
