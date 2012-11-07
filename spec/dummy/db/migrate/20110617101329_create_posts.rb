@@ -10,7 +10,6 @@ class CreatePosts < ActiveRecord::Migration
       t.timestamps
       t.integer :tumblr_id
       t.integer :likes_count, :default => 0
-      t.integer :comments_count, :default => 0
       t.integer :votes_count, :default => 0
       t.integer :twitter_id
       t.integer :facebook_id
@@ -25,7 +24,6 @@ class CreatePosts < ActiveRecord::Migration
     end
     add_index :posts, :slug
     add_index :posts, :likes_count
-    add_index :posts, :comments_count
     add_index :posts, :votes_count
     add_index :posts, :twitter_id
     add_index :posts, :linkable_id

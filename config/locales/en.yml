@@ -69,36 +69,6 @@ en:
           reset: reset
 
       atreides:
-        comments:
-          index:
-            comments: comments
-            approve: approve
-            'mark as spam': mark as spam
-            delete: delete
-          line:
-            'mark spam': mark as spam
-            'show comments only from this thread': show comments only from this thread
-            'this comment is': this comment is
-            'add commenter to': "add commenter to %{list}"
-            'all comments from': "all comments from"
-            'this thread': this thread
-            see_also: See other comments from
-            approved: approved
-            approve: approve
-            context: context
-            delete: delete
-            reply: reply
-            edit: edit
-            find: find
-          sidebar:
-            filter: filter
-            approved: approved
-            unapproved: unapproved
-            flagged: flagged
-            spam: spam
-            deleted: deleted
-            submit: submit
-
         features:
           index:
             drafted: Drafted

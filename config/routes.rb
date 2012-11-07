@@ -50,10 +50,6 @@ Rails.application.routes.draw do
       end
       resource :photos, :controller => "atreides/photos"
     end
-    resources :comments, :controller => "atreides/comments" do
-      put :update_many, :on => :collection
-      delete :delete_many, :on => :collection
-    end
     resources :videos, :only => [:index, :destroy], :controller => "atreides/videos" do
       post :reorder, :on => :collection
     end

@@ -19,7 +19,6 @@ class Atreides::ContentPart < Atreides::Base
   # Behaviours
   #
 
-  #XXX acts_as_commentable
   accepts_nested_attributes_for :photos, :allow_destroy => true
   accepts_nested_attributes_for :videos, :allow_destroy => true
 

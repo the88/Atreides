@@ -8,12 +8,10 @@ class CreateProducts < ActiveRecord::Migration
       t.string :price_currency
       t.string :state
       t.datetime :published_at
-      t.integer  :comments_count, :default => 0
       t.integer  :likes_count, :default => 0
       t.integer  :votes_count, :default => 0
       t.timestamps
     end
-    add_index :products, :comments_count
     add_index :products, :likes_count
     add_index :products, :votes_count
   end

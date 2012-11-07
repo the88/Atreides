@@ -28,7 +28,7 @@ module Atreides
         generate('devise:install')
 
         %w(create_videos create_photos create_orders create_posts
-           create_pages create_likes create_comments create_messages
+           create_pages create_likes create_messages
            create_features create_products create_line_items create_links
            create_votes create_tweets create_sessions create_sites
            create_content_parts add_userid_to_resources devise_create_users
@@ -47,7 +47,6 @@ module Atreides
         copy_file 'settings.yml', 'config/settings.yml'
         copy_file 'oembed.yml', 'config/oembed.yml'
         copy_file 'delayed_job.rb', 'config/initializers/delayed_job.rb'
-        copy_file 'disqussion.rb', 'config/initializers/disqussion.rb'
         copy_file 'Procfile', 'Procfile'
         gsub_file 'config/application.rb', 'config.active_record.whitelist_attributes = true', 'config.active_record.whitelist_attributes = false'
         remove_file 'public/index.html'

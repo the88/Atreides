@@ -11,10 +11,6 @@ common: &common
     password:
     profile_id:
   domain: atreides.dev
-  disqus:
-    key:
-    secret:
-    forum:
   tumblr:
     blog:
     email:

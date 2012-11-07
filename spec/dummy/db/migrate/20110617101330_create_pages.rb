@@ -9,7 +9,6 @@ class CreatePages < ActiveRecord::Migration
       t.timestamps
 
       t.integer :likes_count, :default => 0
-      t.integer :comments_count, :default => 0
       t.integer :votes_count, :default => 0
 
       t.integer :parent_id
@@ -19,7 +18,6 @@ class CreatePages < ActiveRecord::Migration
     end
     add_index :pages, :slug
     add_index :pages, :likes_count
-    add_index :pages, :comments_count
     add_index :pages, :votes_count
     add_index :pages, :parent_id
     add_index :pages, :post_id

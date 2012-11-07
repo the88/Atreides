@@ -21,7 +21,7 @@ class Atreides::User < Atreides::Base
   #
   # Associatons
   #
-  has_many :comments
+
   has_many :line_items
   has_many :cart_items, :class_name => "LineItem", :conditions => "order_id is null"
   has_many :orders
