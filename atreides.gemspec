@@ -45,7 +45,7 @@ Gem::Specification.new do |s|
   s.add_dependency "nokogiri"
   s.add_dependency "oauth2"
   s.add_dependency "oembed_links"
-  s.add_dependency "paperclip", "3.1.4"
+  s.add_dependency "paperclip", "3.3.1"
   s.add_dependency "rails", "~> 3.0"
   s.add_dependency "rack-fiber_pool"
   s.add_dependency "redcarpet"
