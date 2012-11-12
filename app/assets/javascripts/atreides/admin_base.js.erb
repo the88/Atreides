@@ -127,26 +127,27 @@ $(document).ready(function() {
   }
 
   // Post state drop-down
-  var state_select_css = '.post-states select, .page-states select, .product-states select'
-  var state_input_css = '#post_published_at_input, #page_published_at_input, #product_published_at_input'
-  var state_hidden_css = '.post-hidden input, .page-hidden input, .product-hidden input'
+  var stateSelect = 'select.publish-input',
+      stateInput = 'input.state-input',
+      dateInput = '.date-input'
   function update_state_select() {
-    $(state_input_css).hide()
+
+    $(dateInput).hide()
     switch(this.value) {
       case 'publish_now':
-        $(state_hidden_css).val("published");
+        $(stateInput).val("published");
         break;
       case 'published_at':
-        $(state_hidden_css).val("published");
-        $(state_input_css).show();
+        $(stateInput).val("published");
+        $(dateInput).show();
         break;
       default:
-        $(state_hidden_css).val(this.value);
+        $(stateInput).val(this.value);
         break;
     }
   }
-  $(state_select_css).change(update_state_select);
-  $(state_select_css).trigger('change'); // Make sure it shows correctly on load
+  $(stateSelect).on("change", update_state_select);
+  $(stateSelect).trigger('change'); // Make sure it shows correctly on load
 
   // Photo display types
   var photo_types = $(".photos-display-type input")

@@ -20,14 +20,7 @@
             },
           }); })
 
-    - selected = (resource.pending? || resource.published?) ? (resource.published_at? ? :published_at : :publish_now) : resource.state.to_sym
-
-    - resource.published_at = (resource.published_at || Time.now).in_time_zone # Needed to show time in user's TZ
-    - label = (resource.published_at.past? ? tt(:'.published_on') : tt('.will_be_published_on')) + ": "
-
-    = f.input :state, :as => "select", :collection => resource.states_for_select, :selected => selected, :include_blank => false, :wrapper_html => { :class => "post-states" }
-    = f.input :state, :as => "hidden", :wrapper_html => { :class => "post-hidden" }
-    = f.input :published_at, :label => label, :as => "string", :wrapper_html => { :class => "date-picker", :style => "display:#{selected==:published_at ? 'block' : 'none'}"}
+    = render(:partial => "/admin/atreides/common/sidebar_publish", :locals => {:f => f})
 
     / Tags
     - if defined?(Settings.tags.posts.groups)

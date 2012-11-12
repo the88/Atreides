@@ -20,10 +20,7 @@
 
   #form_sidebar{:class => "sidebar span-6 last"}
     = f.inputs do
-      - selected = (resource.pending? || resource.published?) ? (resource.published_at? ? :published_at : :publish_now) : resource.state.to_sym
-      = f.input :state, :as => "select", :collection => resource.states_for_select, :selected => selected, :include_blank => false, :wrapper_html => { :class => "post-states" }
-      = f.input :state, :as => "hidden", :wrapper_html => { :class => "page-hidden" }
-      = f.input :published_at, :label => ttt(:'.publish_on'), :as => "string", :wrapper_html => { :class => "date-picker" }
+      = render(:partial => "/admin/atreides/common/sidebar_publish", :locals => {:f => f})
       = f.input :parent_id, :as => "select", :label => ttt(:'.parent'), :wrapper_html => { :class => "parent-picker" }, :collection => Atreides::Page.published.all.map{|p| [p.title, p.id]}
       = f.input :tag_list, :label => ttt(:'.tags'), :as => "text", :wrapper_html => { :class => "tag-picker" }
       = f.input :slug, :label => ttt(:'.custom_url'), :as => "underline", :prefix => "/", :hint => ttt(:".leave_blank_to_create_automatically"), :wrapper_html => { :class => "underlined-input" }

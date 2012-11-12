@@ -1,0 +1,7 @@
+- selected = (resource.pending? || resource.published?) ? (resource.published_at? ? :published_at : :published_now) : resource.state.to_sym
+- resource.published_at = (resource.published_at || Time.now).in_time_zone(Atreides::TimeZone::DEFAULT)
+- label = resource.published_at.past? ? "Published on: " : "Will be published on:"
+= f.input :state, :as => "select", :collection => resource.states_for_select, :selected => selected, :include_blank => false, :wrapper_html => { :class => "post-states" }, :input_html => {:class => "publish-input"}
+= f.input :state, :as => "hidden", :wrapper_html => { :class => "post-hidden" }, :input_html => {:class => "state-input"}
+.date-input{:style => "padding-bottom: 15px"}
+  = f.input :published_at, :label => label, :as => "string", :wrapper_html => { :class => "date-input date-picker", :style => "display:#{selected==:published_at ? 'block' : 'none'}"}

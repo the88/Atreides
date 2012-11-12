@@ -50,6 +50,7 @@ require 'mini_fb'
   'atreides/extendable',
   'atreides/validators',
   'atreides/time_formats',
+  'atreides/time_zone',
   "atreides/i18n_helpers",
   'atreides/base/base',
   'atreides/base/taggable',
