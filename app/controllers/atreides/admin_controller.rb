@@ -26,14 +26,28 @@ class Atreides::AdminController < Atreides::ApplicationController
 
   before_filter :set_date, :only => [:index, :filter]
   before_filter :set_expires, :only => [:analytics]
+
   around_filter :cache, :only => [:analytics]
   skip_before_filter :verify_authenticity_token, :only => [:analytics]
   after_filter :set_last_modified
   before_filter :set_resource_request_name
 
+  before_filter :determine_timezone, :only => [:update, :create]
+  after_filter :reset_timezone, :only => [:update, :create]
+
   layout 'admin'
 
   private
+
+  def determine_timezone
+    if params[@resource_request_name.to_sym].key?(:time_zone)
+      Time.zone = params[@resource_request_name.to_sym][:time_zone] || Atreides::TimeZone::DEFAULT
+    end
+  end
+
+  def reset_timezone
+    Time.zone = Atreides::TimeZone::DEFAULT
+  end
 
   def set_resource_request_name
     @resource_request_name = self.resources_configuration[:self][:request_name]

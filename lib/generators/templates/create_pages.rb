@@ -4,8 +4,7 @@ class CreatePages < ActiveRecord::Migration
       t.string :title
       t.text :body
       t.string :slug
-      t.datetime :published_at
-      t.string :state
+      t.publishable
       t.timestamps
 
       t.integer :likes_count, :default => 0

@@ -47,6 +47,7 @@ require "delayed_job"
 require 'mini_fb'
 
 [ 'atreides/configuration',
+  'atreides/schema',
   'atreides/extendable',
   'atreides/validators',
   'atreides/time_formats',
