@@ -32,7 +32,7 @@ module Atreides
            create_features create_products create_line_items create_links
            create_votes create_tweets create_sessions create_sites
            create_content_parts add_userid_to_resources devise_create_users
-           add_role_to_users, create_preferences).each do |f|
+           add_role_to_users create_preferences).each do |f|
           src = "#{f}.rb"
           dst = "db/migrate/#{src}"
           migration_template(src, dst) rescue puts $!
