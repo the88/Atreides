@@ -1,4 +1,4 @@
-class Atreides::Preferences < Atreides::Base
+class Atreides::Preference < Atreides::Base
 
   #
   # Constants
