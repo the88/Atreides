@@ -1,6 +1,0 @@
-<div class="search-form" style="float:right;clear:none;margin-left:0.5em;">
-  <%= form_tag "", :method => "get", :class => "auto-hide-text" do %>
-  <%= link_to ttt(:'.reset'), url_for(:controller => params[:controller], :action => controller.action_name), :class => "submit_btn", :style => "float:right;clear:none;margin-left:0.5em;" %>
-  <%= text_field_tag :search, (params[:search] || "Search...") %>
-  <% end %>
-</div>

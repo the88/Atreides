@@ -1,0 +1,11 @@
+%tr{:class => cycle('even','odd'), :id => record.dom_id('tablerow')}
+  - list_cols.each do |col|
+    - next if cols_hash[col] and cols_hash[col].primary
+    - next if ignore_cols.include?(col)
+    - field_func = "#{col}_column"
+    %td{:class => field_func}
+      = content_tag(:span, (self.respond_to?(field_func) ? send(field_func, record) : record.send(col)))
+  - action_cols.each do |action|
+    - action_func = "#{action}_link"
+    %td.action_link
+      = self.respond_to?(action_func) ? send(action_func, record) : action_link(action, record, record_name)
