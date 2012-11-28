@@ -61,6 +61,8 @@ require 'mini_fb'
   require File.expand_path(path, File.dirname(__FILE__))
 end
 
+include Atreides::Schema
+
 module Atreides
   class << self
 
