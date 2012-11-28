@@ -26,12 +26,6 @@ $.removeDiacriticalMarks = function(string) {
       }
   }
   pattern = new RegExp( "[" + pattern + "]", 'gi');
-  // return function(string) {
-  //     return string ? string.replace(pattern, function(char){
-  //         return char in map ? map[char] : char;
-  //     }) : string;
-  // };
-
   return string ? string.replace(pattern, function(char){
       return char in map ? map[char] : char;
   }) : string;
