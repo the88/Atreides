@@ -55,7 +55,7 @@ Gem::Specification.new do |s|
   s.add_dependency "tumblr-api"
   s.add_dependency "tweetstream"
   s.add_dependency "twitter"
-  s.add_dependency "uglifier", "~> 1.2.7"
+  s.add_dependency "uglifier", "~> 1.3.0"
   s.add_dependency "unicode_utils"
   s.add_dependency "validates_email_format_of"
   s.add_dependency "will_paginate", "~> 3.0.3"
