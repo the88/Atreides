@@ -17,3 +17,6 @@ Time::DATE_FORMATS[:datetime_ordinal] = lambda { |time|
 Time::DATE_FORMATS[:short_month_and_year] = "%b %Y"
 Time::DATE_FORMATS[:month_and_day] = "%B %d"
 Time::DATE_FORMATS[:day] = "%d"
+
+# For publishable items
+Time::DATE_FORMATS[:picker] ="%d/%m/%Y %H:%M"
